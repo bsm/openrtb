@@ -111,6 +111,22 @@ type Banner struct {
 	Ext      Extensions
 }
 
+// Returns topframe status, with default fallback
+func (b *Banner) IsTopFrame() bool {
+	if b.Topframe != nil {
+		return *b.Topframe == 1
+	}
+	return false
+}
+
+// Returns the position, with default fallback
+func (b *Banner) Position() int {
+	if b.Pos != nil {
+		return *b.Pos
+	}
+	return AD_POS_UNKNOWN
+}
+
 // The "video" object must be included directly in the impression object if the impression offered
 // for auction is an in-stream video ad opportunity.
 type Video struct {
@@ -137,6 +153,30 @@ type Video struct {
 	Ext            Extensions
 }
 
+// Returns the sequence number, with default fallback
+func (v *Video) Seq() int {
+	if v.Sequence != nil {
+		return *v.Sequence
+	}
+	return 1
+}
+
+// Returns the boxing permission status, with default fallback
+func (v *Video) IsBoxingAllowed() bool {
+	if v.Boxingallowed != nil {
+		return *v.Boxingallowed == 1
+	}
+	return true
+}
+
+// Returns the position, with default fallback
+func (v *Video) Position() int {
+	if v.Pos != nil {
+		return *v.Pos
+	}
+	return AD_POS_UNKNOWN
+}
+
 // A site object should be included if the ad supported content is part of a website (as opposed to
 // an application).  A bid request must not contain both a site object and an app object.
 type Site struct {
@@ -154,6 +194,14 @@ type Site struct {
 	// Content       Content
 	Keywords []string
 	Ext      Extensions
+}
+
+// Returns the privacy policy status, with default fallback
+func (s *Site) IsPrivacyPolicy() bool {
+	if s.Privacypolicy != nil {
+		return *s.Privacypolicy == 1
+	}
+	return false
 }
 
 // An "app" object should be included if the ad supported content is part of a mobile application
@@ -175,6 +223,22 @@ type App struct {
 	Keywords []string
 	Storeurl *string // App store URL for an installed app
 	Ext      Extensions
+}
+
+// Returns the privacy policy status, with default fallback
+func (a *App) IsPrivacyPolicy() bool {
+	if a.Privacypolicy != nil {
+		return *a.Privacypolicy == 1
+	}
+	return false
+}
+
+// Returns the paid status, with default fallback
+func (a *App) IsPaid() bool {
+	if a.Paid != nil {
+		return *a.Paid == 1
+	}
+	return false
 }
 
 // This object may be useful in the situation where syndicated content contains impressions and
@@ -228,6 +292,38 @@ type Device struct {
 	Devicetype     *int
 	Flashver       *string // Flash version
 	Ext            map[string]string
+}
+
+// Returns the DNT status, with default fallback
+func (d *Device) IsDnt() bool {
+	if d.Dnt != nil {
+		return *d.Dnt == 1
+	}
+	return false
+}
+
+// Returns the JS status, with default fallback
+func (d *Device) IsJs() bool {
+	if d.Js != nil {
+		return *d.Js == 1
+	}
+	return false
+}
+
+// Returns the connection type, with default fallback
+func (d *Device) ConnectionType() int {
+	if d.Connectiontype != nil {
+		return *d.Connectiontype
+	}
+	return CONN_TYPE_UNKNOWN
+}
+
+// Returns the connection type, with default fallback
+func (d *Device) DeviceType() int {
+	if d.Devicetype != nil {
+		return *d.Devicetype
+	}
+	return DEVICE_TYPE_UNKNOWN
 }
 
 // Note that the Geo Object may appear in one or both the Device Object and the User Object.

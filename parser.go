@@ -3,6 +3,7 @@ package openrtb
 import (
 	"encoding/json"
 	"errors"
+	"io"
 )
 
 var (
@@ -19,25 +20,36 @@ var (
 	errValidationVideoProtocol    = errors.New("openrtb parse: video protocol missing")
 )
 
-// Parses a raw JSON byte array into a standard-compliant
-// OpenRTB Request struct
-func ParseRequest(rawJson []byte, validate bool) (req *Request, err error) {
-	if err = json.Unmarshal(rawJson, &req); err != nil {
+// Parses an OpenRTB Request struct from an io.Reader
+// Optionally validates and applies defaults to the Request object (recommended)
+func ParseRequest(reader io.Reader, validate bool) (req *Request, err error) {
+	dec := json.NewDecoder(reader)
+	if err = dec.Decode(&req); err != nil {
 		return nil, err
 	}
+	return processReq(req, validate)
+}
 
+// Parses an OpenRTB Request from bytes
+// Optionally validates and applies defaults to the Request object (recommended)
+func ParseRequestBytes(data []byte, validate bool) (req *Request, err error) {
+	if err = json.Unmarshal(data, &req); err != nil {
+		return nil, err
+	}
+	return processReq(req, validate)
+}
+
+// ------------------- Request Helpers ----------------------
+
+func processReq(req *Request, validate bool) (*Request, error) {
 	if validate {
-		err = validateReq(req)
-	}
-
-	if err != nil {
-		return nil, err
+		if err := validateReq(req); err != nil {
+			return nil, err
+		}
 	}
 
 	return req, nil
 }
-
-// ------------------- Validation Helpers ----------------------
 
 func validateReq(req *Request) error {
 
@@ -151,17 +163,9 @@ func validateVideo(video *Video) error {
 		video.Boxingallowed = new(int)
 		*video.Boxingallowed = 1
 	}
-	if video.Boxingallowed == nil {
-		video.Boxingallowed = new(int)
-		*video.Boxingallowed = 1
-	}
 	if video.Pos == nil {
 		video.Pos = new(int)
 		*video.Pos = AD_POS_UNKNOWN
-	}
-	if video.Startdelay == nil {
-		video.Startdelay = new(int)
-		*video.Startdelay = VIDEO_START_DELAY_PRE_ROLL
 	}
 
 	return nil

@@ -1,24 +1,25 @@
 package openrtb
 
 import (
+	"bytes"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
-func TestParseRequest_BlankUnvalidated(t *testing.T) {
-	req, err := ParseRequest([]byte("{}"), false)
+func TestParseRequestBytes_BlankUnvalidated(t *testing.T) {
+	req, err := ParseRequestBytes([]byte("{}"), false)
 	assert.Nil(t, err)
 	assert.IsType(t, &Request{}, req)
 }
 
-func TestParseRequest_BlankValidated(t *testing.T) {
-	req, err := ParseRequest([]byte("{}"), true)
+func TestParseRequestBytes_BlankValidated(t *testing.T) {
+	req, err := ParseRequestBytes([]byte("{}"), true)
 	assert.Nil(t, req)
 	assert.Equal(t, err.Error(), "openrtb parse: request ID missing")
 }
 
-func TestParseRequest_SimpleBanner(t *testing.T) {
-	req, err := ParseRequest(simpleBanner, true)
+func TestParseRequestBytes_SimpleBanner(t *testing.T) {
+	req, err := ParseRequestBytes(simpleBanner, true)
 	assert.Nil(t, err)
 	assert.IsType(t, &Request{}, req)
 
@@ -37,8 +38,8 @@ func TestParseRequest_SimpleBanner(t *testing.T) {
 	assert.Equal(t, *req.User.Buyeruid, "5df678asd8987656asdf78987654")
 }
 
-func TestParseExpandableCreative(t *testing.T) {
-	req, err := ParseRequest(expandableCreative, true)
+func TestParseRequestBytes_ExpandableCreative(t *testing.T) {
+	req, err := ParseRequestBytes(expandableCreative, true)
 	assert.Nil(t, err)
 	assert.IsType(t, &Request{}, req)
 
@@ -51,6 +52,12 @@ func TestParseExpandableCreative(t *testing.T) {
 	assert.Equal(t, *req.User.Data[0].Id, "6")
 	assert.Equal(t, len(req.User.Data[0].Segment), 3)
 	assert.Equal(t, *req.User.Data[0].Segment[2].Id, "23423424")
+}
+
+func TestParseRequest_ExpandableCreative(t *testing.T) {
+	req, err := ParseRequest(bytes.NewBuffer(expandableCreative), true)
+	assert.Nil(t, err)
+	assert.IsType(t, &Request{}, req)
 }
 
 var simpleBanner []byte = []byte(`
