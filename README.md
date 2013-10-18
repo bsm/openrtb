@@ -11,7 +11,7 @@ To install, use `go get`:
 
 To update, use `go get -u`:
 
-    go get -u github.com/stretchr/testify
+    go get -u github.com/bsm/openrtb
 
 Import the package:
 
