@@ -72,6 +72,54 @@ type Request struct {
 	Ext     Extensions
 }
 
+// ID and at least one “seatbid” object is required, which contains a bid on at least one impression.
+// Other attributes are optional since an exchange may establish default values.
+// No-Bids on all impressions should be indicated as a HTTP 204 response.
+// For no-bids on specific impressions, the bidder should omit these from the bid response.
+type Response struct {
+	Id         *string    `json:"id"`                   // Reflection of the bid request ID for logging purposes
+	Seatbid    []Seatbid  `json:"seatbid"`              // Array of seatbid objects
+	Bidid      *string    `json:"bidid,omitempty"`      // Optional response tracking ID for bidders
+	Cur        *string    `json:"cur,omitempty"`        // Bid currency
+	Customdata *string    `json:"customdata,omitempty"` // Encoded user features
+	Ext        Extensions `json:"ext,omitempty"`        // Custom specifications in Json
+}
+
+// At least one of Bid is required.
+// A bid response can contain multiple “seatbid” objects, each on behalf of a different bidder seat.
+// Seatbid object can contain multiple bids each pertaining to a different impression on behalf of a seat.
+// Each “bid” object must include the impression ID to which it pertains as well as the bid price.
+// Group attribute can be used to specify if a seat is willing to accept any impressions that it can win (default) or if it is
+// only interested in winning any if it can win them all (i.e., all or nothing).
+type Seatbid struct {
+	Bid   []Bid      `json:"id"`             // Array of bid objects; each realtes to an imp, if exchange supported can have many bid objects.
+	Seat  *string    `json:"seat,omiempty"`  // ID of the bidder seat optional string ID of the bidder seat on whose behalf this bid is made.
+	Group *int       `json:"group,omiempty"` // '1' means impression must be won-lost as a group; default is '0'.
+	Ext   Extensions `json:"ext,omiempty"`
+}
+
+// ID, Impid and Price are required; all other optional.
+// If the bidder wins the impression, the exchange calls notice URL (nurl)
+// a) to inform the bidder of the win;
+// b) to convey certain information using substitution macros.
+// Adomain can be used to check advertiser block list compliance.
+// Cid can be used to block ads that were previously identified as inappropriate.
+// Substitution macros may allow a bidder to use a static notice URL for all of its bids.
+type Bid struct {
+	Id      *string    `json:"id"`
+	Impid   *string    `json:"impid"`             // Required string ID of the impression object to which this bid applies.
+	Price   *float32   `json:"price"`             // Bid price in CPM. Suggests using integer math for accounting to avoid rounding errors.
+	Adid    *string    `json:"adid,omitempty"`    // References the ad to be served if the bid wins.
+	Nurl    *string    `json:"nurl,omitempty"`    // Win notice URL.
+	Adm     *string    `json:"adm,omitempty"`     // Actual ad markup. XHTML if a response to a banner object, or VAST XML if a response to a video object.
+	Adomain []string   `json:"adomain,omitempty"` // Advertiser’s primary or top-level domain for advertiser checking; or multiple if imp rotating.
+	Iurl    *string    `json:"iurl,omitempty"`    // Sample image URL.
+	Cid     *string    `json:"cid,omitempty"`     // Campaign ID that appears with the Ad markup.
+	Crid    *string    `json:"crid,omitempty"`    // Creative ID for reporting content issues or defects. This could also be used as a reference to a creative ID that is posted with an exchange.
+	Attr    []int      `json:"attr,omitempty"`    // Array of creative attributes.
+	Ext     Extensions `json:"ext,omitempty"`
+}
+
 // The "imp" object describes the ad position or impression being auctioned.  A single bid request
 // can include multiple "imp" objects, a use case for which might be an exchange that supports
 // selling all ad positions on a given page as a bundle.  Each "imp" object has a required ID so that

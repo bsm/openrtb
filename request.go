@@ -8,7 +8,7 @@ import (
 
 var (
 	errValidationReqId            = errors.New("openrtb parse: request ID missing")
-	errValidationImp              = errors.New("openrtb parse: no impressions")
+	errValidationReqImp           = errors.New("openrtb parse: no impressions")
 	errValidationReqSaA           = errors.New("openrtb parse: request has site and app")
 	errValidationImpId            = errors.New("openrtb parse: impression ID missing")
 	errValidationImpBoV           = errors.New("openrtb parse: impression has neither a banner nor video")
@@ -57,7 +57,7 @@ func validateReq(req *Request) error {
 	if req.Id == nil {
 		return errValidationReqId
 	} else if len(req.Imp) == 0 {
-		return errValidationImp
+		return errValidationReqImp
 	} else if req.Site != nil && req.App != nil {
 		return errValidationReqSaA
 	} else if req.Site != nil {
