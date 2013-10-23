@@ -1,5 +1,9 @@
 package openrtb
 
+import (
+	"errors"
+)
+
 // The "video" object must be included directly in the impression object if the impression offered
 // for auction is an in-stream video ad opportunity.
 type Video struct {
@@ -50,18 +54,27 @@ func (v *Video) Position() int {
 	return AD_POS_UNKNOWN
 }
 
+// Validation errors
+var (
+	invalidVideoMimes       = errors.New("openrtb parse: video has no mimes")
+	invalidVideoLinearity   = errors.New("openrtb parse: video linearity missing")
+	invalidVideoMinduration = errors.New("openrtb parse: video minduration missing")
+	invalidVideoMaxduration = errors.New("openrtb parse: video maxduration missing")
+	invalidVideoProtocol    = errors.New("openrtb parse: video protocol missing")
+)
+
 // Validates the object
 func (v *Video) Valid() (bool, error) {
 	if len(v.Mimes) == 0 {
-		return false, errValidationVideoMimes
+		return false, invalidVideoMimes
 	} else if v.Linearity == nil {
-		return false, errValidationVideoLinearity
+		return false, invalidVideoLinearity
 	} else if v.Minduration == nil {
-		return false, errValidationVideoMinduration
+		return false, invalidVideoMinduration
 	} else if v.Maxduration == nil {
-		return false, errValidationVideoMaxduration
+		return false, invalidVideoMaxduration
 	} else if v.Protocol == nil {
-		return false, errValidationVideoProtocol
+		return false, invalidVideoProtocol
 	}
 	return true, nil
 }

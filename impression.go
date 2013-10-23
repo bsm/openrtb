@@ -1,5 +1,9 @@
 package openrtb
 
+import (
+	"errors"
+)
+
 // The "imp" object describes the ad position or impression being auctioned.  A single bid request
 // can include multiple "imp" objects, a use case for which might be an exchange that supports
 // selling all ad positions on a given page as a bundle.  Each "imp" object has a required ID so that
@@ -19,19 +23,26 @@ type Impression struct {
 	Ext               Extensions
 }
 
+// Validation errors
+var (
+	invalidImpId  = errors.New("openrtb parse: impression ID missing")
+	invalidImpBoV = errors.New("openrtb parse: impression has neither a banner nor video")
+	invalidImpBaV = errors.New("openrtb parse: impression has banner and video")
+)
+
 // Validates the `imp` object
 func (imp *Impression) Valid() (bool, error) {
 
 	if imp.Id == nil {
-		return false, errValidationImpId
+		return false, invalidImpId
 	} else if imp.Banner != nil && imp.Video != nil {
-		return false, errValidationImpBaV
+		return false, invalidImpBaV
 	} else if imp.Video != nil {
 		if ok, err := imp.Video.Valid(); !ok {
 			return ok, err
 		}
 	} else {
-		return false, errValidationImpBoV
+		return false, invalidImpBoV
 	}
 
 	return true, nil

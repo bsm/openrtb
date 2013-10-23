@@ -6,20 +6,6 @@ import (
 	"io"
 )
 
-var (
-	errValidationReqId            = errors.New("openrtb parse: request ID missing")
-	errValidationReqImp           = errors.New("openrtb parse: no impressions")
-	errValidationReqSaA           = errors.New("openrtb parse: request has site and app")
-	errValidationImpId            = errors.New("openrtb parse: impression ID missing")
-	errValidationImpBoV           = errors.New("openrtb parse: impression has neither a banner nor video")
-	errValidationImpBaV           = errors.New("openrtb parse: impression has banner and video")
-	errValidationVideoMimes       = errors.New("openrtb parse: video has no mimes")
-	errValidationVideoLinearity   = errors.New("openrtb parse: video linearity missing")
-	errValidationVideoMinduration = errors.New("openrtb parse: video minduration missing")
-	errValidationVideoMaxduration = errors.New("openrtb parse: video maxduration missing")
-	errValidationVideoProtocol    = errors.New("openrtb parse: video protocol missing")
-)
-
 // The top-level bid request object contains a globally unique bid request or auction ID.  This "id"
 // attribute is required as is at least one "imp" (i.e., impression) object.  Other attributes are
 // optional since an exchange may establish default values.
@@ -60,14 +46,21 @@ func ParseRequestBytes(data []byte) (req *Request, err error) {
 	return req.WithDefaults(), nil
 }
 
+// Validation errors
+var (
+	invalidReqId  = errors.New("openrtb parse: request ID missing")
+	invalidReqImp = errors.New("openrtb parse: no impressions")
+	invalidReqSaA = errors.New("openrtb parse: request has site and app")
+)
+
 // Validates the request
 func (req *Request) Valid() (bool, error) {
 	if req.Id == nil {
-		return false, errValidationReqId
+		return false, invalidReqId
 	} else if len(req.Imp) == 0 {
-		return false, errValidationReqImp
+		return false, invalidReqImp
 	} else if req.Site != nil && req.App != nil {
-		return false, errValidationReqSaA
+		return false, invalidReqSaA
 	}
 
 	for _, imp := range req.Imp {
