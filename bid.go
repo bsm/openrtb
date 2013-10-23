@@ -1,5 +1,9 @@
 package openrtb
 
+import (
+	"errors"
+)
+
 // ID, Impid and Price are required; all other optional.
 // If the bidder wins the impression, the exchange calls notice URL (nurl)
 // a) to inform the bidder of the win;
@@ -22,15 +26,22 @@ type Bid struct {
 	Ext     Extensions `json:"ext,omitempty"`
 }
 
+// Validation errors
+var (
+	invalidBidId    = errors.New("openrtb response: bid is missing ID")
+	invalidBidImpid = errors.New("openrtb response: bid is missing impression ID")
+	invalidBidPrice = errors.New("openrtb response: bid is missing price")
+)
+
 // Validate Bid required attributes
 func (bid *Bid) Valid() (bool, error) {
 
 	if bid.Id == nil {
-		return false, errValidationBidId
+		return false, invalidBidId
 	} else if bid.Impid == nil {
-		return false, errValidationBidImpid
+		return false, invalidBidImpid
 	} else if bid.Price == nil {
-		return false, errValidationBidPrice
+		return false, invalidBidPrice
 	}
 
 	return true, nil

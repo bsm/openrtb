@@ -1,5 +1,9 @@
 package openrtb
 
+import (
+	"errors"
+)
+
 // At least one of Bid is required.
 // A bid response can contain multiple “seatbid” objects, each on behalf of a different bidder seat.
 // Seatbid object can contain multiple bids each pertaining to a different impression on behalf of a seat.
@@ -13,11 +17,16 @@ type Seatbid struct {
 	Ext   Extensions `json:"ext,omiempty"`
 }
 
+// Validation errors
+var (
+	invalidSeatbidBid = errors.New("openrtb response: seatbid is missing bids")
+)
+
 // Validate Seatbid required attributes
 func (sb *Seatbid) Valid() (bool, error) {
 
 	if sb.Bid == nil || len(sb.Bid) < 1 {
-		return false, errValidationSeatbidBid
+		return false, invalidSeatbidBid
 	}
 
 	for _, bid := range sb.Bid {

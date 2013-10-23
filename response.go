@@ -5,15 +5,6 @@ import (
 	"errors"
 )
 
-var (
-	errValidationResId      = errors.New("openrtb response: missing ID")
-	errValidationResSeatbid = errors.New("openrtb response: missing seatbids")
-	errValidationSeatbidBid = errors.New("openrtb response: seatbid is missing bids")
-	errValidationBidId      = errors.New("openrtb response: bid is missing ID")
-	errValidationBidImpid   = errors.New("openrtb response: bid is missing impression ID")
-	errValidationBidPrice   = errors.New("openrtb response: bid is missing price")
-)
-
 // ID and at least one “seatbid” object is required, which contains a bid on at least one impression.
 // Other attributes are optional since an exchange may establish default values.
 // No-Bids on all impressions should be indicated as a HTTP 204 response.
@@ -33,14 +24,20 @@ func (res *Response) JSON() ([]byte, error) {
 	return json.Marshal(res)
 }
 
+// Validation errors
+var (
+	invalidResId      = errors.New("openrtb response: missing ID")
+	invalidResSeatbid = errors.New("openrtb response: missing seatbids")
+)
+
 // Validate Response required attributes
 // @return [Boolean,Error] true if response,seatbid,bid required attrs present
 func (res *Response) Valid() (bool, error) {
 
 	if res.Id == nil {
-		return false, errValidationResId
+		return false, invalidResId
 	} else if res.Seatbid == nil || len(res.Seatbid) < 1 {
-		return false, errValidationResSeatbid
+		return false, invalidResSeatbid
 	}
 
 	for _, sb := range res.Seatbid {
