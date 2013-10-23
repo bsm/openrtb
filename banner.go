@@ -7,17 +7,17 @@ package openrtb
 // VAST response to dictate placement of the companion creatives when multiple companion ad
 // opportunities of the same size are available on a page.
 type Banner struct {
-	W        *int     // Width
-	H        *int     // Height
-	Id       *string  // A unique identifier
-	Pos      *int     // Ad Position
-	Btype    []int    // Blocked creative types
-	Battr    []int    // Blocked creative attributes
-	Mimes    []string // Whitelist of content MIME types supported
-	Topframe *int     // Default: 0 ("1": Delivered in top frame, "0": Elsewhere)
-	Expdir   []int    // Specify properties for an expandable ad
-	Api      []int    // List of supported API frameworks
-	Ext      Extensions
+	W        *int       `json:"w,omitempty"`        // Width
+	H        *int       `json:"h,omitempty"`        // Height
+	Id       *string    `json:"id,omitempty"`       // A unique identifier
+	Pos      *int       `json:"pos,omitempty"`      // Ad Position
+	Btype    []int      `json:"btype,omitempty"`    // Blocked creative types
+	Battr    []int      `json:"battr,omitempty"`    // Blocked creative attributes
+	Mimes    []string   `json:"mimes,omitempty"`    // Whitelist of content MIME types supported
+	Topframe *int       `json:"topframe,omitempty"` // Default: 0 ("1": Delivered in top frame, "0": Elsewhere)
+	Expdir   []int      `json:"expdir,omitempty"`   // Specify properties for an expandable ad
+	Api      []int      `json:"api,omitempty"`      // List of supported API frameworks
+	Ext      Extensions `json:"ext,omitempty"`
 }
 
 // Returns topframe status, with default fallback

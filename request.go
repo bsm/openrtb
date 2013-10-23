@@ -10,21 +10,21 @@ import (
 // attribute is required as is at least one "imp" (i.e., impression) object.  Other attributes are
 // optional since an exchange may establish default values.
 type Request struct {
-	Id      *string // Unique ID of the bid request
-	Imp     []Impression
-	Site    *Site
-	App     *App
-	Device  *Device
-	User    *User
-	At      *int     // Auction type, Default: 2 ("1": first price auction, "2": then second price auction)
-	Tmax    *int     // Maximum amount of time in milliseconds to submit a bid
-	Wseat   []string // Array of buyer seats allowed to bid on this auction
-	Allimps *int     // Flag to indicate whether exchange can verify that all impressions offered represent all of the impressions available in context, Default: 0
-	Cur     []string // Array of allowed currencies
-	Bcat    []string // Blocked Advertiser Categories.
-	Badv    []string // Array of strings of blocked toplevel domains of advertisers
-	Pmp     *Pmp
-	Ext     Extensions
+	Id      *string      `json:"id"` // Unique ID of the bid request
+	Imp     []Impression `json:"imp,omitempty"`
+	Site    *Site        `json:"site,omitempty"`
+	App     *App         `json:"app,omitempty"`
+	Device  *Device      `json:"device,omitempty"`
+	User    *User        `json:"user,omitempty"`
+	At      *int         `json:"at"`                // Auction type, Default: 2 ("1": first price auction, "2": then second price auction)
+	Tmax    *int         `json:"tmax,omitempty"`    // Maximum amount of time in milliseconds to submit a bid
+	Wseat   []string     `json:"wseat,omitempty"`   // Array of buyer seats allowed to bid on this auction
+	Allimps *int         `json:"allimps,omitempty"` // Flag to indicate whether exchange can verify that all impressions offered represent all of the impressions available in context, Default: 0
+	Cur     []string     `json:"cur,omitempty"`     // Array of allowed currencies
+	Bcat    []string     `json:"bcat,omitempty"`    // Blocked Advertiser Categories.
+	Badv    []string     `json:"badv,omitempty"`    // Array of strings of blocked toplevel domains of advertisers
+	Pmp     *Pmp         `json:"pmp,omitempty"`
+	Ext     Extensions   `json:"ext,omitempty"`
 }
 
 // Parses an OpenRTB Request struct from an io.Reader
@@ -52,6 +52,11 @@ var (
 	invalidReqImp = errors.New("openrtb parse: no impressions")
 	invalidReqSaA = errors.New("openrtb parse: request has site and app")
 )
+
+// Generate JSON
+func (req *Request) JSON() ([]byte, error) {
+	return json.Marshal(req)
+}
 
 // Validates the request
 func (req *Request) Valid() (bool, error) {

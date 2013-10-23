@@ -10,17 +10,17 @@ import (
 // bids can reference them individually.  An exchange can also conduct private auctions by
 // restricting involvement to specific subsets of seats within bidders.
 type Impression struct {
-	Id                *string // A unique identifier for this impression
-	Banner            *Banner
-	Video             *Video
-	Displaymanager    *string  // Name of ad mediation partner, SDK technology, etc
-	Displaymanagerver *string  // Version of the above
-	Instl             *int     // Interstitial, Default: 0 ("1": Interstitial, "0": Something else)
-	Tagid             *string  // Identifier for specific ad placement or ad tag
-	Bidfloor          *float32 // Bid floor for this impression in CPM
-	Bidfloorcur       *string  // Currency of bid floor
-	Iframebuster      []string // Array of names for supportediframe busters.
-	Ext               Extensions
+	Id                *string    `json:"id` // A unique identifier for this impression
+	Banner            *Banner    `json:"banner,omitempty"`
+	Video             *Video     `json:"video,omitempty"`
+	Displaymanager    *string    `json:"displaymanager,omitempty"`    // Name of ad mediation partner, SDK technology, etc
+	Displaymanagerver *string    `json:"displaymanagerver,omitempty"` // Version of the above
+	Instl             *int       `json:"instl,omitempty"`             // Interstitial, Default: 0 ("1": Interstitial, "0": Something else)
+	Tagid             *string    `json:"tagid,omitempty"`             // Identifier for specific ad placement or ad tag
+	Bidfloor          *float32   `json:"bidfloor,omitempty"`          // Bid floor for this impression in CPM
+	Bidfloorcur       *string    `json:"bidfloorcur,omitempty"`       // Currency of bid floor
+	Iframebuster      []string   `json:"iframebuster,omitempty"`      // Array of names for supportediframe busters.
+	Ext               Extensions `json:"ext,omitempty"`
 }
 
 // Validation errors

@@ -65,11 +65,11 @@ const (
 
 // Abstract third-party
 type ThirdParty struct {
-	Id     *string
-	Name   *string
-	Cat    []string // Array of IAB content categories
-	Domain *string
-	Ext    Extensions
+	Id     *string    `json:"id,omitempty"`
+	Name   *string    `json:"name,omitempty"`
+	Cat    []string   `json:"cat,omitempty"` // Array of IAB content categories
+	Domain *string    `json:"domain,omitempty"`
+	Ext    Extensions `json:"ext,omitempty"`
 }
 
 // The publisher object itself and all of its parameters are optional, so default values are not
@@ -87,16 +87,16 @@ type Producer ThirdParty
 // (such as IP geo lookup), or by user registration information (for example provided to a publisher
 // through a user registration).
 type Geo struct {
-	Lat           *float32 // Latitude from -90 to 90
-	Lon           *float32 // Longitude from -180 to 180
-	Country       *string  // Country using ISO 3166-1 Alpha 3
-	Region        *string  // Region using ISO 3166-2
-	Regionfips104 *string  // Region of a country using fips 10-4
-	Metro         *string
-	City          *string
-	Zip           *string
-	Type          *int // Indicate the source of the geo data
-	Ext           Extensions
+	Lat           *float32   `json:"lat,omitempty"`           // Latitude from -90 to 90
+	Lon           *float32   `json:"lon,omitempty"`           // Longitude from -180 to 180
+	Country       *string    `json:"country,omitempty"`       // Country using ISO 3166-1 Alpha 3
+	Region        *string    `json:"region,omitempty"`        // Region using ISO 3166-2
+	Regionfips104 *string    `json:"regionfips104,omitempty"` // Region of a country using fips 10-4
+	Metro         *string    `json:"metro,omitempty"`
+	City          *string    `json:"city,omitempty"`
+	Zip           *string    `json:"zip,omitempty"`
+	Type          *int       `json:"type,omitempty"` // Indicate the source of the geo data
+	Ext           Extensions `json:"ext,omitempty"`
 }
 
 // The "user" object contains information known or derived about the human user of the device.
@@ -104,15 +104,15 @@ type Geo struct {
 // platform derived IDs) and may be subject to rotation policies. However, this user ID must be
 // stable long enough to serve reasonably as the basis for frequency capping.
 type User struct {
-	Id         *string // Unique consumer ID of this user on the exchange
-	Buyeruid   *string // Buyer's user ID
-	Yob        *int    // Year-of-birth
-	Gender     *string // Gender ("M": male, "F" female, "O" Other)
-	Keywords   *string
-	Customdata *string
-	Geo        *Geo
-	Data       []Data
-	Ext        Extensions
+	Id         *string    `json:"id,omitempty"`       // Unique consumer ID of this user on the exchange
+	Buyeruid   *string    `json:"buyeruid,omitempty"` // Buyer's user ID
+	Yob        *int       `json:"yob,omitempty"`      // Year-of-birth
+	Gender     *string    `json:"gender,omitempty"`   // Gender ("M": male, "F" female, "O" Other)
+	Keywords   *string    `json:"keywords,omitempty"`
+	Customdata *string    `json:"customdata,omitempty"`
+	Geo        *Geo       `json:"geo,omitempty"`
+	Data       []Data     `json:"data,omitempty"`
+	Ext        Extensions `json:"ext,omitempty"`
 }
 
 // The data and segment objects together allow data about the user to be passed to bidders in the
@@ -120,37 +120,37 @@ type User struct {
 // providers) as specified by the data object ID field.  A bid request can mix data objects from
 // multiple providers.
 type Data struct {
-	Id      *string
-	Name    *string
-	Segment []Segment
-	Ext     Extensions
+	Id      *string    `json:"id,omitempty"`
+	Name    *string    `json:"name,omitempty"`
+	Segment []Segment  `json:"segment,omitempty"`
+	Ext     Extensions `json:"ext,omitempty"`
 }
 
 // The data and segment objects together allow data about the user to be passed to bidders in the
 // bid request.  Segment objects convey specific units of information from the provider identified
 // in the parent data object.
 type Segment struct {
-	Id    *string
-	Name  *string
-	Value *string
-	Ext   Extensions
+	Id    *string    `json:"id,omitempty"`
+	Name  *string    `json:"name,omitempty"`
+	Value *string    `json:"value,omitempty"`
+	Ext   Extensions `json:"ext,omitempty"`
 }
 
 // Private Marketplace Object
 type Pmp struct {
-	Private *int
-	Deals   []Deal
-	Ext     Extensions
+	Private *int       `json:"private,omitempty"`
+	Deals   []Deal     `json:"deals,omitempty"`
+	Ext     Extensions `json:"ext,omitempty"`
 }
 
 // Private Marketplace Deal
 type Deal struct {
-	Id       *string  // Unique deal ID
-	At       *int     // Auction type, Default: 2 ("1": first price auction, "2": then second price auction)
-	Seats    []string // List of seat IDs attached to this deal
-	Type     *int     // Deal indicator ("1": Eplicit Deal, "2": Trading Agreement Deal)
-	Bidfloor *float32
-	Ext      Extensions
+	Id       *string    `json:"id,omitempty"`    // Unique deal ID
+	At       *int       `json:"at,omitempty"`    // Auction type, Default: 2 ("1": first price auction, "2": then second price auction)
+	Seats    []string   `json:"seats,omitempty"` // List of seat IDs attached to this deal
+	Type     *int       `json:"type,omitempty"`  // Deal indicator ("1": Eplicit Deal, "2": Trading Agreement Deal)
+	Bidfloor *float32   `json:"bidfloor,omitempty"`
+	Ext      Extensions `json:"ext,omitempty"`
 }
 
 // General Extensions

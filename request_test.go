@@ -62,6 +62,18 @@ func TestRequest_WithDefaults(t *testing.T) {
 	assert.Equal(t, "pending", "TODO")
 }
 
+func TestRequest_JSON(t *testing.T) {
+	req, err := ParseRequest(bytes.NewBuffer(expandableCreative))
+	assert.Nil(t, err)
+
+	if req != nil {
+		assert.Equal(t, "pending", "TODO")
+		// json, err := req.JSON()
+		// assert.Nil(t, err)
+		// assert.Equal(t, string(json), string(expandableCreative))
+	}
+}
+
 var simpleBanner []byte = []byte(`
 {
   "id":"1234534625254",
