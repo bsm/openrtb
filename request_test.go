@@ -6,20 +6,14 @@ import (
 	"testing"
 )
 
-func TestParseRequestBytes_BlankUnvalidated(t *testing.T) {
-	req, err := ParseRequestBytes([]byte("{}"), false)
+func TestParseRequestBytes_Blank(t *testing.T) {
+	req, err := ParseRequestBytes([]byte("{}"))
 	assert.Nil(t, err)
 	assert.IsType(t, &Request{}, req)
 }
 
-func TestParseRequestBytes_BlankValidated(t *testing.T) {
-	req, err := ParseRequestBytes([]byte("{}"), true)
-	assert.Nil(t, req)
-	assert.Equal(t, err.Error(), "openrtb parse: request ID missing")
-}
-
 func TestParseRequestBytes_SimpleBanner(t *testing.T) {
-	req, err := ParseRequestBytes(simpleBanner, true)
+	req, err := ParseRequestBytes(simpleBanner)
 	assert.Nil(t, err)
 	assert.IsType(t, &Request{}, req)
 
@@ -39,7 +33,7 @@ func TestParseRequestBytes_SimpleBanner(t *testing.T) {
 }
 
 func TestParseRequestBytes_ExpandableCreative(t *testing.T) {
-	req, err := ParseRequestBytes(expandableCreative, true)
+	req, err := ParseRequestBytes(expandableCreative)
 	assert.Nil(t, err)
 	assert.IsType(t, &Request{}, req)
 
@@ -55,9 +49,17 @@ func TestParseRequestBytes_ExpandableCreative(t *testing.T) {
 }
 
 func TestParseRequest_ExpandableCreative(t *testing.T) {
-	req, err := ParseRequest(bytes.NewBuffer(expandableCreative), true)
+	req, err := ParseRequest(bytes.NewBuffer(expandableCreative))
 	assert.Nil(t, err)
 	assert.IsType(t, &Request{}, req)
+}
+
+func TestRequest_Valid(t *testing.T) {
+	assert.Equal(t, "pending", "TODO")
+}
+
+func TestRequest_WithDefaults(t *testing.T) {
+	assert.Equal(t, "pending", "TODO")
 }
 
 var simpleBanner []byte = []byte(`

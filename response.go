@@ -14,6 +14,19 @@ var (
 	errValidationBidPrice   = errors.New("openrtb response: bid is missing price")
 )
 
+// ID and at least one “seatbid” object is required, which contains a bid on at least one impression.
+// Other attributes are optional since an exchange may establish default values.
+// No-Bids on all impressions should be indicated as a HTTP 204 response.
+// For no-bids on specific impressions, the bidder should omit these from the bid response.
+type Response struct {
+	Id         *string    `json:"id"`                   // Reflection of the bid request ID for logging purposes
+	Seatbid    []Seatbid  `json:"seatbid"`              // Array of seatbid objects
+	Bidid      *string    `json:"bidid,omitempty"`      // Optional response tracking ID for bidders
+	Cur        *string    `json:"cur,omitempty"`        // Bid currency
+	Customdata *string    `json:"customdata,omitempty"` // Encoded user features
+	Ext        Extensions `json:"ext,omitempty"`        // Custom specifications in Json
+}
+
 // Response object to_json
 // @return [Json,Error]
 func (res *Response) JSON() ([]byte, error) {
