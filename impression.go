@@ -41,7 +41,7 @@ func (imp *Impression) Valid() (bool, error) {
 		if ok, err := imp.Video.Valid(); !ok {
 			return ok, err
 		}
-	} else {
+	} else if imp.Banner == nil {
 		return false, invalidImpBoV
 	}
 
@@ -73,5 +73,32 @@ func (imp *Impression) WithDefaults() *Impression {
 		imp.Video.WithDefaults()
 	}
 
+	return imp
+}
+
+// Set the ID
+func (imp *Impression) SetId(id string) *Impression {
+	if imp.Id == nil {
+		imp.Id = new(string)
+	}
+	*imp.Id = id
+	return imp
+}
+
+// Set the Banner
+func (imp *Impression) SetBanner(b Banner) *Impression {
+	if imp.Banner == nil {
+		imp.Banner = new(Banner)
+	}
+	*imp.Banner = b
+	return imp
+}
+
+// Set the Video
+func (imp *Impression) SetVideo(v Video) *Impression {
+	if imp.Video == nil {
+		imp.Video = new(Video)
+	}
+	*imp.Video = v
 	return imp
 }

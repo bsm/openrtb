@@ -11,5 +11,7 @@ func TestSite_IsPrivacyPolicy(t *testing.T) {
 }
 
 func TestSite_WithDefaults(t *testing.T) {
-	assert.Equal(t, "pending", "TODO")
+	s := &Site{}
+	site := s.WithDefaults()
+	assert.Equal(t, *site.Privacypolicy, 0)
 }

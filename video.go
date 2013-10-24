@@ -95,3 +95,39 @@ func (v *Video) WithDefaults() *Video {
 	}
 	return v
 }
+
+// Set the Linearity
+func (v *Video) SetLinearity(lin int) *Video {
+	if v.Linearity == nil {
+		v.Linearity = new(int)
+	}
+	*v.Linearity = lin
+	return v
+}
+
+// Set the Minduration
+func (v *Video) SetMinduration(mdur int) *Video {
+	if v.Minduration == nil {
+		v.Minduration = new(int)
+	}
+	*v.Minduration = mdur
+	return v
+}
+
+// Set the Maxduration
+func (v *Video) SetMaxduration(mdur int) *Video {
+	if v.Maxduration == nil {
+		v.Maxduration = new(int)
+	}
+	*v.Maxduration = mdur
+	return v
+}
+
+// Set the Protocol
+func (v *Video) SetProtocol(p int) *Video {
+	if v.Protocol == nil {
+		v.Protocol = new(int)
+	}
+	*v.Protocol = p
+	return v
+}

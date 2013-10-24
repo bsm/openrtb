@@ -16,5 +16,8 @@ func TestApp_IsPaid(t *testing.T) {
 }
 
 func TestApp_WithDefaults(t *testing.T) {
-	assert.Equal(t, "pending", "TODO")
+	a := &App{}
+	app := a.WithDefaults()
+	assert.Equal(t, *app.Privacypolicy, 0)
+	assert.Equal(t, *app.Paid, 0)
 }

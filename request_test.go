@@ -55,11 +55,86 @@ func TestParseRequest_ExpandableCreative(t *testing.T) {
 }
 
 func TestRequest_Valid(t *testing.T) {
-	assert.Equal(t, "pending", "TODO")
+	r := &Request{}
+	s := &Site{}
+	a := &App{}
+	i := &Impression{}
+	b := &Banner{}
+
+	// blank Request
+	ok, err := r.Valid()
+	assert.Equal(t, ok, false)
+	if err != nil {
+		assert.Equal(t, err.Error(), "openrtb parse: request ID missing")
+	}
+
+	// with ID
+	r.SetId("RAND_ID")
+	ok, err = r.Valid()
+	assert.Equal(t, ok, false)
+	if err != nil {
+		assert.Equal(t, err.Error(), "openrtb parse: no impressions")
+	}
+
+	// with Site
+	r.SetSite(*s)
+	ok, err = r.Valid()
+	assert.Equal(t, ok, false)
+	if err != nil {
+		assert.Equal(t, err.Error(), "openrtb parse: no impressions")
+	}
+
+	// with Site & App
+	r.SetApp(*a)
+	ok, err = r.Valid()
+	assert.Equal(t, ok, false)
+	if err != nil {
+		assert.Equal(t, err.Error(), "openrtb parse: no impressions")
+	}
+
+	// with Impression
+	i.SetId("IMPID").SetBanner(*b).WithDefaults()
+	r.Imp = []Impression{*i}
+	ok, err = r.Valid()
+	assert.Equal(t, ok, false)
+	if err != nil {
+		assert.Equal(t, err.Error(), "openrtb parse: request has site and app")
+	}
+
+	// with valid attrs
+	r.App = nil
+	ok, err = r.Valid()
+	assert.Equal(t, ok, true)
 }
 
 func TestRequest_WithDefaults(t *testing.T) {
-	assert.Equal(t, "pending", "TODO")
+	s := &Site{}
+	a := &App{}
+	d := &Device{}
+	i := &Impression{}
+	b := &Banner{}
+	v := &Video{}
+
+	i.SetBanner(*b).SetVideo(*v)
+	r := &Request{Site: s, App: a, Device: d, Imp: []Impression{*i}}
+
+	req := r.WithDefaults()
+	assert.Equal(t, *req.At, 2)
+	assert.Equal(t, *req.App.Privacypolicy, 0)
+	assert.Equal(t, *req.App.Paid, 0)
+	assert.Equal(t, *req.Site.Privacypolicy, 0)
+	assert.Equal(t, *req.Device.Dnt, 0)
+	assert.Equal(t, *req.Device.Js, 0)
+	assert.Equal(t, *req.Device.Connectiontype, CONN_TYPE_UNKNOWN)
+	assert.Equal(t, *req.Device.Devicetype, DEVICE_TYPE_UNKNOWN)
+	assert.Equal(t, *req.Imp[0].Instl, 0)
+	assert.Equal(t, *req.Imp[0].Bidfloor, 0)
+	assert.Equal(t, *req.Imp[0].Bidfloorcur, "USD")
+	assert.Equal(t, *req.Imp[0].Banner.Topframe, 0)
+	assert.Equal(t, *req.Imp[0].Banner.Pos, AD_POS_UNKNOWN)
+	assert.Equal(t, *req.Imp[0].Video.Sequence, 1)
+	assert.Equal(t, *req.Imp[0].Video.Boxingallowed, 1)
+	assert.Equal(t, *req.Imp[0].Video.Pos, AD_POS_UNKNOWN)
 }
 
 func TestRequest_JSON(t *testing.T) {

@@ -16,5 +16,8 @@ func TestBanner_Position(t *testing.T) {
 }
 
 func TestBanner_WithDefaults(t *testing.T) {
-	assert.Equal(t, "pending", "TODO")
+	b := &Banner{}
+	banner := b.WithDefaults()
+	assert.Equal(t, *banner.Topframe, 0)
+	assert.Equal(t, *banner.Pos, AD_POS_UNKNOWN)
 }

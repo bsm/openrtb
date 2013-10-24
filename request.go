@@ -99,3 +99,30 @@ func (req *Request) WithDefaults() *Request {
 
 	return req
 }
+
+// Set the ID
+func (req *Request) SetId(id string) *Request {
+	if req.Id == nil {
+		req.Id = new(string)
+	}
+	*req.Id = id
+	return req
+}
+
+// Set the Site
+func (req *Request) SetSite(site Site) *Request {
+	if req.Site == nil {
+		req.Site = new(Site)
+	}
+	*req.Site = site
+	return req
+}
+
+// Set the App
+func (req *Request) SetApp(app App) *Request {
+	if req.App == nil {
+		req.App = new(App)
+	}
+	*req.App = app
+	return req
+}
