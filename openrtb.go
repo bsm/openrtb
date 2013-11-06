@@ -154,4 +154,4 @@ type Deal struct {
 }
 
 // General Extensions
-type Extensions map[string]string
+type Extensions map[string]interface{}
