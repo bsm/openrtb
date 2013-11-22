@@ -6,15 +6,22 @@ import (
 )
 
 func TestResponse_JSON(t *testing.T) {
+	bid := &Bid{}
+	bid.SetID("BIDID").SetImpID("IMPID").SetPrice(0.0)
+
+	sb := &Seatbid{}
+	sb.Bid = append(sb.Bid, *bid)
+
 	res := &Response{}
 	res.Id = new(string)
 	*res.Id = "RES_ID"
 	res.Cur = new(string)
 	*res.Cur = "USD"
+	res.Seatbid = append(res.Seatbid, *sb)
 
 	bytes, err := res.JSON()
 	assert.Nil(t, err)
-	assert.Equal(t, string(bytes), `{"id":"RES_ID","seatbid":null,"cur":"USD"}`)
+	assert.Equal(t, string(bytes), `{"id":"RES_ID","seatbid":[{"bid":[{"id":"BIDID","impid":"IMPID","price":0}]}],"cur":"USD"}`)
 }
 
 func TestResponse_Valid(t *testing.T) {
