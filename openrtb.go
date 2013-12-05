@@ -87,8 +87,8 @@ type Producer ThirdParty
 // (such as IP geo lookup), or by user registration information (for example provided to a publisher
 // through a user registration).
 type Geo struct {
-	Lat           *float32   `json:"lat,omitempty"`           // Latitude from -90 to 90
-	Lon           *float32   `json:"lon,omitempty"`           // Longitude from -180 to 180
+	Lat           *float64   `json:"lat,omitempty"`           // Latitude from -90 to 90
+	Lon           *float64   `json:"lon,omitempty"`           // Longitude from -180 to 180
 	Country       *string    `json:"country,omitempty"`       // Country using ISO 3166-1 Alpha 3
 	Region        *string    `json:"region,omitempty"`        // Region using ISO 3166-2
 	Regionfips104 *string    `json:"regionfips104,omitempty"` // Region of a country using fips 10-4
