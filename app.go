@@ -16,7 +16,7 @@ type App struct {
 	Paid          *int       `json:"paid,omitempty"`          // "1": Paid, "2": Free
 	Publisher     *Publisher `json:"publisher,omitempty"`
 	// Content       Content
-	Keywords []string   `json:"keywords,omitempty"`
+	Keywords *string    `json:"keywords,omitempty"`
 	Storeurl *string    `json:"storeurl,omitempty"` // App store URL for an installed app
 	Ext      Extensions `json:"ext,omitempty"`
 }

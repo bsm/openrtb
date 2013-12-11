@@ -15,7 +15,7 @@ type Site struct {
 	Search        *string    `json:"search,omitempty"`        // Search string that caused naviation
 	Publisher     *Publisher `json:"publisher,omitempty"`
 	// Content       Content
-	Keywords []string   `json:"keywords,omitempty"`
+	Keywords *string    `json:"keywords,omitempty"`
 	Ext      Extensions `json:"ext,omitempty"`
 }
 
