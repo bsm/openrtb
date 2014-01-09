@@ -23,6 +23,7 @@ type Bid struct {
 	Cid     *string    `json:"cid,omitempty"`     // Campaign ID that appears with the Ad markup.
 	Crid    *string    `json:"crid,omitempty"`    // Creative ID for reporting content issues or defects. This could also be used as a reference to a creative ID that is posted with an exchange.
 	Attr    []int      `json:"attr,omitempty"`    // Array of creative attributes.
+	DealId  *string    `json:"deal_id,omitempty"` // DealID extension of private marketplace deals
 	Ext     Extensions `json:"ext,omitempty"`
 }
 
