@@ -50,6 +50,14 @@ func (imp *Impression) Valid() (bool, error) {
 	return true, nil
 }
 
+// Returns secure status, with default fallback
+func (imp *Impression) IsSecure() bool {
+	if imp.Secure != nil {
+		return *imp.Secure == 1
+	}
+	return false
+}
+
 // Returns the `imp` object returning defaults
 func (imp *Impression) WithDefaults() *Impression {
 	if imp.Instl == nil {
@@ -60,6 +68,11 @@ func (imp *Impression) WithDefaults() *Impression {
 	if imp.Bidfloor == nil {
 		imp.Bidfloor = new(float32)
 		*imp.Bidfloor = 0
+	}
+
+	if imp.Secure == nil {
+		imp.Secure = new(int)
+		*imp.Secure = 0
 	}
 
 	if imp.Bidfloorcur == nil {

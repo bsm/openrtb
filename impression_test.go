@@ -37,11 +37,16 @@ var _ = Describe("Impression", func() {
 		Expect(ok).To(BeTrue())
 	})
 
+	It("should have accessors", func() {
+		Expect(subject.IsSecure()).To(BeFalse())
+	})
+
 	It("should have defaults", func() {
 		subject.SetBanner(&Banner{}).SetVideo(&Video{})
 		subject.WithDefaults()
 
 		Expect(*subject.Instl).To(Equal(0))
+		Expect(*subject.Secure).To(Equal(0))
 		Expect(*subject.Bidfloor).To(Equal(float32(0.0)))
 		Expect(*subject.Bidfloorcur).To(Equal("USD"))
 		Expect(*subject.Banner.Topframe).To(Equal(0))
