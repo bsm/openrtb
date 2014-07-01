@@ -1,64 +1,53 @@
 package openrtb
 
 import (
-	"github.com/stretchr/testify/assert"
-	"testing"
+	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/gomega"
 )
 
-func TestImpression_Valid(t *testing.T) {
-	imp := &Impression{}
-	b := &Banner{}
-	v := &Video{Mimes: []string{"MIME_123"}}
+var _ = Describe("Impression", func() {
+	var subject *Impression
 
-	// blank Impression
-	ok, err := imp.Valid()
-	assert.Equal(t, ok, false)
-	if err != nil {
-		assert.Equal(t, err.Error(), "openrtb parse: impression ID missing")
-	}
+	BeforeEach(func() {
+		subject = new(Impression)
+	})
 
-	// Impression with ID
-	imp.SetId("CODE_12")
-	ok, err = imp.Valid()
-	assert.Equal(t, ok, false)
-	if err != nil {
-		assert.Equal(t, err.Error(), "openrtb parse: impression has neither a banner nor video")
-	}
+	It("should validate", func() {
+		b := &Banner{}
+		v := (&Video{Mimes: []string{"MIME_123"}}).SetLinearity(1).SetMinduration(1).SetMaxduration(5).SetProtocol(1)
 
-	// Impression with Banner
-	imp.SetBanner(*b)
-	ok, err = imp.Valid()
-	assert.Equal(t, ok, true)
+		ok, err := subject.Valid()
+		Expect(err).To(HaveOccurred())
+		Expect(ok).To(BeFalse())
 
-	// Impression with both Banner and Video
-	v.SetLinearity(1).SetMinduration(1).SetMaxduration(5).SetProtocol(1)
-	imp.SetVideo(*v)
-	ok, err = imp.Valid()
-	assert.Equal(t, ok, false)
-	if err != nil {
-		assert.Equal(t, err.Error(), "openrtb parse: impression has banner and video")
-	}
+		subject.SetId("CODE_12")
+		subject.SetBanner(b)
+		ok, err = subject.Valid()
+		Expect(err).NotTo(HaveOccurred())
+		Expect(ok).To(BeTrue())
 
-	// Impression with valid attrs
-	imp.Banner = nil
-	ok, err = imp.Valid()
-	assert.Equal(t, ok, true)
-}
+		subject.SetVideo(v)
+		ok, err = subject.Valid()
+		Expect(err).To(HaveOccurred())
+		Expect(ok).To(BeFalse())
 
-func TestImpression_WithDefaults(t *testing.T) {
-	i := &Impression{}
-	b := &Banner{}
-	v := &Video{}
+		subject.SetBanner(nil)
+		ok, err = subject.Valid()
+		Expect(err).NotTo(HaveOccurred())
+		Expect(ok).To(BeTrue())
+	})
 
-	i.SetBanner(*b).SetVideo(*v)
-	imp := i.WithDefaults()
+	It("should have defaults", func() {
+		subject.SetBanner(&Banner{}).SetVideo(&Video{})
+		subject.WithDefaults()
 
-	assert.Equal(t, *imp.Instl, 0)
-	assert.Equal(t, *imp.Bidfloor, 0)
-	assert.Equal(t, *imp.Bidfloorcur, "USD")
-	assert.Equal(t, *imp.Banner.Topframe, 0)
-	assert.Equal(t, *imp.Banner.Pos, AD_POS_UNKNOWN)
-	assert.Equal(t, *imp.Video.Sequence, 1)
-	assert.Equal(t, *imp.Video.Boxingallowed, 1)
-	assert.Equal(t, *imp.Video.Pos, AD_POS_UNKNOWN)
-}
+		Expect(*subject.Instl).To(Equal(0))
+		Expect(*subject.Bidfloor).To(Equal(float32(0.0)))
+		Expect(*subject.Bidfloorcur).To(Equal("USD"))
+		Expect(*subject.Banner.Topframe).To(Equal(0))
+		Expect(*subject.Banner.Pos).To(Equal(AD_POS_UNKNOWN))
+		Expect(*subject.Video.Sequence).To(Equal(1))
+		Expect(*subject.Video.Boxingallowed).To(Equal(1))
+		Expect(*subject.Video.Pos).To(Equal(AD_POS_UNKNOWN))
+	})
+})

@@ -2,8 +2,9 @@ package openrtb
 
 import (
 	"bytes"
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestParseRequestBytes_Blank(t *testing.T) {
@@ -77,7 +78,7 @@ func TestRequest_Valid(t *testing.T) {
 	}
 
 	// with Site
-	r.SetSite(*s)
+	r.SetSite(s)
 	ok, err = r.Valid()
 	assert.Equal(t, ok, false)
 	if err != nil {
@@ -85,7 +86,7 @@ func TestRequest_Valid(t *testing.T) {
 	}
 
 	// with Site & App
-	r.SetApp(*a)
+	r.SetApp(a)
 	ok, err = r.Valid()
 	assert.Equal(t, ok, false)
 	if err != nil {
@@ -93,7 +94,7 @@ func TestRequest_Valid(t *testing.T) {
 	}
 
 	// with Impression
-	i.SetId("IMPID").SetBanner(*b).WithDefaults()
+	i.SetId("IMPID").SetBanner(b).WithDefaults()
 	r.Imp = []Impression{*i}
 	ok, err = r.Valid()
 	assert.Equal(t, ok, false)
@@ -115,7 +116,7 @@ func TestRequest_WithDefaults(t *testing.T) {
 	b := &Banner{}
 	v := &Video{}
 
-	i.SetBanner(*b).SetVideo(*v)
+	i.SetBanner(b).SetVideo(v)
 	r := &Request{Site: s, App: a, Device: d, Imp: []Impression{*i}}
 
 	req := r.WithDefaults()
@@ -135,18 +136,6 @@ func TestRequest_WithDefaults(t *testing.T) {
 	assert.Equal(t, *req.Imp[0].Video.Sequence, 1)
 	assert.Equal(t, *req.Imp[0].Video.Boxingallowed, 1)
 	assert.Equal(t, *req.Imp[0].Video.Pos, AD_POS_UNKNOWN)
-}
-
-func TestRequest_JSON(t *testing.T) {
-	req, err := ParseRequest(bytes.NewBuffer(expandableCreative))
-	assert.Nil(t, err)
-
-	if req != nil {
-		assert.Equal(t, "pending", "TODO")
-		// json, err := req.JSON()
-		// assert.Nil(t, err)
-		// assert.Equal(t, string(json), string(expandableCreative))
-	}
 }
 
 var simpleBanner []byte = []byte(`

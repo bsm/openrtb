@@ -29,20 +29,20 @@ type Bid struct {
 
 // Validation errors
 var (
-	invalidBidId    = errors.New("openrtb response: bid is missing ID")
-	invalidBidImpid = errors.New("openrtb response: bid is missing impression ID")
-	invalidBidPrice = errors.New("openrtb response: bid is missing price")
+	ErrInvalidBidID    = errors.New("openrtb response: bid is missing ID")
+	ErrInvalidBidImpID = errors.New("openrtb response: bid is missing impression ID")
+	ErrInvalidBidPrice = errors.New("openrtb response: bid is missing price")
 )
 
 // Validate Bid required attributes
 func (bid *Bid) Valid() (bool, error) {
 
 	if bid.Id == nil {
-		return false, invalidBidId
+		return false, ErrInvalidBidID
 	} else if bid.Impid == nil {
-		return false, invalidBidImpid
+		return false, ErrInvalidBidImpID
 	} else if bid.Price == nil {
-		return false, invalidBidPrice
+		return false, ErrInvalidBidPrice
 	}
 
 	return true, nil

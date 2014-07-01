@@ -12,6 +12,8 @@ type Device struct {
 	Didmd5         *string    `json:"didmd5,omitempty"`   // MD5 hashed device ID
 	Dpidsha1       *string    `json:"dpidsha1,omitempty"` // SHA1 hashed platform device ID
 	Dpidmd5        *string    `json:"dpidmd5,omitempty"`  // MD5 hashed platform device ID
+	Macsha1        *string    `json:"macsha1,omitempty"`  // SHA1 hashed device ID; IMEI when available, else MEID or ESN
+	Macmd5         *string    `json:"macmd5,omitempty"`   // MD5 hashed device ID; IMEI when available, else MEID or ESN
 	Ipv6           *string    `json:"ipv6,omitempty"`     // IPv6
 	Carrier        *string    `json:"carrier,omitempty"`  // Carrier or ISP derived from the IP address
 	Language       *string    `json:"language,omitempty"` // Browser language
@@ -23,6 +25,7 @@ type Device struct {
 	Connectiontype *int       `json:"connectiontype,omitempty"`
 	Devicetype     *int       `json:"devicetype,omitempty"`
 	Flashver       *string    `json:"flashver,omitempty"` // Flash version
+	Ifa            *string    `json:"ifa,omitempty"`      // Native identifier for advertisers
 	Ext            Extensions `json:"ext,omitempty"`
 }
 

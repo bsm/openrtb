@@ -23,8 +23,10 @@ type Request struct {
 	Cur     []string     `json:"cur,omitempty"`     // Array of allowed currencies
 	Bcat    []string     `json:"bcat,omitempty"`    // Blocked Advertiser Categories.
 	Badv    []string     `json:"badv,omitempty"`    // Array of strings of blocked toplevel domains of advertisers
-	Pmp     *Pmp         `json:"pmp,omitempty"`
+	Regs    *Regulations `json:"regs,omitempty"`
 	Ext     Extensions   `json:"ext,omitempty"`
+
+	Pmp *Pmp `json:"pmp,omitempty"` // DEPRECATED: kept for backwards compatibility
 }
 
 // Parses an OpenRTB Request struct from an io.Reader
@@ -48,24 +50,19 @@ func ParseRequestBytes(data []byte) (req *Request, err error) {
 
 // Validation errors
 var (
-	invalidReqId  = errors.New("openrtb parse: request ID missing")
-	invalidReqImp = errors.New("openrtb parse: no impressions")
-	invalidReqSaA = errors.New("openrtb parse: request has site and app")
+	ErrInvalidReqID  = errors.New("openrtb parse: request ID missing")
+	ErrInvalidReqImp = errors.New("openrtb parse: no impressions")
+	ErrInvalidReqSrc = errors.New("openrtb parse: request has site and app")
 )
-
-// Generate JSON
-func (req *Request) JSON() ([]byte, error) {
-	return json.Marshal(req)
-}
 
 // Validates the request
 func (req *Request) Valid() (bool, error) {
 	if req.Id == nil {
-		return false, invalidReqId
+		return false, ErrInvalidReqID
 	} else if len(req.Imp) == 0 {
-		return false, invalidReqImp
+		return false, ErrInvalidReqImp
 	} else if req.Site != nil && req.App != nil {
-		return false, invalidReqSaA
+		return false, ErrInvalidReqSrc
 	}
 
 	for _, imp := range req.Imp {
@@ -110,19 +107,13 @@ func (req *Request) SetId(id string) *Request {
 }
 
 // Set the Site
-func (req *Request) SetSite(site Site) *Request {
-	if req.Site == nil {
-		req.Site = new(Site)
-	}
-	*req.Site = site
+func (req *Request) SetSite(site *Site) *Request {
+	req.Site = site
 	return req
 }
 
 // Set the App
-func (req *Request) SetApp(app App) *Request {
-	if req.App == nil {
-		req.App = new(App)
-	}
-	*req.App = app
+func (req *Request) SetApp(app *App) *Request {
+	req.App = app
 	return req
 }

@@ -9,6 +9,10 @@ package openrtb
 type Banner struct {
 	W        *int       `json:"w,omitempty"`        // Width
 	H        *int       `json:"h,omitempty"`        // Height
+	Wmax     *int       `json:"wmax,omitempty"`     // Width maximum
+	Hmax     *int       `json:"hmax,omitempty"`     // Height maximum
+	Wmin     *int       `json:"wmax,omitempty"`     // Width minimum
+	Hmin     *int       `json:"hmax,omitempty"`     // Height minimum
 	Id       *string    `json:"id,omitempty"`       // A unique identifier
 	Pos      *int       `json:"pos,omitempty"`      // Ad Position
 	Btype    []int      `json:"btype,omitempty"`    // Blocked creative types

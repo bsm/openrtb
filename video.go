@@ -8,13 +8,14 @@ import (
 // for auction is an in-stream video ad opportunity.
 type Video struct {
 	Mimes          []string   `json:"mimes,omitempty"`          // Content MIME types supported.
-	Linearity      *int       `json:"linearity,omitempty"`      // Indicates whether the ad impression is linear or non-linear
 	Minduration    *int       `json:"minduration,omitempty"`    // Minimum video ad duration in seconds
 	Maxduration    *int       `json:"maxduration,omitempty"`    // Maximum video ad duration in seconds
 	Protocol       *int       `json:"protocol,omitempty"`       // Video bid response protocols
+	Protocols      []int      `json:"protocols,omitempty"`      // Video bid response protocols
 	W              *int       `json:"w,omitempty"`              // Width of the player in pixels
 	H              *int       `json:"h,omitempty"`              // Height of the player in pixels
 	Startdelay     *int       `json:"startdelay,omitempty"`     // Indicates the start delay in seconds
+	Linearity      *int       `json:"linearity,omitempty"`      // Indicates whether the ad impression is linear or non-linear
 	Sequence       *int       `json:"sequence,omitempty"`       // Default: 1
 	Battr          []int      `json:"battr,omitempty"`          // Blocked creative attributes
 	Maxextended    *int       `json:"maxextended,omitempty"`    // Maximum extended video ad duration
@@ -56,25 +57,25 @@ func (v *Video) Position() int {
 
 // Validation errors
 var (
-	invalidVideoMimes       = errors.New("openrtb parse: video has no mimes")
-	invalidVideoLinearity   = errors.New("openrtb parse: video linearity missing")
-	invalidVideoMinduration = errors.New("openrtb parse: video minduration missing")
-	invalidVideoMaxduration = errors.New("openrtb parse: video maxduration missing")
-	invalidVideoProtocol    = errors.New("openrtb parse: video protocol missing")
+	ErrInvalidVideoMimes       = errors.New("openrtb parse: video has no mimes")
+	ErrInvalidVideoLinearity   = errors.New("openrtb parse: video linearity missing")
+	ErrInvalidVideoMinduration = errors.New("openrtb parse: video minduration missing")
+	ErrInvalidVideoMaxduration = errors.New("openrtb parse: video maxduration missing")
+	ErrInvalidVideoProtocol    = errors.New("openrtb parse: video protocol missing")
 )
 
 // Validates the object
 func (v *Video) Valid() (bool, error) {
 	if len(v.Mimes) == 0 {
-		return false, invalidVideoMimes
+		return false, ErrInvalidVideoMimes
 	} else if v.Linearity == nil {
-		return false, invalidVideoLinearity
+		return false, ErrInvalidVideoLinearity
 	} else if v.Minduration == nil {
-		return false, invalidVideoMinduration
+		return false, ErrInvalidVideoMinduration
 	} else if v.Maxduration == nil {
-		return false, invalidVideoMaxduration
+		return false, ErrInvalidVideoMaxduration
 	} else if v.Protocol == nil {
-		return false, invalidVideoProtocol
+		return false, ErrInvalidVideoProtocol
 	}
 	return true, nil
 }

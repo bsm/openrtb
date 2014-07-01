@@ -19,14 +19,14 @@ type Seatbid struct {
 
 // Validation errors
 var (
-	invalidSeatbidBid = errors.New("openrtb response: seatbid is missing bids")
+	ErrInvalidSeatbidBid = errors.New("openrtb response: seatbid is missing bids")
 )
 
 // Validate Seatbid required attributes
 func (sb *Seatbid) Valid() (bool, error) {
 
 	if sb.Bid == nil || len(sb.Bid) < 1 {
-		return false, invalidSeatbidBid
+		return false, ErrInvalidSeatbidBid
 	}
 
 	for _, bid := range sb.Bid {

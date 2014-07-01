@@ -19,30 +19,32 @@ type Impression struct {
 	Tagid             *string    `json:"tagid,omitempty"`             // Identifier for specific ad placement or ad tag
 	Bidfloor          *float32   `json:"bidfloor,omitempty"`          // Bid floor for this impression in CPM
 	Bidfloorcur       *string    `json:"bidfloorcur,omitempty"`       // Currency of bid floor
+	Secure            *int       `json:"secure,omitempty"`            // Flag to indicate whether the impression requires secure HTTPS URL creative assets and markup.
 	Iframebuster      []string   `json:"iframebuster,omitempty"`      // Array of names for supportediframe busters.
+	Pmp               *Pmp       `json:"pmp,omitempty"`               // A reference to the PMP object containing any Deals eligible for the impression object.
 	Ext               Extensions `json:"ext,omitempty"`
 }
 
 // Validation errors
 var (
-	invalidImpId  = errors.New("openrtb parse: impression ID missing")
-	invalidImpBoV = errors.New("openrtb parse: impression has neither a banner nor video")
-	invalidImpBaV = errors.New("openrtb parse: impression has banner and video")
+	ErrInvalidImpID  = errors.New("openrtb parse: impression ID missing")
+	ErrInvalidImpBoV = errors.New("openrtb parse: impression has neither a banner nor video")
+	ErrInvalidImpBaV = errors.New("openrtb parse: impression has banner and video")
 )
 
 // Validates the `imp` object
 func (imp *Impression) Valid() (bool, error) {
 
 	if imp.Id == nil {
-		return false, invalidImpId
+		return false, ErrInvalidImpID
 	} else if imp.Banner != nil && imp.Video != nil {
-		return false, invalidImpBaV
+		return false, ErrInvalidImpBaV
 	} else if imp.Video != nil {
 		if ok, err := imp.Video.Valid(); !ok {
 			return ok, err
 		}
 	} else if imp.Banner == nil {
-		return false, invalidImpBoV
+		return false, ErrInvalidImpBoV
 	}
 
 	return true, nil
@@ -86,19 +88,13 @@ func (imp *Impression) SetId(id string) *Impression {
 }
 
 // Set the Banner
-func (imp *Impression) SetBanner(b Banner) *Impression {
-	if imp.Banner == nil {
-		imp.Banner = new(Banner)
-	}
-	*imp.Banner = b
+func (imp *Impression) SetBanner(b *Banner) *Impression {
+	imp.Banner = b
 	return imp
 }
 
 // Set the Video
-func (imp *Impression) SetVideo(v Video) *Impression {
-	if imp.Video == nil {
-		imp.Video = new(Video)
-	}
-	*imp.Video = v
+func (imp *Impression) SetVideo(v *Video) *Impression {
+	imp.Video = v
 	return imp
 }

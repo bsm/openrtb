@@ -1,24 +1,28 @@
 package openrtb
 
 import (
-	"github.com/stretchr/testify/assert"
-	"testing"
+	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/gomega"
 )
 
-func TestSeatbid_Valid(t *testing.T) {
-	sb := &Seatbid{}
+var _ = Describe("Seatbid", func() {
+	var subject *Seatbid
 
-	ok, err := sb.Valid()
-	assert.Equal(t, ok, false)
-	if err != nil {
-		assert.Equal(t, err.Error(), "openrtb response: seatbid is missing bids")
-	}
+	BeforeEach(func() {
+		subject = new(Seatbid)
+	})
 
-	bid := &Bid{}
-	bid.SetID("BIDID").SetImpID("IMPID").SetPrice(0.0)
-	sb.Bid = append(sb.Bid, *bid)
+	It("should have validation", func() {
+		ok, err := subject.Valid()
+		Expect(err).To(HaveOccurred())
+		Expect(ok).To(BeFalse())
 
-	ok, err = sb.Valid()
-	assert.Equal(t, ok, true)
-	assert.Nil(t, err)
-}
+		bid := (&Bid{}).SetID("BIDID").SetImpID("IMPID").SetPrice(0.0)
+		subject.Bid = append(subject.Bid, *bid)
+
+		ok, err = subject.Valid()
+		Expect(err).NotTo(HaveOccurred())
+		Expect(ok).To(BeTrue())
+	})
+
+})

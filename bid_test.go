@@ -1,34 +1,29 @@
 package openrtb
 
 import (
-	"github.com/stretchr/testify/assert"
-	"testing"
+	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/gomega"
 )
 
-func TestBid_Valid(t *testing.T) {
-	bid := &Bid{}
+var _ = Describe("Bid", func() {
+	var subject *Bid
 
-	ok, err := bid.Valid()
-	assert.Equal(t, ok, false)
-	if err != nil {
-		assert.Equal(t, err.Error(), "openrtb response: bid is missing ID")
-	}
+	BeforeEach(func() {
+		subject = new(Bid)
+	})
 
-	bid.SetID("BIDID")
-	ok, err = bid.Valid()
-	assert.Equal(t, ok, false)
-	if err != nil {
-		assert.Equal(t, err.Error(), "openrtb response: bid is missing impression ID")
-	}
+	It("should have validation", func() {
+		ok, err := subject.Valid()
+		Expect(err).To(HaveOccurred())
+		Expect(ok).To(BeFalse())
 
-	bid.SetImpID("IMPID")
-	ok, err = bid.Valid()
-	assert.Equal(t, ok, false)
-	if err != nil {
-		assert.Equal(t, err.Error(), "openrtb response: bid is missing price")
-	}
+		subject.SetID("BIDID")
+		subject.SetImpID("IMPID")
+		subject.SetPrice(0.0)
 
-	bid.SetPrice(0.0)
-	ok, err = bid.Valid()
-	assert.Equal(t, ok, true)
-}
+		ok, err = subject.Valid()
+		Expect(err).NotTo(HaveOccurred())
+		Expect(ok).To(BeTrue())
+	})
+
+})

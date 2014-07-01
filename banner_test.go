@@ -1,23 +1,25 @@
 package openrtb
 
 import (
-	"github.com/stretchr/testify/assert"
-	"testing"
+	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/gomega"
 )
 
-func TestBanner_IsTopFrame(t *testing.T) {
-	b := &Banner{}
-	assert.Equal(t, b.IsTopFrame(), false)
-}
+var _ = Describe("Banner", func() {
+	var subject *Banner
 
-func TestBanner_Position(t *testing.T) {
-	b := &Banner{}
-	assert.Equal(t, b.Position(), 0)
-}
+	BeforeEach(func() {
+		subject = new(Banner)
+	})
 
-func TestBanner_WithDefaults(t *testing.T) {
-	b := &Banner{}
-	banner := b.WithDefaults()
-	assert.Equal(t, *banner.Topframe, 0)
-	assert.Equal(t, *banner.Pos, AD_POS_UNKNOWN)
-}
+	It("should have accessors", func() {
+		Expect(subject.IsTopFrame()).To(BeFalse())
+		Expect(subject.Position()).To(Equal(0))
+	})
+
+	It("should have defaults", func() {
+		subject.WithDefaults()
+		Expect(*subject.Topframe).To(Equal(0))
+		Expect(*subject.Pos).To(Equal(AD_POS_UNKNOWN))
+	})
+})

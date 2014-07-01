@@ -1,9 +1,6 @@
 package openrtb
 
-import (
-	"encoding/json"
-	"errors"
-)
+import "errors"
 
 // ID and at least one “seatbid” object is required, which contains a bid on at least one impression.
 // Other attributes are optional since an exchange may establish default values.
@@ -18,16 +15,10 @@ type Response struct {
 	Ext        Extensions `json:"ext,omitempty"`        // Custom specifications in Json
 }
 
-// Response object to_json
-// @return [Json,Error]
-func (res *Response) JSON() ([]byte, error) {
-	return json.Marshal(res)
-}
-
 // Validation errors
 var (
-	invalidResId      = errors.New("openrtb response: missing ID")
-	invalidResSeatbid = errors.New("openrtb response: missing seatbids")
+	ErrInvalidResID      = errors.New("openrtb response: missing ID")
+	ErrInvalidResSeatbid = errors.New("openrtb response: missing seatbids")
 )
 
 // Validate Response required attributes
@@ -35,9 +26,9 @@ var (
 func (res *Response) Valid() (bool, error) {
 
 	if res.Id == nil {
-		return false, invalidResId
+		return false, ErrInvalidResID
 	} else if res.Seatbid == nil || len(res.Seatbid) < 1 {
-		return false, invalidResSeatbid
+		return false, ErrInvalidResSeatbid
 	}
 
 	for _, sb := range res.Seatbid {

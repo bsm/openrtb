@@ -1,23 +1,25 @@
 package openrtb
 
 import (
-	"github.com/stretchr/testify/assert"
-	"testing"
+	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/gomega"
 )
 
-func TestApp_IsPrivacyPolicy(t *testing.T) {
-	a := &App{}
-	assert.Equal(t, a.IsPrivacyPolicy(), false)
-}
+var _ = Describe("App", func() {
+	var subject *App
 
-func TestApp_IsPaid(t *testing.T) {
-	a := &App{}
-	assert.Equal(t, a.IsPaid(), false)
-}
+	BeforeEach(func() {
+		subject = new(App)
+	})
 
-func TestApp_WithDefaults(t *testing.T) {
-	a := &App{}
-	app := a.WithDefaults()
-	assert.Equal(t, *app.Privacypolicy, 0)
-	assert.Equal(t, *app.Paid, 0)
-}
+	It("should have accessors", func() {
+		Expect(subject.IsPrivacyPolicy()).To(BeFalse())
+		Expect(subject.IsPaid()).To(BeFalse())
+	})
+
+	It("should have defaults", func() {
+		subject.WithDefaults()
+		Expect(*subject.Privacypolicy).To(Equal(0))
+		Expect(*subject.Paid).To(Equal(0))
+	})
+})

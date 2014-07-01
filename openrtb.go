@@ -1,7 +1,7 @@
 package openrtb
 
 const (
-	VERSION = "2.1"
+	VERSION = "2.2"
 
 	AD_POS_UNKNOWN    = 0
 	AD_POS_ABOVE_FOLD = 1
@@ -136,21 +136,32 @@ type Segment struct {
 	Ext   Extensions `json:"ext,omitempty"`
 }
 
-// Private Marketplace Object
-type Pmp struct {
-	Private *int       `json:"private,omitempty"`
-	Deals   []Deal     `json:"deals,omitempty"`
-	Ext     Extensions `json:"ext,omitempty"`
+// The "regs" object contains any legal, governmental, or industry regulations that
+// apply to the request
+type Regulations struct {
+	Coppa *int       `json:"coppa,omitempty"`
+	Ext   Extensions `json:"ext,omitempty"`
 }
 
-// Private Marketplace Deal
-type Deal struct {
-	Id       *string    `json:"id,omitempty"`    // Unique deal ID
-	At       *int       `json:"at,omitempty"`    // Auction type, Default: 2 ("1": first price auction, "2": then second price auction)
-	Seats    []string   `json:"seats,omitempty"` // List of seat IDs attached to this deal
-	Type     *int       `json:"type,omitempty"`  // Deal indicator ("1": Eplicit Deal, "2": Trading Agreement Deal)
-	Bidfloor *float32   `json:"bidfloor,omitempty"`
-	Ext      Extensions `json:"ext,omitempty"`
+// Private Marketplace Object
+type Pmp struct {
+	Private *int         `json:"private_auction,omitempty"`
+	Deals   []DirectDeal `json:"deals,omitempty"`
+	Ext     Extensions   `json:"ext,omitempty"`
+}
+
+// PMP Direct Deal
+type DirectDeal struct {
+	Id          *string    `json:"id,omitempty"` // Unique deal ID
+	Bidfloor    *float32   `json:"bidfloor,omitempty"`
+	Bidfloorcur *string    `json:"bidfloorcur,omitempty"` // Currency of bid floor
+	Wseat       []string   `json:"wseat,omitempty"`       // Array of buyer seats allowed to bid on this Direct Deal.
+	Wadomain    []string   `json:"wadomain,omitempty"`    // Array of advertiser domains allowed to bid on this Direct Deal
+	At          *int       `json:"at,omitempty"`          // Auction type, Default: 2 ("1": first price auction, "2": then second price auction)
+	Ext         Extensions `json:"ext,omitempty"`
+
+	Seats []string `json:"seats,omitempty"` // DEPRECATED: kept for backwards compatibility
+	Type  *int     `json:"type,omitempty"`  // DEPRECATED: kept for backwards compatibility
 }
 
 // General Extensions

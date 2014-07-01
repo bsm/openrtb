@@ -1,8 +1,9 @@
 package openrtb
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestVideo_Seq(t *testing.T) {
