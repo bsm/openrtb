@@ -2,141 +2,161 @@ package openrtb
 
 import (
 	"bytes"
-	"testing"
-
-	"github.com/stretchr/testify/assert"
+  . "github.com/onsi/ginkgo"
+  . "github.com/onsi/gomega"
 )
 
-func TestParseRequestBytes_Blank(t *testing.T) {
-	req, err := ParseRequestBytes([]byte("{}"))
-	assert.Nil(t, err)
-	assert.IsType(t, &Request{}, req)
-}
+var _ = Describe("Request", func() {
+  var subject *Request
 
-func TestParseRequestBytes_SimpleBanner(t *testing.T) {
-	req, err := ParseRequestBytes(simpleBanner)
-	assert.Nil(t, err)
-	assert.IsType(t, &Request{}, req)
+  BeforeEach(func() { subject = new(Request) })
 
-	assert.Equal(t, *req.At, 2)
-	assert.Equal(t, *req.Id, "1234534625254")
-	assert.Equal(t, len(req.Badv), 2)
-	assert.Equal(t, len(req.Bcat), 0)
+  Describe("ParseRequest()", func() {
+    req, err := ParseRequest(bytes.NewBuffer(expandableCreative))
+    Expect(err).NotTo(HaveOccurred())
+    Expect(req).To(BeAssignableToTypeOf(&Request{}))
+  })
 
-	assert.Equal(t, len(req.Imp), 1)
-	assert.Equal(t, *req.Imp[0].Banner.W, 300)
-	assert.Equal(t, *req.Imp[0].Banner.H, 250)
+  Describe("ParseRequestBytes()", func() {
+    It("should return blank request with defaults when blank", func() {
+      req, err := ParseRequestBytes([]byte("{}"))
+      Expect(err).NotTo(HaveOccurred())
+      Expect(req).To(BeAssignableToTypeOf(&Request{}))
+    })
 
-	assert.Equal(t, *req.Site.Name, "Site ABCD")
-	assert.Equal(t, *req.Site.Publisher.Name, "Publisher A")
-	assert.Equal(t, *req.Device.Ip, "64.124.253.1")
-	assert.Equal(t, *req.User.Buyeruid, "5df678asd8987656asdf78987654")
-}
+    It("should return accordingly when with simple banner", func() {
+      req, err := ParseRequestBytes(simpleBanner)
+      Expect(err).NotTo(HaveOccurred())
+      Expect(req).To(BeAssignableToTypeOf(&Request{}))
 
-func TestParseRequestBytes_ExpandableCreative(t *testing.T) {
-	req, err := ParseRequestBytes(expandableCreative)
-	assert.Nil(t, err)
-	assert.IsType(t, &Request{}, req)
+      Expect(*req.At).To(Equal(2))
+      Expect(*req.Id).To(Equal("1234534625254"))
 
-	assert.Equal(t, *req.At, 2)
-	assert.Equal(t, *req.Tmax, 120)
-	assert.Equal(t, req.Imp[0].Banner.Expdir, []int{2, 4})
-	assert.Equal(t, *req.Site.Privacypolicy, 1)
-	assert.Equal(t, *req.Device.Flashver, "10.1")
-	assert.Equal(t, len(req.User.Data), 1)
-	assert.Equal(t, *req.User.Data[0].Id, "6")
-	assert.Equal(t, len(req.User.Data[0].Segment), 3)
-	assert.Equal(t, *req.User.Data[0].Segment[2].Id, "23423424")
-}
+      Expect(len(req.Badv)).To(Equal(2))
+      Expect(len(req.Bcat)).To(Equal(0))
+      Expect(len(req.Imp)).To(Equal(1))
 
-func TestParseRequest_ExpandableCreative(t *testing.T) {
-	req, err := ParseRequest(bytes.NewBuffer(expandableCreative))
-	assert.Nil(t, err)
-	assert.IsType(t, &Request{}, req)
-}
+      Expect(*req.Imp[0].Banner.W).To(Equal(300))
+      Expect(*req.Imp[0].Banner.H).To(Equal(250))
+      Expect(*req.Site.Name).To(Equal("Site ABCD"))
+      Expect(*req.Site.Publisher.Name).To(Equal("Publisher A"))
+      Expect(*req.Device.Ip).To(Equal("64.124.253.1"))
+      Expect(*req.User.Buyeruid).To(Equal("5df678asd8987656asdf78987654"))
+    })
 
-func TestRequest_Valid(t *testing.T) {
-	r := &Request{}
-	s := &Site{}
-	a := &App{}
-	i := &Impression{}
-	b := &Banner{}
+    It("should return accordingly when with expandable creatives", func(){
+      req, err := ParseRequestBytes(expandableCreative)
+      Expect(err).NotTo(HaveOccurred())
+      Expect(req).To(BeAssignableToTypeOf(&Request{}))
 
-	// blank Request
-	ok, err := r.Valid()
-	assert.Equal(t, ok, false)
-	if err != nil {
-		assert.Equal(t, err.Error(), "openrtb parse: request ID missing")
-	}
+      Expect(*req.At).To(Equal(2))
+      Expect(*req.Tmax).To(Equal(120))
+      Expect(req.Imp[0].Banner.Expdir).To(Equal([]int{2,4}))
+      Expect(*req.Site.Privacypolicy).To(Equal(1))
+      Expect(*req.Device.Flashver).To(Equal("10.1"))
+      Expect(*req.User.Data[0].Id).To(Equal("6"))
+      Expect(*req.User.Data[0].Segment[2].Id).To(Equal("23423424"))
 
-	// with ID
-	r.SetId("RAND_ID")
-	ok, err = r.Valid()
-	assert.Equal(t, ok, false)
-	if err != nil {
-		assert.Equal(t, err.Error(), "openrtb parse: no impressions")
-	}
+      Expect(len(req.User.Data)).To(Equal(1))
+      Expect(len(req.User.Data[0].Segment)).To(Equal(3))
+    })
+  })
 
-	// with Site
-	r.SetSite(s)
-	ok, err = r.Valid()
-	assert.Equal(t, ok, false)
-	if err != nil {
-		assert.Equal(t, err.Error(), "openrtb parse: no impressions")
-	}
+  Describe("Valid()", func() {
 
-	// with Site & App
-	r.SetApp(a)
-	ok, err = r.Valid()
-	assert.Equal(t, ok, false)
-	if err != nil {
-		assert.Equal(t, err.Error(), "openrtb parse: no impressions")
-	}
+    var (
+      site        *Site
+      app         *App
+      impression  *Impression
+      banner      *Banner
+    )
 
-	// with Impression
-	i.SetId("IMPID").SetBanner(b).WithDefaults()
-	r.Imp = []Impression{*i}
-	ok, err = r.Valid()
-	assert.Equal(t, ok, false)
-	if err != nil {
-		assert.Equal(t, err.Error(), "openrtb parse: request has site and app")
-	}
+    BeforeEach(func() {
+      site        = new(Site)
+      app         = new(App)
+      impression  = new(Impression)
+      banner      = new(Banner)
+    })
 
-	// with valid attrs
-	r.App = nil
-	ok, err = r.Valid()
-	assert.Equal(t, ok, true)
-}
+    It("should return error messages when attributes missing", func(){
+      ok, err := subject.Valid()
+      Expect(err.Error()).To(Equal("openrtb parse: request ID missing"))
 
-func TestRequest_WithDefaults(t *testing.T) {
-	s := &Site{}
-	a := &App{}
-	d := &Device{}
-	i := &Impression{}
-	b := &Banner{}
-	v := &Video{}
+      subject.SetId("RAND_ID") // With ID
+      ok, err = subject.Valid()
+      Expect(err.Error()).To(Equal("openrtb parse: no impressions"))
 
-	i.SetBanner(b).SetVideo(v)
-	r := &Request{Site: s, App: a, Device: d, Imp: []Impression{*i}}
+      subject.SetSite(site)    // With Site
+      ok, err = subject.Valid()
+      Expect(err.Error()).To(Equal("openrtb parse: no impressions"))
 
-	req := r.WithDefaults()
-	assert.Equal(t, *req.At, 2)
-	assert.Equal(t, *req.App.Privacypolicy, 0)
-	assert.Equal(t, *req.App.Paid, 0)
-	assert.Equal(t, *req.Site.Privacypolicy, 0)
-	assert.Equal(t, *req.Device.Dnt, 0)
-	assert.Equal(t, *req.Device.Js, 0)
-	assert.Equal(t, *req.Device.Connectiontype, CONN_TYPE_UNKNOWN)
-	assert.Equal(t, *req.Device.Devicetype, DEVICE_TYPE_UNKNOWN)
-	assert.Equal(t, *req.Imp[0].Instl, 0)
-	assert.Equal(t, *req.Imp[0].Bidfloor, 0)
-	assert.Equal(t, *req.Imp[0].Bidfloorcur, "USD")
-	assert.Equal(t, *req.Imp[0].Banner.Topframe, 0)
-	assert.Equal(t, *req.Imp[0].Banner.Pos, AD_POS_UNKNOWN)
-	assert.Equal(t, *req.Imp[0].Video.Sequence, 1)
-	assert.Equal(t, *req.Imp[0].Video.Boxingallowed, 1)
-	assert.Equal(t, *req.Imp[0].Video.Pos, AD_POS_UNKNOWN)
-}
+      subject.SetApp(app)      // With App
+      ok, err = subject.Valid()
+      Expect(err.Error()).To(Equal("openrtb parse: no impressions"))
+
+      // With Impression
+      impression.SetId("IMPID").SetBanner(banner).WithDefaults()
+      subject.Imp = []Impression{*impression}
+      ok, err = subject.Valid()
+      Expect(err.Error()).To(Equal("openrtb parse: request has site and app"))
+
+      // with valid attrs
+      subject.App = nil
+      ok, err = subject.Valid()
+      Expect(err).NotTo(HaveOccurred())
+      Expect(ok).To(BeTrue())
+    })
+
+  })
+
+  Describe("WithDefaults()", func() {
+
+    var (
+      site        *Site
+      app         *App
+      device      *Device
+      impression  *Impression
+      banner      *Banner
+      video       *Video
+    )
+
+    BeforeEach(func() {
+      site        = new(Site)
+      app         = new(App)
+      device      = new(Device)
+      impression  = new(Impression)
+      banner      = new(Banner)
+      video       = new(Video)
+
+      impression.SetBanner(banner).SetVideo(video)
+      subject.Site   = site
+      subject.App    = app
+      subject.Device = device
+      subject.Imp    = []Impression{*impression}
+    })
+
+    It("should return blank request with default values", func(){
+       request := subject.WithDefaults()
+       Expect(*request.At).To(Equal(2))
+       Expect(*request.App.Privacypolicy).To(Equal(0))
+       Expect(*request.App.Paid).To(Equal(0))
+       Expect(*request.Site.Privacypolicy).To(Equal(0))
+       Expect(*request.Device.Dnt).To(Equal(0))
+       Expect(*request.Device.Js).To(Equal(0))
+       Expect(*request.Device.Connectiontype).To(Equal(CONN_TYPE_UNKNOWN))
+       Expect(*request.Device.Devicetype).To(Equal(DEVICE_TYPE_UNKNOWN))
+       Expect(*request.Imp[0].Instl).To(Equal(0))
+       Expect(*request.Imp[0].Bidfloor).To(Equal(float32(0)))
+       Expect(*request.Imp[0].Bidfloorcur).To(Equal("USD"))
+       Expect(*request.Imp[0].Banner.Topframe).To(Equal(0))
+       Expect(*request.Imp[0].Banner.Pos).To(Equal(AD_POS_UNKNOWN))
+       Expect(*request.Imp[0].Video.Sequence).To(Equal(1))
+       Expect(*request.Imp[0].Video.Boxingallowed).To(Equal(1))
+       Expect(*request.Imp[0].Video.Pos).To(Equal(AD_POS_UNKNOWN))
+    })
+  })
+
+})
 
 var simpleBanner []byte = []byte(`
 {
