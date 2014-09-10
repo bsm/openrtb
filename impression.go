@@ -10,7 +10,7 @@ import (
 // bids can reference them individually.  An exchange can also conduct private auctions by
 // restricting involvement to specific subsets of seats within bidders.
 type Impression struct {
-	Id                *string    `json:"id` // A unique identifier for this impression
+	Id                *string    `json:"id"` // A unique identifier for this impression
 	Banner            *Banner    `json:"banner,omitempty"`
 	Video             *Video     `json:"video,omitempty"`
 	Displaymanager    *string    `json:"displaymanager,omitempty"`    // Name of ad mediation partner, SDK technology, etc
