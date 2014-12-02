@@ -11,8 +11,8 @@ type Banner struct {
 	H        *int       `json:"h,omitempty"`        // Height
 	Wmax     *int       `json:"wmax,omitempty"`     // Width maximum
 	Hmax     *int       `json:"hmax,omitempty"`     // Height maximum
-	Wmin     *int       `json:"wmax,omitempty"`     // Width minimum
-	Hmin     *int       `json:"hmax,omitempty"`     // Height minimum
+	Wmin     *int       `json:"wmin,omitempty"`     // Width minimum
+	Hmin     *int       `json:"hmin,omitempty"`     // Height minimum
 	Id       *string    `json:"id,omitempty"`       // A unique identifier
 	Pos      *int       `json:"pos,omitempty"`      // Ad Position
 	Btype    []int      `json:"btype,omitempty"`    // Blocked creative types
