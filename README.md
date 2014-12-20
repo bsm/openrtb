@@ -1,5 +1,6 @@
-Go OpenRTB 2.1
-==============
+# Go OpenRTB 2.2 
+
+[![Build Status](https://travis-ci.org/bsm/openrtb.svg?branch=master)](https://travis-ci.org/bsm/openrtb)
 
 OpenRTB implementation for Go
 
@@ -39,7 +40,7 @@ Import the package:
 
 ## Licence
 
-    Copyright (c) 2013 Black Square Media Ltd. All rights reserved.
+    Copyright (c) 2014 Black Square Media Ltd. All rights reserved.
     (The MIT License)
 
     Permission is hereby granted, free of charge, to any person obtaining
