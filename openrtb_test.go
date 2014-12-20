@@ -13,5 +13,5 @@ import (
 
 func TestSuite(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "github.com/bsm/openrtb")
+	RunSpecs(t, "openrtb")
 }
