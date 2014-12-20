@@ -65,6 +65,8 @@ var testFixtures = struct {
       "banner":{
         "w":300,
         "h":250,
+        "wmin":300,
+        "hmin":250,
         "pos":1,
         "battr":[
           13

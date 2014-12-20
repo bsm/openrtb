@@ -9,6 +9,9 @@ import (
 
 var _ = Describe("Request", func() {
 	var subject *Request
+	var sptr = func(s string) *string { return &s }
+	var iptr = func(n int) *int { return &n }
+	var fptr = func(f float32) *float32 { return &f }
 
 	BeforeEach(func() {
 		subject = new(Request)
@@ -17,7 +20,64 @@ var _ = Describe("Request", func() {
 	It("should should parse requests", func() {
 		req, err := ParseRequest(bytes.NewBuffer(testFixtures.expandableCreative))
 		Expect(err).NotTo(HaveOccurred())
-		Expect(req).To(BeAssignableToTypeOf(&Request{}))
+
+		Expect(req.Imp).To(Equal([]Impression{
+			{
+				Id: sptr("1"),
+				Banner: &Banner{
+					W:        iptr(300),
+					H:        iptr(250),
+					Wmin:     iptr(300),
+					Hmin:     iptr(250),
+					Pos:      iptr(1),
+					Topframe: iptr(0),
+					Battr:    []int{13},
+					Expdir:   []int{2, 4},
+				},
+				Instl:        iptr(0),
+				Bidfloor:     fptr(0),
+				Bidfloorcur:  sptr("USD"),
+				Secure:       iptr(0),
+				Iframebuster: []string{"vendor1.com", "vendor2.com"},
+			},
+		}))
+
+		Expect(req.Site).To(Equal(&Site{
+			Id:            sptr("1345135123"),
+			Name:          sptr("Site ABCD"),
+			Domain:        sptr("siteabcd.com"),
+			Page:          sptr("http://siteabcd.com/page.htm"),
+			Privacypolicy: iptr(1),
+			Ref:           sptr("http://referringsite.com/referringpage.htm"),
+			Publisher:     &Publisher{Id: sptr("pub12345"), Name: sptr("Publisher A")},
+		}))
+
+		Expect(req.Device).To(Equal(&Device{
+			Dnt:            iptr(0),
+			Ua:             sptr("Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US; rv:1.9.2.16) Gecko/20110319 Firefox/3.6.16"),
+			Ip:             sptr("64.124.253.1"),
+			Os:             sptr("OS X"),
+			Js:             iptr(1),
+			Connectiontype: iptr(0),
+			Devicetype:     iptr(0),
+			Flashver:       sptr("10.1"),
+		}))
+
+		Expect(req.User).To(Equal(&User{
+			Id:       sptr("456789876567897654678987656789"),
+			Buyeruid: sptr("545678765467876567898765678987654"),
+			Data: []Data{
+				{
+					Id:   sptr("6"),
+					Name: sptr("Data Provider 1"),
+					Segment: []Segment{
+						{Id: sptr("12341318394918"), Name: sptr("auto intenders")},
+						{Id: sptr("1234131839491234"), Name: sptr("auto enthusiasts")},
+						{Id: sptr("23423424"), Name: sptr("data-provider1-age"), Value: sptr("30-40")},
+					},
+				},
+			},
+		}))
 	})
 
 	Describe("ParseRequestBytes()", func() {
