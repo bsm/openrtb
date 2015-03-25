@@ -13,6 +13,7 @@ type Site struct {
 	Privacypolicy *int       `json:"privacypolicy,omitempty"` // Default: 1 ("1": site has a privacy policy)
 	Ref           *string    `json:"ref,omitempty"`           // Referrer URL
 	Search        *string    `json:"search,omitempty"`        // Search string that caused naviation
+	Mobile        *int       `json:"mobile,omitempty"`        // Mobile ("1": site is mobile optimised)
 	Publisher     *Publisher `json:"publisher,omitempty"`
 	// Content       Content
 	Keywords *string    `json:"keywords,omitempty"`
