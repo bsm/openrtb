@@ -1,4 +1,4 @@
-# Go OpenRTB 2.2 
+# Go OpenRTB 2.3
 
 [![Build Status](https://travis-ci.org/bsm/openrtb.svg?branch=master)](https://travis-ci.org/bsm/openrtb)
 
