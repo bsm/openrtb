@@ -1,9 +1,19 @@
 package openrtb
 
+var sptr = func(s string) *string { return &s }
+var iptr = func(i int) *int { return &i }
+
 var testFixtures = struct {
-	simpleBanner       []byte
-	expandableCreative []byte
-	simpleResponse     []byte
+	simpleBanner         []byte
+	expandableCreative   []byte
+	simpleResponse       []byte
+	simpleNativeResponse []byte
+	simpleLink           Link
+	simpleImg            ResponseImg
+	simpleTitle          ResponseTitle
+	simpleData           ResponseData
+	installData          ResponseData
+	fullLink             Link
 }{
 	simpleBanner: []byte(`
 {
@@ -160,4 +170,63 @@ var testFixtures = struct {
     "cur": "USD"
 }
 `),
+	simpleNativeResponse: []byte(`
+{
+    "native": {
+        "ver": "1",
+        "link": {
+            "url": "deeplink://deeplink/url/into/app",
+            "fallback": "http: //i.am.a/URL",
+            "clicktrackers": [
+                "http: //a.com/a",
+                "http: //b.com/b"
+            ]
+        },
+        "imptrackers": [
+            "http: //a.com/a",
+            "http: //b.com/b"
+        ],
+        "assets": [
+            {
+                "id": 1,
+                "title": {
+                    "text": "InstallBOA"
+                },
+                "link": {
+                    "url": "http: //i.am.a/URL"
+                }
+            },
+            {
+                "id": 2,
+                "data": {
+                    "value": "5"
+                }
+            },
+            {
+                "id": 3,
+                "img": {
+                    "url": "http: //cdn.mobad.com/ad.png",
+                    "w": 64,
+                    "h": 64
+                }
+            },
+            {
+                "id": 4,
+                "data": {
+                    "value": "Install"
+                },
+                "link": {
+                    "url": "http: //i.am.a/URL"
+                }
+            }
+        ]
+    }
+}
+`),
+	simpleLink:  Link{Url: sptr("http: //i.am.a/URL")},
+	simpleImg:   ResponseImg{Url: sptr("http: //cdn.mobad.com/ad.png"), W: iptr(64), H: iptr(64)},
+	simpleTitle: ResponseTitle{Text: sptr("InstallBOA")},
+	simpleData:  ResponseData{Value: sptr("5")},
+	installData: ResponseData{Value: sptr("Install")},
+	fullLink:    Link{Url: sptr("deeplink://deeplink/url/into/app"), Clicktrackers: []string{"http: //a.com/a", "http: //b.com/b"}, Fallback: sptr("http: //i.am.a/URL")},
 }

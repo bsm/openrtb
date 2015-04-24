@@ -13,6 +13,7 @@ type Impression struct {
 	Id                *string    `json:"id"` // A unique identifier for this impression
 	Banner            *Banner    `json:"banner,omitempty"`
 	Video             *Video     `json:"video,omitempty"`
+	Native            *Native    `json:"native,omitempty"`
 	Displaymanager    *string    `json:"displaymanager,omitempty"`    // Name of ad mediation partner, SDK technology, etc
 	Displaymanagerver *string    `json:"displaymanagerver,omitempty"` // Version of the above
 	Instl             *int       `json:"instl,omitempty"`             // Interstitial, Default: 0 ("1": Interstitial, "0": Something else)
