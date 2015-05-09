@@ -16,6 +16,7 @@ type Response struct {
 	Bidid      *string    `json:"bidid,omitempty"`      // Optional response tracking ID for bidders
 	Cur        *string    `json:"cur,omitempty"`        // Bid currency
 	Customdata *string    `json:"customdata,omitempty"` // Encoded user features
+	Nbr        *int       `json:"nbr,omitempty"`        // Reason for not bidding, where 0 = unknown error, 1 = technical error, 2 = invalid request, 3 = known web spider, 4 = suspected Non-Human Traffic, 5 = cloud, data center, or proxy IP, 6 = unsupported device, 7 = blocked publisher or site, 8 = unmatched user
 	Ext        Extensions `json:"ext,omitempty"`        // Custom specifications in Json
 }
 

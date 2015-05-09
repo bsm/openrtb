@@ -2,12 +2,15 @@ package openrtb
 
 import (
 	"bytes"
+	"encoding/json"
+
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
 
 var _ = Describe("Response", func() {
 	var subject *Response
+	var iptr = func(i int) *int { return &i }
 	var sptr = func(s string) *string { return &s }
 	var fptr = func(f float32) *float32 { return &f }
 
@@ -30,6 +33,17 @@ var _ = Describe("Response", func() {
 		ok, err = subject.Valid()
 		Expect(err).NotTo(HaveOccurred())
 		Expect(ok).To(BeTrue())
+	})
+
+	It("should generate responses", func() {
+		nobid := Response{
+			Id:      sptr("32a69c6ba388f110487f9d1e63f77b22d86e916b"),
+			Nbr:     iptr(0),
+			Seatbid: []Seatbid{},
+		}
+		bin, err := json.Marshal(nobid)
+		Expect(err).NotTo(HaveOccurred())
+		Expect(string(bin)).To(Equal(`{"id":"32a69c6ba388f110487f9d1e63f77b22d86e916b","seatbid":[],"nbr":0}`))
 	})
 
 	It("should parse responses", func() {
