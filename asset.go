@@ -1,6 +1,9 @@
 package openrtb
 
-// TODO: Add description, use cases and other details
+// The main container object for each asset requested or supported by Exchange on behalf of the rendering client.
+// Any object that is required is to be flagged as such. Only one of the {title,,img,video,data} objects should
+// be present in each object. All others should be null/absent.
+// The id is to be unique within the AssetObject array so that the response can be aligned.
 type Asset struct {
 	Id       *int         `json:"id"`                 // Unique asset ID, assigned by exchange
 	Required *int         `json:"required,omitempty"` // Set to 1 if asset is required
