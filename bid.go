@@ -22,8 +22,11 @@ type Bid struct {
 	Iurl    *string    `json:"iurl,omitempty"`    // Sample image URL.
 	Cid     *string    `json:"cid,omitempty"`     // Campaign ID that appears with the Ad markup.
 	Crid    *string    `json:"crid,omitempty"`    // Creative ID for reporting content issues or defects. This could also be used as a reference to a creative ID that is posted with an exchange.
+	Cat     []string   `json:"cat,omitempty"`     // IAB content categories of the creative. Refer to List 5.1
 	Attr    []int      `json:"attr,omitempty"`    // Array of creative attributes.
 	DealId  *string    `json:"deal_id,omitempty"` // DealID extension of private marketplace deals
+	H       *int       `json:"h,omitempty"`       // Height of the ad in pixels.
+	W       *int       `json:"w,omitempty"`       // Width of the ad in pixels.
 	Ext     Extensions `json:"ext,omitempty"`
 }
 
