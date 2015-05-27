@@ -5,11 +5,11 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("Native", func() {
-	var subject *Native
+var _ = Describe("NativeRequest", func() {
+	var subject *NativeRequest
 
 	BeforeEach(func() {
-		subject = new(Native)
+		subject = new(NativeRequest)
 	})
 
 	It("should have defaults", func() {

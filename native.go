@@ -1,29 +1,15 @@
 package openrtb
 
-// TODO: Add description, use cases and other details
+// The presence of a Native as a subordinate of the Imp object indicates that this impression
+// is offered as a native type impression.
+// The Native Subcommittee has developed a companion specification to OpenRTB called the Native
+// Ad Specification. It defines the request parameters and response markup structure of native
+// ad units.
+// This object provides the means of transporting request parameters as an opaque string
 type Native struct {
-	Ver      *string    `json:"ver,omitempty"`      // Version of the Native Markup version in use
-	Layout   *int       `json:"layout,omitempty"`   // Layout ID of the native ad unit
-	Adunit   *int       `json:"adunit,omitempty"`   // Ad unit ID of the native ad unit
-	Plcmtcnt *int       `json:"plcmtcnt,omitempty"` // Number of identical placements in this Layout
-	Seq      *int       `json:"seq,omitempty"`      // This is not the sequence number of the content in the stream
-	Assets   []Asset    `json:"assets"`             // Array of Asset Objects
-	Ext      Extensions `json:"ext,omitempty"`
-}
-
-// Applies defaults
-func (n *Native) WithDefaults() *Native {
-	if n.Ver == nil {
-		n.Ver = new(string)
-		*n.Ver = "1"
-	}
-	if n.Plcmtcnt == nil {
-		n.Plcmtcnt = new(int)
-		*n.Plcmtcnt = 1
-	}
-	if n.Seq == nil {
-		n.Seq = new(int)
-		*n.Seq = 0
-	}
-	return n
+	Request *string    `json:"request"`         // Request payload complying with the Native Ad Specification
+	Ver     *string    `json:"ver,omitempty"`   // Version of the Native Ad Specification to which request complies
+	Api     []int      `json:"api,omitempty"`   // List of supported API frameworks for this impression
+	Battr   []int      `json:"battr,omitempty"` // Blocked creative attributes
+	Ext     Extensions `json:"ext,omitempty"`
 }
