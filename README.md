@@ -9,7 +9,7 @@ OpenRTB implementation for Go
 To install, use `go get`:
 
 ```shell
-go get github.com/bsm/openrtb
+go get gopkg.in/bsm/openrtb.v2
 ```
 
 Import the package:
@@ -19,7 +19,7 @@ package main
 
 import (
   "log"
-  "github.com/bsm/openrtb"
+  "gopkg.in/bsm/openrtb.v2"
 )
 
 func main() {
