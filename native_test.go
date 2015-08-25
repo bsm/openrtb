@@ -9,13 +9,15 @@ var _ = Describe("Native", func() {
 	var subject *Native
 
 	BeforeEach(func() {
-		subject = new(Native)
+		err := fixture("native", &subject)
+		Expect(err).NotTo(HaveOccurred())
 	})
 
-	It("should have defaults", func() {
-		subject.WithDefaults()
-		Expect(*subject.Ver).To(Equal("1"))
-		Expect(*subject.Plcmtcnt).To(Equal(1))
-		Expect(*subject.Seq).To(Equal(0))
+	It("should parse correctly", func() {
+		Expect(subject).To(Equal(&Native{
+			Request: "PAYLOAD",
+			Ver:     "2",
+		}))
 	})
+
 })

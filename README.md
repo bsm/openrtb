@@ -1,4 +1,4 @@
-# Go OpenRTB 2.3
+# Go OpenRTB v2.x
 
 [![Build Status](https://travis-ci.org/bsm/openrtb.svg?branch=master)](https://travis-ci.org/bsm/openrtb)
 
@@ -8,39 +8,40 @@ OpenRTB implementation for Go
 
 To install, use `go get`:
 
-    go get github.com/bsm/openrtb
-
-To update, use `go get -u`:
-
-    go get -u github.com/bsm/openrtb
+```shell
+go get github.com/bsm/openrtb
+```
 
 Import the package:
 
-    package main
+```go
+package main
 
-    import (
-      "github.com/bsm/openrtb"
-    )
+import (
+  "log"
+  "github.com/bsm/openrtb"
+)
 
-## Example
+func main() {
+  file, err := os.Open("stored.json")
+  if err != nil {
+    log.Fatal(err)
+  }
+  defer file.Close()
 
-    // Handle a HTTP request
-    http.HandleFunc("/bid", func(w http.ResponseWriter, r *http.Request) {
-      defer r.Body().Close()
+  var req *openrtb.BidRequest
+  err = json.NewDecoder(file).Decode(&req)
+  if err != nil {
+    log.Fatal(err)
+  }
 
-      req, err := openrtb.ParseRequest(r.Body(), true)
-      if err != nil {
-        log.Println("ERROR %s", err.Error())
-      } else {
-        log.Println("INFO  Received bid request %s", *req.Id)
-      }
-
-      w.WriteHeader(204) // respond with 'no bid'
-    })
+  log.Printf("%+v\n", req)
+}
+```
 
 ## Licence
 
-    Copyright (c) 2014 Black Square Media Ltd. All rights reserved.
+    Copyright (c) 2015 Black Square Media Ltd. All rights reserved.
     (The MIT License)
 
     Permission is hereby granted, free of charge, to any person obtaining
@@ -61,3 +62,6 @@ Import the package:
     CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
     TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
     SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+    Some test examples were taken from:
+    https://code.google.com/p/openrtb/wiki/OpenRTB_Examples

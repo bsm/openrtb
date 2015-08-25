@@ -9,50 +9,36 @@ var _ = Describe("Impression", func() {
 	var subject *Impression
 
 	BeforeEach(func() {
-		subject = new(Impression)
+		err := fixture("impression", &subject)
+		Expect(err).NotTo(HaveOccurred())
+	})
+
+	It("should parse correctly", func() {
+		Expect(subject).To(Equal(&Impression{
+			ID: "1",
+			Banner: &Banner{
+				W: 300,
+				H: 250,
+			},
+			BidFloor: 0.03,
+			Pmp: &Pmp{
+				Private: 1,
+				Deals: []Deal{
+					{
+						ID:          "DX-1985-010A",
+						BidFloor:    2.5,
+						AuctionType: 2,
+					},
+				},
+			},
+		}))
 	})
 
 	It("should validate", func() {
-		b := &Banner{}
-		v := (&Video{Mimes: []string{"MIME_123"}}).SetLinearity(1).SetMinduration(1).SetMaxduration(5).SetProtocol(1)
-
-		ok, err := subject.Valid()
-		Expect(err).To(HaveOccurred())
-		Expect(ok).To(BeFalse())
-
-		subject.SetId("CODE_12")
-		subject.SetBanner(b)
-		ok, err = subject.Valid()
-		Expect(err).NotTo(HaveOccurred())
-		Expect(ok).To(BeTrue())
-
-		subject.SetVideo(v)
-		ok, err = subject.Valid()
-		Expect(err).To(HaveOccurred())
-		Expect(ok).To(BeFalse())
-
-		subject.SetBanner(nil)
-		ok, err = subject.Valid()
-		Expect(err).NotTo(HaveOccurred())
-		Expect(ok).To(BeTrue())
+		Expect((&Impression{}).Validate()).To(Equal(ErrInvalidImpNoID))
+		Expect((&Impression{ID: "IMPID"}).Validate()).To(Equal(ErrInvalidImpNoAssets))
+		Expect((&Impression{ID: "IMPID", Banner: &Banner{}, Video: &Video{}}).Validate()).To(Equal(ErrInvalidImpMultiAssets))
+		Expect((&Impression{ID: "IMPID", Banner: &Banner{}}).Validate()).NotTo(HaveOccurred())
 	})
 
-	It("should have accessors", func() {
-		Expect(subject.IsSecure()).To(BeFalse())
-	})
-
-	It("should have defaults", func() {
-		subject.SetBanner(&Banner{}).SetVideo(&Video{})
-		subject.WithDefaults()
-
-		Expect(*subject.Instl).To(Equal(0))
-		Expect(*subject.Secure).To(Equal(0))
-		Expect(*subject.Bidfloor).To(Equal(float32(0.0)))
-		Expect(*subject.Bidfloorcur).To(Equal("USD"))
-		Expect(*subject.Banner.Topframe).To(Equal(0))
-		Expect(*subject.Banner.Pos).To(Equal(AD_POS_UNKNOWN))
-		Expect(*subject.Video.Sequence).To(Equal(1))
-		Expect(*subject.Video.Boxingallowed).To(Equal(1))
-		Expect(*subject.Video.Pos).To(Equal(AD_POS_UNKNOWN))
-	})
 })

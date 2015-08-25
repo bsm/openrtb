@@ -9,17 +9,19 @@ var _ = Describe("Banner", func() {
 	var subject *Banner
 
 	BeforeEach(func() {
-		subject = new(Banner)
+		err := fixture("banner", &subject)
+		Expect(err).NotTo(HaveOccurred())
 	})
 
-	It("should have accessors", func() {
-		Expect(subject.IsTopFrame()).To(BeFalse())
-		Expect(subject.Position()).To(Equal(0))
+	It("should parse correctly", func() {
+		Expect(subject).To(Equal(&Banner{
+			W:     728,
+			H:     90,
+			Pos:   AdPosAboveFold,
+			BType: []int{4},
+			BAttr: []int{14},
+			Api:   []int{3},
+		}))
 	})
 
-	It("should have defaults", func() {
-		subject.WithDefaults()
-		Expect(*subject.Topframe).To(Equal(0))
-		Expect(*subject.Pos).To(Equal(AD_POS_UNKNOWN))
-	})
 })

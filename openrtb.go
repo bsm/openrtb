@@ -1,58 +1,158 @@
-package openrtb
+package openrtb // import "gopkg.in/bsm/openrtb.v2"
 
+import "encoding/json"
+
+// 5.2 Banner Ad Types
 const (
-	VERSION = "2.2"
+	BannerTypeXHTMLText int = iota + 1
+	BannerTypeXHTML
+	BannerTypeJS
+	BannerTypeFrame
+)
 
-	AD_POS_UNKNOWN    = 0
-	AD_POS_ABOVE_FOLD = 1
-	AD_POS_BELOW_FOLD = 3
-	AD_POS_HEADER     = 4
-	AD_POS_FOOTER     = 5
-	AD_POS_SIDEBAR    = 6
-	AD_POS_FULLSCREEN = 7
+// 5.3 Creative Attributes
+// TODO
 
-	BANNER_TYPE_XHTML_TEXT = 1
-	BANNER_TYPE_XHTML      = 2
-	BANNER_TYPE_JS         = 3
-	BANNER_TYPE_FRAME      = 4
+// 5.4 Ad Position
+const (
+	AdPosUnknown int = iota
+	AdPosAboveFold
+	AdPosBelowFold
+	AdPosHeader
+	AdPosFooter
+	AdPosSidebar
+	AdPosFullscreen
+)
 
-	CONN_TYPE_UNKNOWN  = 0
-	CONN_TYPE_ETHERNET = 1
-	CONN_TYPE_WIFI     = 2
-	CONN_TYPE_CELL     = 3
-	CONN_TYPE_CELL_2G  = 4
-	CONN_TYPE_CELL_3G  = 5
-	CONN_TYPE_CELL_4G  = 6
+// 5.5 Expandable Direction
+const (
+	ExpDirLeft int = iota + 1
+	ExpDirRight
+	ExpDirUp
+	ExpDirDown
+	ExpDirFullScreen
+)
 
-	LOCATION_TYPE_GPS  = 1
-	LOCATION_TYPE_IP   = 2
-	LOCATION_TYPE_USER = 3
+// 5.6 API Frameworks
+const (
+	APIFrameworkVPAID1 int = iota + 1
+	APIFrameworkVPAID2
+	APIFrameworkMRAID1
+	APIFrameworkORMMA
+	APIFrameworkMRAID2
+)
 
-	DEVICE_TYPE_UNKNOWN     = 0
-	DEVICE_TYPE_MOBILE      = 1
-	DEVICE_TYPE_PC          = 2
-	DEVICE_TYPE_TV          = 3
-	DEVICE_TYPE_PHONE       = 4
-	DEVICE_TYPE_TABLET      = 5
-	DEVICE_TYPE_CONNECTED   = 6
-	DEVICE_TYPE_SET_TOP_BOX = 7
+// 5.7 Video Linearity
+const (
+	VideoLinearityLinear int = iota + 1
+	VideoLinearityNonLinear
+)
 
-	VIDEO_LINEARITY_LINEAR     = 1
-	VIDEO_LINEARITY_NON_LINEAR = 2
+// 5.8 Video Bid Response Protocols
+const (
+	VideoProtoVAST1 int = iota + 1
+	VideoProtoVAST2
+	VideoProtoVAST3
+	VideoProtoVAST1Wrapper
+	VideoProtoVAST2Wrapper
+	VideoProtoVAST3Wrapper
+)
 
-	VIDEO_PLAYBACK_AUTO_SOUND_ON  = 1
-	VIDEO_PLAYBACK_AUTO_SOUND_OFF = 2
-	VIDEO_PLAYBACK_CLICK_TO_PLAY  = 3
-	VIDEO_PLAYBACK_MOUSE_OVER     = 4
+// 5.9 Video Playback Methods
+const (
+	VideoPlaybackAutoSoundOn int = iota + 1
+	VideoPlaybackAutoSoundOff
+	VideoPlaybackClickToPlay
+	VideoPlaybackMouseOver
+)
 
-	VIDEO_START_DELAY_PRE_ROLL  = 0
-	VIDEO_START_DELAY_MID_ROLL  = -1
-	VIDEO_START_DELAY_POST_ROLL = -2
+// 5.10 Video Start Delay
+const (
+	VideoStartDelayPreRoll         = 0
+	VideoStartDelayGenericMidRoll  = -1
+	VideoStartDelayGenericPostRoll = -2
+)
 
-	VIDEO_QUALITY_UNKNOWN      = 0
-	VIDEO_QUALITY_PROFESSIONAL = 1
-	VIDEO_QUALITY_PROSUMER     = 2
-	VIDEO_QUALITY_UGC          = 3
+// 5.11 Video Quality
+const (
+	VideoQualityUnknown int = iota
+	VideoQualityProfessional
+	VideoQualityProsumer
+	VideoQualityUGC
+)
+
+// 5.12 VAST Companion Types
+const (
+	VASTCompanionStatic int = iota + 1
+	VASTCompanionHTML
+	VASTCompanionIFrame
+)
+
+// 5.13 Content Delivery Methods
+const (
+	ContentDeliveryStreaming int = iota + 1
+	ContentDeliveryProgressive
+)
+
+// 5.14 Content Context
+const (
+	ContextVideo int = iota + 1
+	ContextGame
+	ContextMusic
+	ContextApplication
+	ContextText
+	ContextOther
+	ContextUnknown
+)
+
+// 5.15 QAG Media Ratings
+const (
+	QAGAll int = iota + 1
+	QAGOver12
+	QAGMature
+)
+
+// 5.16 Location Type
+const (
+	LocationTypeGPS int = iota + 1
+	LocationTypeIP
+	LocationTypeUser
+)
+
+// 5.17 Device Type
+const (
+	DeviceTypeUnknown int = iota
+	DeviceTypeMobile
+	DeviceTypePC
+	DeviceTypeTV
+	DeviceTypePhone
+	DeviceTypeTablet
+	DeviceTypeConnected
+	DeviceTypeSetTopBox
+)
+
+// 5.18 Connection Type
+const (
+	ConnTypeUnknown int = iota
+	ConnTypeEthernet
+	ConnTypeWIFI
+	ConnTypeCell
+	ConnTypeCell2G
+	ConnTypeCell3G
+	ConnTypeCell4G
+)
+
+// 5.19 No-Bid Reason Codes
+const (
+	NBRUnknownError int = iota
+	NBRTechnicalError
+	NBRInvalidRequest
+	NBRKnownSpider
+	NBRSuspectedNonHuman
+	NBRProxyIP
+	NBRUnsupportedDevice
+	NBRBlockedSite
+	NBRUnmatchedUser
 )
 
 /*************************************************************************
@@ -60,7 +160,7 @@ const (
  *************************************************************************/
 
 // This object may be useful in the situation where syndicated content contains impressions and
-// does not necessarily match the publisher’s general content.  The exchange might or might not
+// does not necessarily match the publisher's general content.  The exchange might or might not
 // have knowledge of the page where the content is running, as a result of the syndication
 // method.  (For example, video impressions embedded in an iframe on an unknown web property
 // or device.)
@@ -69,11 +169,11 @@ const (
 
 // Abstract third-party
 type ThirdParty struct {
-	Id     *string    `json:"id,omitempty"`
-	Name   *string    `json:"name,omitempty"`
-	Cat    []string   `json:"cat,omitempty"` // Array of IAB content categories
-	Domain *string    `json:"domain,omitempty"`
-	Ext    Extensions `json:"ext,omitempty"`
+	ID     string          `json:"id,omitempty"`
+	Name   string          `json:"name,omitempty"`
+	Cat    []string        `json:"cat,omitempty"` // Array of IAB content categories
+	Domain string          `json:"domain,omitempty"`
+	Ext    json.RawMessage `json:"ext,omitempty"`
 }
 
 // The publisher object itself and all of its parameters are optional, so default values are not
@@ -91,82 +191,60 @@ type Producer ThirdParty
 // (such as IP geo lookup), or by user registration information (for example provided to a publisher
 // through a user registration).
 type Geo struct {
-	Lat           *float64   `json:"lat,omitempty"`           // Latitude from -90 to 90
-	Lon           *float64   `json:"lon,omitempty"`           // Longitude from -180 to 180
-	Country       *string    `json:"country,omitempty"`       // Country using ISO 3166-1 Alpha 3
-	Region        *string    `json:"region,omitempty"`        // Region using ISO 3166-2
-	Regionfips104 *string    `json:"regionfips104,omitempty"` // Region of a country using fips 10-4
-	Metro         *string    `json:"metro,omitempty"`
-	City          *string    `json:"city,omitempty"`
-	Zip           *string    `json:"zip,omitempty"`
-	Type          *int       `json:"type,omitempty"` // Indicate the source of the geo data
-	Ext           Extensions `json:"ext,omitempty"`
+	Lat           float64         `json:"lat,omitempty"`           // Latitude from -90 to 90
+	Lon           float64         `json:"lon,omitempty"`           // Longitude from -180 to 180
+	Country       string          `json:"country,omitempty"`       // Country using ISO 3166-1 Alpha 3
+	Region        string          `json:"region,omitempty"`        // Region using ISO 3166-2
+	RegionFIPS104 string          `json:"regionFIPS104,omitempty"` // Region of a country using FIPS 10-4
+	Metro         string          `json:"metro,omitempty"`
+	City          string          `json:"city,omitempty"`
+	Zip           string          `json:"zip,omitempty"`
+	Type          int             `json:"type,omitempty"`      // Indicate the source of the geo data
+	UTCOffset     int             `json:"utcoffset,omitempty"` // Local time as the number +/- of minutes from UTC
+	Ext           json.RawMessage `json:"ext,omitempty"`
 }
 
-// The "user" object contains information known or derived about the human user of the device.
-// Note that the user ID is an exchange artifact (refer to the "device" object for hardware or
-// platform derived IDs) and may be subject to rotation policies. However, this user ID must be
-// stable long enough to serve reasonably as the basis for frequency capping.
+// This object contains information known or derived about the human user of the device (i.e., the
+// audience for advertising). The user id is an exchange artifact and may be subject to rotation or other
+// privacy policies. However, this user ID must be stable long enough to serve reasonably as the basis for
+// frequency capping and retargeting.
 type User struct {
-	Id         *string    `json:"id,omitempty"`       // Unique consumer ID of this user on the exchange
-	Buyeruid   *string    `json:"buyeruid,omitempty"` // Buyer's user ID
-	Yob        *int       `json:"yob,omitempty"`      // Year-of-birth
-	Gender     *string    `json:"gender,omitempty"`   // Gender ("M": male, "F" female, "O" Other)
-	Keywords   *string    `json:"keywords,omitempty"`
-	Customdata *string    `json:"customdata,omitempty"`
-	Geo        *Geo       `json:"geo,omitempty"`
-	Data       []Data     `json:"data,omitempty"`
-	Ext        Extensions `json:"ext,omitempty"`
+	ID         string          `json:"id,omitempty"`         // Unique consumer ID of this user on the exchange
+	BuyerID    string          `json:"buyerid,omitempty"`    // Buyer-specific ID for the user as mapped by the exchange for the buyer. At least one of buyerid or id is recommended.
+	YOB        int             `json:"yob,omitempty"`        // Year of birth as a 4-digit integer.
+	Gender     string          `json:"gender,omitempty"`     // Gender ("M": male, "F" female, "O" Other)
+	Keywords   string          `json:"keywords,omitempty"`   // Comma separated list of keywords, interests, or intent
+	CustomData string          `json:"customdata,omitempty"` // Optional feature to pass bidder data that was set in the exchange's cookie. The string must be in base85 cookie safe characters and be in any format. Proper JSON encoding must be used to include "escaped" quotation marks.
+	Geo        *Geo            `json:"geo,omitempty"`
+	Data       []Data          `json:"data,omitempty"`
+	Ext        json.RawMessage `json:"ext,omitempty"`
 }
 
-// The data and segment objects together allow data about the user to be passed to bidders in the
-// bid request.  This data may be from multiple sources (e.g., the exchange itself, third party
-// providers) as specified by the data object ID field.  A bid request can mix data objects from
-// multiple providers.
+// The data and segment objects together allow additional data about the user to be specified. This data
+// may be from multiple sources whether from the exchange itself or third party providers as specified by
+// the id field. A bid request can mix data objects from multiple providers. The specific data providers in
+// use should be published by the exchange a priori to its bidders.
 type Data struct {
-	Id      *string    `json:"id,omitempty"`
-	Name    *string    `json:"name,omitempty"`
-	Segment []Segment  `json:"segment,omitempty"`
-	Ext     Extensions `json:"ext,omitempty"`
+	ID      string          `json:"id,omitempty"`
+	Name    string          `json:"name,omitempty"`
+	Segment []Segment       `json:"segment,omitempty"`
+	Ext     json.RawMessage `json:"ext,omitempty"`
 }
 
-// The data and segment objects together allow data about the user to be passed to bidders in the
-// bid request.  Segment objects convey specific units of information from the provider identified
-// in the parent data object.
+// Segment objects are essentially key-value pairs that convey specific units of data about the user. The
+// parent Data object is a collection of such values from a given data provider. The specific segment
+// names and value options must be published by the exchange a priori to its bidders.
 type Segment struct {
-	Id    *string    `json:"id,omitempty"`
-	Name  *string    `json:"name,omitempty"`
-	Value *string    `json:"value,omitempty"`
-	Ext   Extensions `json:"ext,omitempty"`
+	ID    string          `json:"id,omitempty"`
+	Name  string          `json:"name,omitempty"`
+	Value string          `json:"value,omitempty"`
+	Ext   json.RawMessage `json:"ext,omitempty"`
 }
 
-// The "regs" object contains any legal, governmental, or industry regulations that
-// apply to the request
+// This object contains any legal, governmental, or industry regulations that apply to the request. The
+// coppa flag signals whether or not the request falls under the United States Federal Trade Commission's
+// regulations for the United States Children's Online Privacy Protection Act ("COPPA").
 type Regulations struct {
-	Coppa *int       `json:"coppa,omitempty"`
-	Ext   Extensions `json:"ext,omitempty"`
+	Coppa int             `json:"coppa,omitempty"` // Flag indicating if this request is subject to the COPPA regulations established by the USA FTC, where 0 = no, 1 = yes.
+	Ext   json.RawMessage `json:"ext,omitempty"`
 }
-
-// Private Marketplace Object
-type Pmp struct {
-	Private *int         `json:"private_auction,omitempty"`
-	Deals   []DirectDeal `json:"deals,omitempty"`
-	Ext     Extensions   `json:"ext,omitempty"`
-}
-
-// PMP Direct Deal
-type DirectDeal struct {
-	Id          *string    `json:"id,omitempty"` // Unique deal ID
-	Bidfloor    *float32   `json:"bidfloor,omitempty"`
-	Bidfloorcur *string    `json:"bidfloorcur,omitempty"` // Currency of bid floor
-	Wseat       []string   `json:"wseat,omitempty"`       // Array of buyer seats allowed to bid on this Direct Deal.
-	Wadomain    []string   `json:"wadomain,omitempty"`    // Array of advertiser domains allowed to bid on this Direct Deal
-	At          *int       `json:"at,omitempty"`          // Auction type, Default: 2 ("1": first price auction, "2": then second price auction)
-	Ext         Extensions `json:"ext,omitempty"`
-
-	Seats []string `json:"seats,omitempty"` // DEPRECATED: kept for backwards compatibility
-	Type  *int     `json:"type,omitempty"`  // DEPRECATED: kept for backwards compatibility
-}
-
-// General Extensions
-type Extensions map[string]interface{}

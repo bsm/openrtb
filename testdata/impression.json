@@ -1,0 +1,19 @@
+{
+  "id": "1",
+  "banner": {
+    "h": 250,
+    "w": 300,
+    "pos": 0
+  },
+  "bidfloor": 0.03,
+  "pmp": {
+    "private_auction": 1,
+    "deals": [
+      {
+        "id": "DX-1985-010A",
+        "bidfloor": 2.5,
+        "at": 2
+      }
+    ]
+  }
+}
