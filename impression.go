@@ -25,7 +25,7 @@ type Impression struct {
 	DisplayManager    string          `json:"displaymanager,omitempty"`    // Name of ad mediation partner, SDK technology, etc
 	DisplayManagerVer string          `json:"displaymanagerver,omitempty"` // Version of the above
 	Instl             int             `json:"instl,omitempty"`             // Interstitial, Default: 0 ("1": Interstitial, "0": Something else)
-	Tagid             string          `json:"tagid,omitempty"`             // IDentifier for specific ad placement or ad tag
+	TagID             string          `json:"tagid,omitempty"`             // IDentifier for specific ad placement or ad tag
 	BidFloor          float64         `json:"bidfloor,omitempty"`          // Bid floor for this impression in CPM
 	BidFloorCurrency  string          `json:"bidfloorcur,omitempty"`       // Currency of bid floor
 	Secure            int             `json:"secure,omitempty"`            // Flag to indicate whether the impression requires secure HTTPS URL creative assets and markup.
