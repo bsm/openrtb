@@ -53,7 +53,8 @@ var _ = Describe("BidRequest", func() {
 				FlashVer: "10.1",
 			},
 			User: &User{
-				ID: "45asdf987656789adfad4678rew656789",
+				ID:       "45asdf987656789adfad4678rew656789",
+				BuyerUID: "5df678asd8987656asdf78987654",
 			},
 			AuctionType: 2,
 			TMax:        120,
