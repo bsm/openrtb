@@ -12,6 +12,8 @@ To install, use `go get`:
 go get gopkg.in/bsm/openrtb.v2
 ```
 
+## Usage
+
 Import the package:
 
 ```go
