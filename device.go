@@ -7,6 +7,7 @@ import "encoding/json"
 // set top box or other digital device.
 type Device struct {
 	DNT        int             `json:"dnt,omitempty"` // "1": Do not track
+	LimitTrack int             `json:"lmt,omitempty"` // "1": Limit Ad Tracking
 	UA         string          `json:"ua,omitempty"`  // User agent
 	IP         string          `json:"ip,omitempty"`  // IPv4
 	Geo        *Geo            `json:"geo,omitempty"`
