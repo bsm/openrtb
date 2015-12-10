@@ -9,6 +9,6 @@ go:
 install:
   - go get github.com/onsi/ginkgo
   - go get github.com/onsi/gomega
-  - mkdir -p $HOME/gopath/src/gopkg.in
-  - mv $HOME/gopath/src/github.com/bsm/openrtb $HOME/gopath/src/bsm/openrtb.v2
-  - cd $HOME/gopath/src/bsm/openrtb.v2
+  - mkdir -p $GOPATH/src/gopkg.in
+  - mv $GOPATH/src/github.com/bsm/openrtb $GOPATH/src/gopkg.in/bsm/openrtb.v2
+  - cd $GOPATH/src/gopkg.in/bsm/openrtb.v2
