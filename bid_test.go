@@ -25,6 +25,7 @@ var _ = Describe("Bid", func() {
 			IURL:       "http://ads.com/112770_1386565997.jpeg",
 			CampaignID: "52a5516d29e435137c6f6e74",
 			CreativeID: "52a5516d29e435137c6f6e74_1386565997",
+			DealID:     "example_deal",
 			Attr:       []int{},
 		}))
 	})

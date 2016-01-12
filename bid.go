@@ -31,7 +31,7 @@ type Bid struct {
 	CreativeID string          `json:"crid,omitempty"`    // Creative ID for reporting content issues or defects. This could also be used as a reference to a creative ID that is posted with an exchange.
 	Cat        []string        `json:"cat,omitempty"`     // IAB content categories of the creative. Refer to List 5.1
 	Attr       []int           `json:"attr,omitempty"`    // Array of creative attributes.
-	DealID     string          `json:"deal_id,omitempty"` // DealID extension of private marketplace deals
+	DealID     string          `json:"dealid,omitempty"` // DealID extension of private marketplace deals
 	H          int             `json:"h,omitempty"`       // Height of the ad in pixels.
 	W          int             `json:"w,omitempty"`       // Width of the ad in pixels.
 	Ext        json.RawMessage `json:"ext,omitempty"`
