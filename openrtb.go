@@ -1,4 +1,4 @@
-package openrtb // import "gopkg.in/bsm/openrtb.v2"
+package openrtb
 
 import "encoding/json"
 
