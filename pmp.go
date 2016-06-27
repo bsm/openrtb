@@ -1,3 +1,4 @@
+//go:generate ffjson $GOFILE
 package openrtb
 
 import "encoding/json"
@@ -24,27 +25,3 @@ type Deal struct {
 }
 
 type jsonDeal Deal
-
-// MarshalJSON custom marshalling with normalization
-func (d *Deal) MarshalJSON() ([]byte, error) {
-	d.normalize()
-	return json.Marshal((*jsonDeal)(d))
-}
-
-// UnmarshalJSON custom unmarshalling with normalization
-func (d *Deal) UnmarshalJSON(data []byte) error {
-	var h jsonDeal
-	if err := json.Unmarshal(data, &h); err != nil {
-		return err
-	}
-
-	*d = (Deal)(h)
-	d.normalize()
-	return nil
-}
-
-func (d *Deal) normalize() {
-	if d.AuctionType == 0 {
-		d.AuctionType = 2
-	}
-}
