@@ -211,6 +211,7 @@ type Geo struct {
 type User struct {
 	ID         string          `json:"id,omitempty"`         // Unique consumer ID of this user on the exchange
 	BuyerUID   string          `json:"buyeruid,omitempty"`   // Buyer-specific ID for the user as mapped by the exchange for the buyer. At least one of buyeruid or id is recommended.
+	BuyerID    string          `json:"buyerid,omitempty"`    // Buyer-specific ID for the user as mapped by the exchange for the buyer. At least one of buyeruid or id is recommended.
 	YOB        int             `json:"yob,omitempty"`        // Year of birth as a 4-digit integer.
 	Gender     string          `json:"gender,omitempty"`     // Gender ("M": male, "F" female, "O" Other)
 	Keywords   string          `json:"keywords,omitempty"`   // Comma separated list of keywords, interests, or intent
