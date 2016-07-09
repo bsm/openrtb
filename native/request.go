@@ -62,6 +62,13 @@ type Data struct {
 	Ext    map[string]interface{} `json:"ext,omitempty"`
 }
 
+type Link struct {
+	URL         string                 `json:"url"`
+	Trackers    []string               `json:"clicktrackers,omitempty"`
+	FallbackURL string                 `json:"fallback,omitempty"`
+	Ext         map[string]interface{} `json:"ext,omitempty"`
+}
+
 // The native object is the top level JSON object which identifies a native
 // response.
 type NativeBidResponse struct {
