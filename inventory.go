@@ -11,8 +11,8 @@ type Inventory struct {
 	SectionCat    []string         `json:"sectioncat,omitempty"`   // Array of IAB content categories for subsection
 	PageCat       []string         `json:"pagecat,omitempty"`      // Array of IAB content categories for page
 	PrivacyPolicy *int             `json:"pivacypolicy,omitempty"` // Default: 1 ("1": has a privacy policy)
-	Publisher     *Publisher       `json:"publisher,omitempty"`    // Details about the Publisher
-	Content       *Content         `json:"content,omitempty"`      // Details about the Content
+	Publisher     Publisher        `json:"publisher,omitempty"`    // Details about the Publisher
+	Content       Content          `json:"content,omitempty"`      // Details about the Content
 	Keywords      string           `json:"keywords,omitempty"`     // Comma separated list of keywords about the site.
 	Ext           *json.RawMessage `json:"ext,omitempty"`
 }

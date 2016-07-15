@@ -216,7 +216,7 @@ type User struct {
 	Gender     string           `json:"gender,omitempty"`     // Gender ("M": male, "F" female, "O" Other)
 	Keywords   string           `json:"keywords,omitempty"`   // Comma separated list of keywords, interests, or intent
 	CustomData string           `json:"customdata,omitempty"` // Optional feature to pass bidder data that was set in the exchange's cookie. The string must be in base85 cookie safe characters and be in any format. Proper JSON encoding must be used to include "escaped" quotation marks.
-	Geo        *Geo             `json:"geo,omitempty"`
+	Geo        Geo              `json:"geo,omitempty"`
 	Data       []Data           `json:"data,omitempty"`
 	Ext        *json.RawMessage `json:"ext,omitempty"`
 }

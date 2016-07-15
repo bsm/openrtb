@@ -11,7 +11,7 @@ type Device struct {
 	LMT        int              `json:"lmt,omitempty"` // "1": Limit Ad Tracking
 	UA         string           `json:"ua,omitempty"`  // User agent
 	IP         string           `json:"ip,omitempty"`  // IPv4
-	Geo        *Geo             `json:"geo,omitempty"`
+	Geo        Geo              `json:"geo,omitempty"`
 	IDSHA1     string           `json:"didsha1,omitempty"`  // SHA1 hashed device ID
 	IDMD5      string           `json:"didmd5,omitempty"`   // MD5 hashed device ID
 	PIDSHA1    string           `json:"dpidsha1,omitempty"` // SHA1 hashed platform device ID
