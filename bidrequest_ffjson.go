@@ -56,49 +56,41 @@ func (mj *BidRequest) MarshalJSONBuf(buf fflib.EncodingBuffer) error {
 		}
 		buf.WriteByte(',')
 	}
-	if mj.Site != nil {
-		if true {
-			/* Struct fall back. type=openrtb.Site kind=struct */
-			buf.WriteString(`"site":`)
-			err = buf.Encode(mj.Site)
-			if err != nil {
-				return err
-			}
-			buf.WriteByte(',')
+	if true {
+		/* Struct fall back. type=openrtb.Site kind=struct */
+		buf.WriteString(`"site":`)
+		err = buf.Encode(&mj.Site)
+		if err != nil {
+			return err
 		}
+		buf.WriteByte(',')
 	}
-	if mj.App != nil {
-		if true {
-			/* Struct fall back. type=openrtb.App kind=struct */
-			buf.WriteString(`"app":`)
-			err = buf.Encode(mj.App)
-			if err != nil {
-				return err
-			}
-			buf.WriteByte(',')
+	if true {
+		/* Struct fall back. type=openrtb.App kind=struct */
+		buf.WriteString(`"app":`)
+		err = buf.Encode(&mj.App)
+		if err != nil {
+			return err
 		}
+		buf.WriteByte(',')
 	}
-	if mj.Device != nil {
-		if true {
-			/* Struct fall back. type=openrtb.Device kind=struct */
-			buf.WriteString(`"device":`)
-			err = buf.Encode(mj.Device)
-			if err != nil {
-				return err
-			}
-			buf.WriteByte(',')
+	if true {
+		/* Struct fall back. type=openrtb.Device kind=struct */
+		buf.WriteString(`"device":`)
+		err = buf.Encode(&mj.Device)
+		if err != nil {
+			return err
 		}
+		buf.WriteByte(',')
 	}
-	if mj.User != nil {
-		if true {
-			/* Struct fall back. type=openrtb.User kind=struct */
-			buf.WriteString(`"user":`)
-			err = buf.Encode(mj.User)
-			if err != nil {
-				return err
-			}
-			buf.WriteByte(',')
+	if true {
+		/* Struct fall back. type=openrtb.User kind=struct */
+		buf.WriteString(`"user":`)
+		err = buf.Encode(&mj.User)
+		if err != nil {
+			return err
 		}
+		buf.WriteByte(',')
 	}
 	buf.WriteString(`"at":`)
 	fflib.FormatBits2(buf, uint64(mj.AuctionType), 10, mj.AuctionType < 0)
@@ -177,16 +169,14 @@ func (mj *BidRequest) MarshalJSONBuf(buf fflib.EncodingBuffer) error {
 		}
 		buf.WriteByte(',')
 	}
-	if mj.Regs != nil {
-		if true {
-			/* Struct fall back. type=openrtb.Regulations kind=struct */
-			buf.WriteString(`"regs":`)
-			err = buf.Encode(mj.Regs)
-			if err != nil {
-				return err
-			}
-			buf.WriteByte(',')
+	if true {
+		/* Struct fall back. type=openrtb.Regulations kind=struct */
+		buf.WriteString(`"regs":`)
+		err = buf.Encode(&mj.Regs)
+		if err != nil {
+			return err
 		}
+		buf.WriteByte(',')
 	}
 	if mj.Ext != nil {
 		if true {

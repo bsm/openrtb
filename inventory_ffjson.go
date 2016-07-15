@@ -124,31 +124,27 @@ func (mj *App) MarshalJSONBuf(buf fflib.EncodingBuffer) error {
 			buf.WriteByte(',')
 		}
 	}
-	if mj.Publisher != nil {
-		if true {
-			/* Struct fall back. type=openrtb.Publisher kind=struct */
-			buf.WriteString(`"publisher":`)
-			err = buf.Encode(mj.Publisher)
+	if true {
+		/* Struct fall back. type=openrtb.Publisher kind=struct */
+		buf.WriteString(`"publisher":`)
+		err = buf.Encode(&mj.Publisher)
+		if err != nil {
+			return err
+		}
+		buf.WriteByte(',')
+	}
+	if true {
+		buf.WriteString(`"content":`)
+
+		{
+
+			err = mj.Content.MarshalJSONBuf(buf)
 			if err != nil {
 				return err
 			}
-			buf.WriteByte(',')
+
 		}
-	}
-	if mj.Content != nil {
-		if true {
-			buf.WriteString(`"content":`)
-
-			{
-
-				err = mj.Content.MarshalJSONBuf(buf)
-				if err != nil {
-					return err
-				}
-
-			}
-			buf.WriteByte(',')
-		}
+		buf.WriteByte(',')
 	}
 	if len(mj.Keywords) != 0 {
 		buf.WriteString(`"keywords":`)
@@ -1038,14 +1034,8 @@ handle_Content:
 	{
 		if tok == fflib.FFTok_null {
 
-			uj.Content = nil
-
 			state = fflib.FFParse_after_value
 			goto mainparse
-		}
-
-		if uj.Content == nil {
-			uj.Content = new(Content)
 		}
 
 		err = uj.Content.UnmarshalJSONFFLexer(fs, fflib.FFParse_want_key)
@@ -1225,31 +1215,27 @@ func (mj *Inventory) MarshalJSONBuf(buf fflib.EncodingBuffer) error {
 			buf.WriteByte(',')
 		}
 	}
-	if mj.Publisher != nil {
-		if true {
-			/* Struct fall back. type=openrtb.Publisher kind=struct */
-			buf.WriteString(`"publisher":`)
-			err = buf.Encode(mj.Publisher)
+	if true {
+		/* Struct fall back. type=openrtb.Publisher kind=struct */
+		buf.WriteString(`"publisher":`)
+		err = buf.Encode(&mj.Publisher)
+		if err != nil {
+			return err
+		}
+		buf.WriteByte(',')
+	}
+	if true {
+		buf.WriteString(`"content":`)
+
+		{
+
+			err = mj.Content.MarshalJSONBuf(buf)
 			if err != nil {
 				return err
 			}
-			buf.WriteByte(',')
+
 		}
-	}
-	if mj.Content != nil {
-		if true {
-			buf.WriteString(`"content":`)
-
-			{
-
-				err = mj.Content.MarshalJSONBuf(buf)
-				if err != nil {
-					return err
-				}
-
-			}
-			buf.WriteByte(',')
-		}
+		buf.WriteByte(',')
 	}
 	if len(mj.Keywords) != 0 {
 		buf.WriteString(`"keywords":`)
@@ -1953,14 +1939,8 @@ handle_Content:
 	{
 		if tok == fflib.FFTok_null {
 
-			uj.Content = nil
-
 			state = fflib.FFParse_after_value
 			goto mainparse
-		}
-
-		if uj.Content == nil {
-			uj.Content = new(Content)
 		}
 
 		err = uj.Content.UnmarshalJSONFFLexer(fs, fflib.FFParse_want_key)
@@ -2160,31 +2140,27 @@ func (mj *Site) MarshalJSONBuf(buf fflib.EncodingBuffer) error {
 			buf.WriteByte(',')
 		}
 	}
-	if mj.Publisher != nil {
-		if true {
-			/* Struct fall back. type=openrtb.Publisher kind=struct */
-			buf.WriteString(`"publisher":`)
-			err = buf.Encode(mj.Publisher)
+	if true {
+		/* Struct fall back. type=openrtb.Publisher kind=struct */
+		buf.WriteString(`"publisher":`)
+		err = buf.Encode(&mj.Publisher)
+		if err != nil {
+			return err
+		}
+		buf.WriteByte(',')
+	}
+	if true {
+		buf.WriteString(`"content":`)
+
+		{
+
+			err = mj.Content.MarshalJSONBuf(buf)
 			if err != nil {
 				return err
 			}
-			buf.WriteByte(',')
+
 		}
-	}
-	if mj.Content != nil {
-		if true {
-			buf.WriteString(`"content":`)
-
-			{
-
-				err = mj.Content.MarshalJSONBuf(buf)
-				if err != nil {
-					return err
-				}
-
-			}
-			buf.WriteByte(',')
-		}
+		buf.WriteByte(',')
 	}
 	if len(mj.Keywords) != 0 {
 		buf.WriteString(`"keywords":`)
@@ -3074,14 +3050,8 @@ handle_Content:
 	{
 		if tok == fflib.FFTok_null {
 
-			uj.Content = nil
-
 			state = fflib.FFParse_after_value
 			goto mainparse
-		}
-
-		if uj.Content == nil {
-			uj.Content = new(Content)
 		}
 
 		err = uj.Content.UnmarshalJSONFFLexer(fs, fflib.FFParse_want_key)

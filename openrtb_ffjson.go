@@ -3288,20 +3288,18 @@ func (mj *User) MarshalJSONBuf(buf fflib.EncodingBuffer) error {
 		fflib.WriteJsonString(buf, string(mj.CustomData))
 		buf.WriteByte(',')
 	}
-	if mj.Geo != nil {
-		if true {
-			buf.WriteString(`"geo":`)
+	if true {
+		buf.WriteString(`"geo":`)
 
-			{
+		{
 
-				err = mj.Geo.MarshalJSONBuf(buf)
-				if err != nil {
-					return err
-				}
-
+			err = mj.Geo.MarshalJSONBuf(buf)
+			if err != nil {
+				return err
 			}
-			buf.WriteByte(',')
+
 		}
+		buf.WriteByte(',')
 	}
 	if len(mj.Data) != 0 {
 		buf.WriteString(`"data":`)
@@ -3798,14 +3796,8 @@ handle_Geo:
 	{
 		if tok == fflib.FFTok_null {
 
-			uj.Geo = nil
-
 			state = fflib.FFParse_after_value
 			goto mainparse
-		}
-
-		if uj.Geo == nil {
-			uj.Geo = new(Geo)
 		}
 
 		err = uj.Geo.UnmarshalJSONFFLexer(fs, fflib.FFParse_want_key)

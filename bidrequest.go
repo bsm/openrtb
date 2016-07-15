@@ -42,7 +42,7 @@ func (req *BidRequest) Validate() error {
 		return ErrInvalidReqNoID
 	} else if len(req.Imp) == 0 {
 		return ErrInvalidReqNoImps
-	} else if req.Site != nil && req.App != nil {
+	} else if req.Site.ID != "" && req.App.ID != "" {
 		return ErrInvalidReqMultiInv
 	}
 

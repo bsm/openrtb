@@ -54,16 +54,14 @@ func (mj *Device) MarshalJSONBuf(buf fflib.EncodingBuffer) error {
 		fflib.WriteJsonString(buf, string(mj.IP))
 		buf.WriteByte(',')
 	}
-	if mj.Geo != nil {
-		if true {
-			/* Struct fall back. type=openrtb.Geo kind=struct */
-			buf.WriteString(`"geo":`)
-			err = buf.Encode(mj.Geo)
-			if err != nil {
-				return err
-			}
-			buf.WriteByte(',')
+	if true {
+		/* Struct fall back. type=openrtb.Geo kind=struct */
+		buf.WriteString(`"geo":`)
+		err = buf.Encode(&mj.Geo)
+		if err != nil {
+			return err
 		}
+		buf.WriteByte(',')
 	}
 	if len(mj.IDSHA1) != 0 {
 		buf.WriteString(`"didsha1":`)
