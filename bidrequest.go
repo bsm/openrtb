@@ -22,6 +22,7 @@ type BidRequest struct {
 	App         *App            `json:"app,omitempty"`
 	Device      *Device         `json:"device,omitempty"`
 	User        *User           `json:"user,omitempty"`
+	Test        int             `json:"test,omitempty"`    // Indicator of test mode in which auctions are not billable, where 0 = live mode, 1 = test mode
 	AuctionType int             `json:"at"`                // Auction type, where 1 = First Price, 2 = Second Price Plus. Exchange-specific auction types can be defined using values greater than 500.
 	TMax        int             `json:"tmax,omitempty"`    // Maximum amount of time in milliseconds to submit a bid
 	WSeat       []string        `json:"wseat,omitempty"`   // Array of buyer seats allowed to bid on this auction
