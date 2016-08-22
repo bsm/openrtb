@@ -1,7 +1,7 @@
-default: test
+default: vet test
 
-deps:
-	go get -t ./...
-
-test: deps
+test:
 	go test ./...
+
+vet:
+	go vet ./...
