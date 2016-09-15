@@ -1,0 +1,23 @@
+package openrtb
+
+import (
+	"encoding/json"
+	"io/ioutil"
+	"path/filepath"
+	"testing"
+)
+
+func BenchmarkBidRequest_Unmarshal(b *testing.B) {
+	data, err := ioutil.ReadFile(filepath.Join("testdata", "breq.video.json"))
+	if err != nil {
+		b.Fatal(err.Error())
+	}
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		var req *BidRequest
+		if err := json.Unmarshal(data, &req); err != nil {
+			b.Fatal(err.Error())
+		}
+	}
+}
