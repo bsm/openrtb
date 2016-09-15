@@ -15,7 +15,7 @@ type Content struct {
 	Season             string          `json:"season,omitempty"`             // Content season.
 	Producer           *Producer       `json:"producer,omitempty"`           // The producer.
 	URL                string          `json:"url,omitempty"`                // URL of the content, for buy-side contextualization or review.
-	Cat                []string        `json:"url,omitempty"`                // Array of IAB content categories that describe the content.
+	Cat                []string        `json:"cat,omitempty"`                // Array of IAB content categories that describe the content.
 	VideoQuality       int             `json:"videoquality,omitempty"`       // Video quality per IAB's classification.
 	Context            int             `json:"context,omitempty"`            // Type of content (game, video, text, etc.).
 	ContentRating      string          `json:"contentrating,omitempty"`      // Content rating (e.g., MPAA).
