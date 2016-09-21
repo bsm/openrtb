@@ -2,16 +2,16 @@ package request
 
 import "encoding/json"
 
-type Image_Type int
+type ImageTypeID int
 
 const (
-	Image_Icon Image_Type = 1 // Icon image
-	Image_Logo Image_Type = 2 // Logo image for the brand/app
-	Image_Main Image_Type = 3 // Large image preview for the ad
+	ImageTypeIcon ImageTypeID = 1 // Icon image
+	ImageTypeLogo ImageTypeID = 2 // Logo image for the brand/app
+	ImageTypeMain ImageTypeID = 3 // Large image preview for the ad
 )
 
 type Image struct {
-	Type Image_Type `json:"type,omitempty"` // Type ID of the image element supported by the publisher
+	TypeID ImageTypeID `json:"type,omitempty"` // Type ID of the image element supported by the publisher
 
 	Width     int `json:"w,omitempty"`    // Width of the image in pixels
 	WidthMin  int `json:"wmin,omitempty"` // The minimum requested width of the image in pixels
