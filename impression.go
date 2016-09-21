@@ -17,6 +17,8 @@ var (
 // selling all ad positions on a given page as a bundle.  Each "imp" object has a required ID so that
 // bids can reference them individually.  An exchange can also conduct private auctions by
 // restricting involvement to specific subsets of seats within bidders.
+// The presence of Banner, Video, and/or Native objects
+// subordinate to the Imp object indicates the type of impression being offered.
 type Impression struct {
 	ID                string          `json:"id"` // A unique identifier for this impression
 	Banner            *Banner         `json:"banner,omitempty"`
