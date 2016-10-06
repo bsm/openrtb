@@ -38,6 +38,10 @@ type Bid struct {
 	Ext        *json.RawMessage `json:"ext,omitempty"`
 }
 
+type BidExt struct {
+	ImpressionTrackingUrl []string `json:"impression_tracking_url,omitempty"`
+}
+
 // Validate required attributes
 func (bid *Bid) Validate() error {
 	if bid.ID == "" {
