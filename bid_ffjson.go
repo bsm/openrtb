@@ -7,7 +7,6 @@ package openrtb
 
 import (
 	"bytes"
-	"encoding/json"
 	"fmt"
 	fflib "github.com/pquerna/ffjson/fflib/v1"
 )
@@ -133,21 +132,18 @@ func (mj *Bid) MarshalJSONBuf(buf fflib.EncodingBuffer) error {
 		fflib.FormatBits2(buf, uint64(mj.W), 10, mj.W < 0)
 		buf.WriteByte(',')
 	}
-	if mj.Ext != nil {
-		if true {
-			buf.WriteString(`"ext":`)
+	if true {
+		buf.WriteString(`"ext":`)
 
-			{
+		{
 
-				obj, err = mj.Ext.MarshalJSON()
-				if err != nil {
-					return err
-				}
-				buf.Write(obj)
-
+			err = mj.Ext.MarshalJSONBuf(buf)
+			if err != nil {
+				return err
 			}
-			buf.WriteByte(',')
+
 		}
+		buf.WriteByte(',')
 	}
 	buf.Rewind(1)
 	buf.WriteByte('}')
@@ -1115,29 +1111,18 @@ handle_W:
 
 handle_Ext:
 
-	/* handler: uj.Ext type=json.RawMessage kind=slice quoted=false*/
+	/* handler: uj.Ext type=openrtb.BidExt kind=struct quoted=false*/
 
 	{
 		if tok == fflib.FFTok_null {
-
-			uj.Ext = nil
 
 			state = fflib.FFParse_after_value
 			goto mainparse
 		}
 
-		tbuf, err := fs.CaptureField(tok)
+		err = uj.Ext.UnmarshalJSONFFLexer(fs, fflib.FFParse_want_key)
 		if err != nil {
-			return fs.WrapErr(err)
-		}
-
-		if uj.Ext == nil {
-			uj.Ext = new(json.RawMessage)
-		}
-
-		err = uj.Ext.UnmarshalJSON(tbuf)
-		if err != nil {
-			return fs.WrapErr(err)
+			return err
 		}
 		state = fflib.FFParse_after_value
 	}
