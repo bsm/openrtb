@@ -37,8 +37,8 @@ type Bid struct {
 
 type BidExt struct {
 	ImpressionTrackingUrl []string `json:"impression_tracking_url,omitempty"`
-	Duration              int64    `json:"duration"`
-	VastUrl               string   `json:"vast_url"`
+	Duration              int64    `json:"duration,omitempty"`
+	VastUrl               string   `json:"vast_url,omitempty"`
 }
 
 // Validate required attributes
