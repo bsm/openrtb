@@ -1,7 +1,7 @@
 default: vet test
 
 test:
-	go test ./...
+	go test -a ./...
 
 bench:
 	go test ./... -bench=. -run=NONE
