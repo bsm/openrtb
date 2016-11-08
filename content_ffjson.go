@@ -70,6 +70,27 @@ func (mj *Content) MarshalJSONBuf(buf fflib.EncodingBuffer) error {
 			buf.WriteByte(',')
 		}
 	}
+	if len(mj.URL) != 0 {
+		buf.WriteString(`"url":`)
+		fflib.WriteJsonString(buf, string(mj.URL))
+		buf.WriteByte(',')
+	}
+	if len(mj.Cat) != 0 {
+		buf.WriteString(`"cat":`)
+		if mj.Cat != nil {
+			buf.WriteString(`[`)
+			for i, v := range mj.Cat {
+				if i != 0 {
+					buf.WriteString(`,`)
+				}
+				fflib.WriteJsonString(buf, string(v))
+			}
+			buf.WriteString(`]`)
+		} else {
+			buf.WriteString(`null`)
+		}
+		buf.WriteByte(',')
+	}
 	if mj.VideoQuality != 0 {
 		buf.WriteString(`"videoquality":`)
 		fflib.FormatBits2(buf, uint64(mj.VideoQuality), 10, mj.VideoQuality < 0)
@@ -125,21 +146,19 @@ func (mj *Content) MarshalJSONBuf(buf fflib.EncodingBuffer) error {
 		fflib.FormatBits2(buf, uint64(mj.Embeddable), 10, mj.Embeddable < 0)
 		buf.WriteByte(',')
 	}
-	if mj.Ext != nil {
-		if true {
-			buf.WriteString(`"ext":`)
+	if len(mj.Ext) != 0 {
+		buf.WriteString(`"ext":`)
 
-			{
+		{
 
-				obj, err = mj.Ext.MarshalJSON()
-				if err != nil {
-					return err
-				}
-				buf.Write(obj)
-
+			obj, err = mj.Ext.MarshalJSON()
+			if err != nil {
+				return err
 			}
-			buf.WriteByte(',')
+			buf.Write(obj)
+
 		}
+		buf.WriteByte(',')
 	}
 	buf.Rewind(1)
 	buf.WriteByte('}')
@@ -161,6 +180,10 @@ const (
 	ffj_t_Content_Season
 
 	ffj_t_Content_Producer
+
+	ffj_t_Content_URL
+
+	ffj_t_Content_Cat
 
 	ffj_t_Content_VideoQuality
 
@@ -198,6 +221,10 @@ var ffj_key_Content_Series = []byte("series")
 var ffj_key_Content_Season = []byte("season")
 
 var ffj_key_Content_Producer = []byte("producer")
+
+var ffj_key_Content_URL = []byte("url")
+
+var ffj_key_Content_Cat = []byte("cat")
 
 var ffj_key_Content_VideoQuality = []byte("videoquality")
 
@@ -284,7 +311,12 @@ mainparse:
 
 				case 'c':
 
-					if bytes.Equal(ffj_key_Content_Context, kn) {
+					if bytes.Equal(ffj_key_Content_Cat, kn) {
+						currentKey = ffj_t_Content_Cat
+						state = fflib.FFParse_want_colon
+						goto mainparse
+
+					} else if bytes.Equal(ffj_key_Content_Context, kn) {
 						currentKey = ffj_t_Content_Context
 						state = fflib.FFParse_want_colon
 						goto mainparse
@@ -391,7 +423,12 @@ mainparse:
 
 				case 'u':
 
-					if bytes.Equal(ffj_key_Content_UserRating, kn) {
+					if bytes.Equal(ffj_key_Content_URL, kn) {
+						currentKey = ffj_t_Content_URL
+						state = fflib.FFParse_want_colon
+						goto mainparse
+
+					} else if bytes.Equal(ffj_key_Content_UserRating, kn) {
 						currentKey = ffj_t_Content_UserRating
 						state = fflib.FFParse_want_colon
 						goto mainparse
@@ -479,6 +516,18 @@ mainparse:
 					goto mainparse
 				}
 
+				if fflib.SimpleLetterEqualFold(ffj_key_Content_Cat, kn) {
+					currentKey = ffj_t_Content_Cat
+					state = fflib.FFParse_want_colon
+					goto mainparse
+				}
+
+				if fflib.SimpleLetterEqualFold(ffj_key_Content_URL, kn) {
+					currentKey = ffj_t_Content_URL
+					state = fflib.FFParse_want_colon
+					goto mainparse
+				}
+
 				if fflib.SimpleLetterEqualFold(ffj_key_Content_Producer, kn) {
 					currentKey = ffj_t_Content_Producer
 					state = fflib.FFParse_want_colon
@@ -549,6 +598,12 @@ mainparse:
 
 				case ffj_t_Content_Producer:
 					goto handle_Producer
+
+				case ffj_t_Content_URL:
+					goto handle_URL
+
+				case ffj_t_Content_Cat:
+					goto handle_Cat
 
 				case ffj_t_Content_VideoQuality:
 					goto handle_VideoQuality
@@ -748,6 +803,106 @@ handle_Producer:
 		err = json.Unmarshal(tbuf, &uj.Producer)
 		if err != nil {
 			return fs.WrapErr(err)
+		}
+	}
+
+	state = fflib.FFParse_after_value
+	goto mainparse
+
+handle_URL:
+
+	/* handler: uj.URL type=string kind=string quoted=false*/
+
+	{
+
+		{
+			if tok != fflib.FFTok_string && tok != fflib.FFTok_null {
+				return fs.WrapErr(fmt.Errorf("cannot unmarshal %s into Go value for string", tok))
+			}
+		}
+
+		if tok == fflib.FFTok_null {
+
+		} else {
+
+			outBuf := fs.Output.Bytes()
+
+			uj.URL = string(string(outBuf))
+
+		}
+	}
+
+	state = fflib.FFParse_after_value
+	goto mainparse
+
+handle_Cat:
+
+	/* handler: uj.Cat type=[]string kind=slice quoted=false*/
+
+	{
+
+		{
+			if tok != fflib.FFTok_left_brace && tok != fflib.FFTok_null {
+				return fs.WrapErr(fmt.Errorf("cannot unmarshal %s into Go value for ", tok))
+			}
+		}
+
+		if tok == fflib.FFTok_null {
+			uj.Cat = nil
+		} else {
+
+			uj.Cat = []string{}
+
+			wantVal := true
+
+			for {
+
+				var tmp_uj__Cat string
+
+				tok = fs.Scan()
+				if tok == fflib.FFTok_error {
+					goto tokerror
+				}
+				if tok == fflib.FFTok_right_brace {
+					break
+				}
+
+				if tok == fflib.FFTok_comma {
+					if wantVal == true {
+						// TODO(pquerna): this isn't an ideal error message, this handles
+						// things like [,,,] as an array value.
+						return fs.WrapErr(fmt.Errorf("wanted value token, but got token: %v", tok))
+					}
+					continue
+				} else {
+					wantVal = true
+				}
+
+				/* handler: tmp_uj__Cat type=string kind=string quoted=false*/
+
+				{
+
+					{
+						if tok != fflib.FFTok_string && tok != fflib.FFTok_null {
+							return fs.WrapErr(fmt.Errorf("cannot unmarshal %s into Go value for string", tok))
+						}
+					}
+
+					if tok == fflib.FFTok_null {
+
+					} else {
+
+						outBuf := fs.Output.Bytes()
+
+						tmp_uj__Cat = string(string(outBuf))
+
+					}
+				}
+
+				uj.Cat = append(uj.Cat, tmp_uj__Cat)
+
+				wantVal = false
+			}
 		}
 	}
 
@@ -1075,8 +1230,6 @@ handle_Ext:
 	{
 		if tok == fflib.FFTok_null {
 
-			uj.Ext = nil
-
 			state = fflib.FFParse_after_value
 			goto mainparse
 		}
@@ -1084,10 +1237,6 @@ handle_Ext:
 		tbuf, err := fs.CaptureField(tok)
 		if err != nil {
 			return fs.WrapErr(err)
-		}
-
-		if uj.Ext == nil {
-			uj.Ext = new(json.RawMessage)
 		}
 
 		err = uj.Ext.UnmarshalJSON(tbuf)

@@ -338,7 +338,7 @@ handle_Segment:
 			uj.Segment = nil
 		} else {
 
-			uj.Segment = make([]Segment, 0)
+			uj.Segment = []Segment{}
 
 			wantVal := true
 
@@ -382,6 +382,7 @@ handle_Segment:
 				}
 
 				uj.Segment = append(uj.Segment, tmp_uj__Segment)
+
 				wantVal = false
 			}
 		}
@@ -1520,7 +1521,7 @@ handle_Cat:
 			uj.Cat = nil
 		} else {
 
-			uj.Cat = make([]string, 0)
+			uj.Cat = []string{}
 
 			wantVal := true
 
@@ -1569,6 +1570,7 @@ handle_Cat:
 				}
 
 				uj.Cat = append(uj.Cat, tmp_uj__Cat)
+
 				wantVal = false
 			}
 		}
@@ -1996,7 +1998,7 @@ handle_Cat:
 			uj.Cat = nil
 		} else {
 
-			uj.Cat = make([]string, 0)
+			uj.Cat = []string{}
 
 			wantVal := true
 
@@ -2045,6 +2047,7 @@ handle_Cat:
 				}
 
 				uj.Cat = append(uj.Cat, tmp_uj__Cat)
+
 				wantVal = false
 			}
 		}
@@ -3104,7 +3107,7 @@ handle_Cat:
 			uj.Cat = nil
 		} else {
 
-			uj.Cat = make([]string, 0)
+			uj.Cat = []string{}
 
 			wantVal := true
 
@@ -3153,6 +3156,7 @@ handle_Cat:
 				}
 
 				uj.Cat = append(uj.Cat, tmp_uj__Cat)
+
 				wantVal = false
 			}
 		}
@@ -3263,6 +3267,11 @@ func (mj *User) MarshalJSONBuf(buf fflib.EncodingBuffer) error {
 		fflib.WriteJsonString(buf, string(mj.ID))
 		buf.WriteByte(',')
 	}
+	if len(mj.BuyerID) != 0 {
+		buf.WriteString(`"buyerid":`)
+		fflib.WriteJsonString(buf, string(mj.BuyerID))
+		buf.WriteByte(',')
+	}
 	if len(mj.BuyerUID) != 0 {
 		buf.WriteString(`"buyeruid":`)
 		fflib.WriteJsonString(buf, string(mj.BuyerUID))
@@ -3325,21 +3334,19 @@ func (mj *User) MarshalJSONBuf(buf fflib.EncodingBuffer) error {
 		}
 		buf.WriteByte(',')
 	}
-	if mj.Ext != nil {
-		if true {
-			buf.WriteString(`"ext":`)
+	if len(mj.Ext) != 0 {
+		buf.WriteString(`"ext":`)
 
-			{
+		{
 
-				obj, err = mj.Ext.MarshalJSON()
-				if err != nil {
-					return err
-				}
-				buf.Write(obj)
-
+			obj, err = mj.Ext.MarshalJSON()
+			if err != nil {
+				return err
 			}
-			buf.WriteByte(',')
+			buf.Write(obj)
+
 		}
+		buf.WriteByte(',')
 	}
 	buf.Rewind(1)
 	buf.WriteByte('}')
@@ -3351,6 +3358,8 @@ const (
 	ffj_t_Userno_such_key
 
 	ffj_t_User_ID
+
+	ffj_t_User_BuyerID
 
 	ffj_t_User_BuyerUID
 
@@ -3370,6 +3379,8 @@ const (
 )
 
 var ffj_key_User_ID = []byte("id")
+
+var ffj_key_User_BuyerID = []byte("buyerid")
 
 var ffj_key_User_BuyerUID = []byte("buyeruid")
 
@@ -3448,7 +3459,12 @@ mainparse:
 
 				case 'b':
 
-					if bytes.Equal(ffj_key_User_BuyerUID, kn) {
+					if bytes.Equal(ffj_key_User_BuyerID, kn) {
+						currentKey = ffj_t_User_BuyerID
+						state = fflib.FFParse_want_colon
+						goto mainparse
+
+					} else if bytes.Equal(ffj_key_User_BuyerUID, kn) {
 						currentKey = ffj_t_User_BuyerUID
 						state = fflib.FFParse_want_colon
 						goto mainparse
@@ -3565,6 +3581,12 @@ mainparse:
 					goto mainparse
 				}
 
+				if fflib.SimpleLetterEqualFold(ffj_key_User_BuyerID, kn) {
+					currentKey = ffj_t_User_BuyerID
+					state = fflib.FFParse_want_colon
+					goto mainparse
+				}
+
 				if fflib.SimpleLetterEqualFold(ffj_key_User_ID, kn) {
 					currentKey = ffj_t_User_ID
 					state = fflib.FFParse_want_colon
@@ -3590,6 +3612,9 @@ mainparse:
 
 				case ffj_t_User_ID:
 					goto handle_ID
+
+				case ffj_t_User_BuyerID:
+					goto handle_BuyerID
 
 				case ffj_t_User_BuyerUID:
 					goto handle_BuyerUID
@@ -3648,6 +3673,32 @@ handle_ID:
 			outBuf := fs.Output.Bytes()
 
 			uj.ID = string(string(outBuf))
+
+		}
+	}
+
+	state = fflib.FFParse_after_value
+	goto mainparse
+
+handle_BuyerID:
+
+	/* handler: uj.BuyerID type=string kind=string quoted=false*/
+
+	{
+
+		{
+			if tok != fflib.FFTok_string && tok != fflib.FFTok_null {
+				return fs.WrapErr(fmt.Errorf("cannot unmarshal %s into Go value for string", tok))
+			}
+		}
+
+		if tok == fflib.FFTok_null {
+
+		} else {
+
+			outBuf := fs.Output.Bytes()
+
+			uj.BuyerID = string(string(outBuf))
 
 		}
 	}
@@ -3826,7 +3877,7 @@ handle_Data:
 			uj.Data = nil
 		} else {
 
-			uj.Data = make([]Data, 0)
+			uj.Data = []Data{}
 
 			wantVal := true
 
@@ -3870,6 +3921,7 @@ handle_Data:
 				}
 
 				uj.Data = append(uj.Data, tmp_uj__Data)
+
 				wantVal = false
 			}
 		}
@@ -3885,8 +3937,6 @@ handle_Ext:
 	{
 		if tok == fflib.FFTok_null {
 
-			uj.Ext = nil
-
 			state = fflib.FFParse_after_value
 			goto mainparse
 		}
@@ -3894,10 +3944,6 @@ handle_Ext:
 		tbuf, err := fs.CaptureField(tok)
 		if err != nil {
 			return fs.WrapErr(err)
-		}
-
-		if uj.Ext == nil {
-			uj.Ext = new(json.RawMessage)
 		}
 
 		err = uj.Ext.UnmarshalJSON(tbuf)

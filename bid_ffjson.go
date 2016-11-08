@@ -738,7 +738,7 @@ handle_AdvDomain:
 			uj.AdvDomain = nil
 		} else {
 
-			uj.AdvDomain = make([]string, 0)
+			uj.AdvDomain = []string{}
 
 			wantVal := true
 
@@ -787,6 +787,7 @@ handle_AdvDomain:
 				}
 
 				uj.AdvDomain = append(uj.AdvDomain, tmp_uj__AdvDomain)
+
 				wantVal = false
 			}
 		}
@@ -889,7 +890,7 @@ handle_Cat:
 			uj.Cat = nil
 		} else {
 
-			uj.Cat = make([]string, 0)
+			uj.Cat = []string{}
 
 			wantVal := true
 
@@ -938,6 +939,7 @@ handle_Cat:
 				}
 
 				uj.Cat = append(uj.Cat, tmp_uj__Cat)
+
 				wantVal = false
 			}
 		}
@@ -962,7 +964,7 @@ handle_Attr:
 			uj.Attr = nil
 		} else {
 
-			uj.Attr = make([]int, 0)
+			uj.Attr = []int{}
 
 			wantVal := true
 
@@ -1015,6 +1017,7 @@ handle_Attr:
 				}
 
 				uj.Attr = append(uj.Attr, tmp_uj__Attr)
+
 				wantVal = false
 			}
 		}
@@ -1376,7 +1379,7 @@ handle_ImpressionTrackingUrl:
 			uj.ImpressionTrackingUrl = nil
 		} else {
 
-			uj.ImpressionTrackingUrl = make([]string, 0)
+			uj.ImpressionTrackingUrl = []string{}
 
 			wantVal := true
 
@@ -1425,6 +1428,7 @@ handle_ImpressionTrackingUrl:
 				}
 
 				uj.ImpressionTrackingUrl = append(uj.ImpressionTrackingUrl, tmp_uj__ImpressionTrackingUrl)
+
 				wantVal = false
 			}
 		}

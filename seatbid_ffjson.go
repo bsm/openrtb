@@ -283,7 +283,7 @@ handle_Bid:
 			uj.Bid = nil
 		} else {
 
-			uj.Bid = make([]Bid, 0)
+			uj.Bid = []Bid{}
 
 			wantVal := true
 
@@ -327,6 +327,7 @@ handle_Bid:
 				}
 
 				uj.Bid = append(uj.Bid, tmp_uj__Bid)
+
 				wantVal = false
 			}
 		}

@@ -506,7 +506,7 @@ handle_WSeat:
 			uj.WSeat = nil
 		} else {
 
-			uj.WSeat = make([]string, 0)
+			uj.WSeat = []string{}
 
 			wantVal := true
 
@@ -555,6 +555,7 @@ handle_WSeat:
 				}
 
 				uj.WSeat = append(uj.WSeat, tmp_uj__WSeat)
+
 				wantVal = false
 			}
 		}
@@ -579,7 +580,7 @@ handle_WAdvDomain:
 			uj.WAdvDomain = nil
 		} else {
 
-			uj.WAdvDomain = make([]string, 0)
+			uj.WAdvDomain = []string{}
 
 			wantVal := true
 
@@ -628,6 +629,7 @@ handle_WAdvDomain:
 				}
 
 				uj.WAdvDomain = append(uj.WAdvDomain, tmp_uj__WAdvDomain)
+
 				wantVal = false
 			}
 		}
@@ -714,7 +716,7 @@ handle_Seats:
 			uj.Seats = nil
 		} else {
 
-			uj.Seats = make([]string, 0)
+			uj.Seats = []string{}
 
 			wantVal := true
 
@@ -763,6 +765,7 @@ handle_Seats:
 				}
 
 				uj.Seats = append(uj.Seats, tmp_uj__Seats)
+
 				wantVal = false
 			}
 		}
@@ -1096,7 +1099,7 @@ handle_Deals:
 			uj.Deals = nil
 		} else {
 
-			uj.Deals = make([]Deal, 0)
+			uj.Deals = []Deal{}
 
 			wantVal := true
 
@@ -1140,6 +1143,7 @@ handle_Deals:
 				}
 
 				uj.Deals = append(uj.Deals, tmp_uj__Deals)
+
 				wantVal = false
 			}
 		}
@@ -1691,7 +1695,7 @@ handle_WSeat:
 			uj.WSeat = nil
 		} else {
 
-			uj.WSeat = make([]string, 0)
+			uj.WSeat = []string{}
 
 			wantVal := true
 
@@ -1740,6 +1744,7 @@ handle_WSeat:
 				}
 
 				uj.WSeat = append(uj.WSeat, tmp_uj__WSeat)
+
 				wantVal = false
 			}
 		}
@@ -1764,7 +1769,7 @@ handle_WAdvDomain:
 			uj.WAdvDomain = nil
 		} else {
 
-			uj.WAdvDomain = make([]string, 0)
+			uj.WAdvDomain = []string{}
 
 			wantVal := true
 
@@ -1813,6 +1818,7 @@ handle_WAdvDomain:
 				}
 
 				uj.WAdvDomain = append(uj.WAdvDomain, tmp_uj__WAdvDomain)
+
 				wantVal = false
 			}
 		}
@@ -1899,7 +1905,7 @@ handle_Seats:
 			uj.Seats = nil
 		} else {
 
-			uj.Seats = make([]string, 0)
+			uj.Seats = []string{}
 
 			wantVal := true
 
@@ -1948,6 +1954,7 @@ handle_Seats:
 				}
 
 				uj.Seats = append(uj.Seats, tmp_uj__Seats)
+
 				wantVal = false
 			}
 		}

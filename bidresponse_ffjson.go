@@ -377,7 +377,7 @@ handle_SeatBid:
 			uj.SeatBid = nil
 		} else {
 
-			uj.SeatBid = make([]SeatBid, 0)
+			uj.SeatBid = []SeatBid{}
 
 			wantVal := true
 
@@ -420,6 +420,7 @@ handle_SeatBid:
 				}
 
 				uj.SeatBid = append(uj.SeatBid, tmp_uj__SeatBid)
+
 				wantVal = false
 			}
 		}

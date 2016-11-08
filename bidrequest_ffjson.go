@@ -92,6 +92,11 @@ func (mj *BidRequest) MarshalJSONBuf(buf fflib.EncodingBuffer) error {
 		}
 		buf.WriteByte(',')
 	}
+	if mj.Test != 0 {
+		buf.WriteString(`"test":`)
+		fflib.FormatBits2(buf, uint64(mj.Test), 10, mj.Test < 0)
+		buf.WriteByte(',')
+	}
 	buf.WriteString(`"at":`)
 	fflib.FormatBits2(buf, uint64(mj.AuctionType), 10, mj.AuctionType < 0)
 	buf.WriteByte(',')
@@ -178,21 +183,19 @@ func (mj *BidRequest) MarshalJSONBuf(buf fflib.EncodingBuffer) error {
 		}
 		buf.WriteByte(',')
 	}
-	if mj.Ext != nil {
-		if true {
-			buf.WriteString(`"ext":`)
+	if len(mj.Ext) != 0 {
+		buf.WriteString(`"ext":`)
 
-			{
+		{
 
-				obj, err = mj.Ext.MarshalJSON()
-				if err != nil {
-					return err
-				}
-				buf.Write(obj)
-
+			obj, err = mj.Ext.MarshalJSON()
+			if err != nil {
+				return err
 			}
-			buf.WriteByte(',')
+			buf.Write(obj)
+
 		}
+		buf.WriteByte(',')
 	}
 	if mj.Pmp != nil {
 		if true {
@@ -226,6 +229,8 @@ const (
 
 	ffj_t_BidRequest_User
 
+	ffj_t_BidRequest_Test
+
 	ffj_t_BidRequest_AuctionType
 
 	ffj_t_BidRequest_TMax
@@ -258,6 +263,8 @@ var ffj_key_BidRequest_App = []byte("app")
 var ffj_key_BidRequest_Device = []byte("device")
 
 var ffj_key_BidRequest_User = []byte("user")
+
+var ffj_key_BidRequest_Test = []byte("test")
 
 var ffj_key_BidRequest_AuctionType = []byte("at")
 
@@ -432,7 +439,12 @@ mainparse:
 
 				case 't':
 
-					if bytes.Equal(ffj_key_BidRequest_TMax, kn) {
+					if bytes.Equal(ffj_key_BidRequest_Test, kn) {
+						currentKey = ffj_t_BidRequest_Test
+						state = fflib.FFParse_want_colon
+						goto mainparse
+
+					} else if bytes.Equal(ffj_key_BidRequest_TMax, kn) {
 						currentKey = ffj_t_BidRequest_TMax
 						state = fflib.FFParse_want_colon
 						goto mainparse
@@ -516,6 +528,12 @@ mainparse:
 					goto mainparse
 				}
 
+				if fflib.EqualFoldRight(ffj_key_BidRequest_Test, kn) {
+					currentKey = ffj_t_BidRequest_Test
+					state = fflib.FFParse_want_colon
+					goto mainparse
+				}
+
 				if fflib.EqualFoldRight(ffj_key_BidRequest_User, kn) {
 					currentKey = ffj_t_BidRequest_User
 					state = fflib.FFParse_want_colon
@@ -586,6 +604,9 @@ mainparse:
 
 				case ffj_t_BidRequest_User:
 					goto handle_User
+
+				case ffj_t_BidRequest_Test:
+					goto handle_Test
 
 				case ffj_t_BidRequest_AuctionType:
 					goto handle_AuctionType
@@ -673,7 +694,7 @@ handle_Imp:
 			uj.Imp = nil
 		} else {
 
-			uj.Imp = make([]Impression, 0)
+			uj.Imp = []Impression{}
 
 			wantVal := true
 
@@ -716,6 +737,7 @@ handle_Imp:
 				}
 
 				uj.Imp = append(uj.Imp, tmp_uj__Imp)
+
 				wantVal = false
 			}
 		}
@@ -804,6 +826,36 @@ handle_User:
 	state = fflib.FFParse_after_value
 	goto mainparse
 
+handle_Test:
+
+	/* handler: uj.Test type=int kind=int quoted=false*/
+
+	{
+		if tok != fflib.FFTok_integer && tok != fflib.FFTok_null {
+			return fs.WrapErr(fmt.Errorf("cannot unmarshal %s into Go value for int", tok))
+		}
+	}
+
+	{
+
+		if tok == fflib.FFTok_null {
+
+		} else {
+
+			tval, err := fflib.ParseInt(fs.Output.Bytes(), 10, 64)
+
+			if err != nil {
+				return fs.WrapErr(err)
+			}
+
+			uj.Test = int(tval)
+
+		}
+	}
+
+	state = fflib.FFParse_after_value
+	goto mainparse
+
 handle_AuctionType:
 
 	/* handler: uj.AuctionType type=int kind=int quoted=false*/
@@ -880,7 +932,7 @@ handle_WSeat:
 			uj.WSeat = nil
 		} else {
 
-			uj.WSeat = make([]string, 0)
+			uj.WSeat = []string{}
 
 			wantVal := true
 
@@ -929,6 +981,7 @@ handle_WSeat:
 				}
 
 				uj.WSeat = append(uj.WSeat, tmp_uj__WSeat)
+
 				wantVal = false
 			}
 		}
@@ -983,7 +1036,7 @@ handle_Cur:
 			uj.Cur = nil
 		} else {
 
-			uj.Cur = make([]string, 0)
+			uj.Cur = []string{}
 
 			wantVal := true
 
@@ -1032,6 +1085,7 @@ handle_Cur:
 				}
 
 				uj.Cur = append(uj.Cur, tmp_uj__Cur)
+
 				wantVal = false
 			}
 		}
@@ -1056,7 +1110,7 @@ handle_Bcat:
 			uj.Bcat = nil
 		} else {
 
-			uj.Bcat = make([]string, 0)
+			uj.Bcat = []string{}
 
 			wantVal := true
 
@@ -1105,6 +1159,7 @@ handle_Bcat:
 				}
 
 				uj.Bcat = append(uj.Bcat, tmp_uj__Bcat)
+
 				wantVal = false
 			}
 		}
@@ -1129,7 +1184,7 @@ handle_BAdv:
 			uj.BAdv = nil
 		} else {
 
-			uj.BAdv = make([]string, 0)
+			uj.BAdv = []string{}
 
 			wantVal := true
 
@@ -1178,6 +1233,7 @@ handle_BAdv:
 				}
 
 				uj.BAdv = append(uj.BAdv, tmp_uj__BAdv)
+
 				wantVal = false
 			}
 		}
@@ -1213,8 +1269,6 @@ handle_Ext:
 	{
 		if tok == fflib.FFTok_null {
 
-			uj.Ext = nil
-
 			state = fflib.FFParse_after_value
 			goto mainparse
 		}
@@ -1222,10 +1276,6 @@ handle_Ext:
 		tbuf, err := fs.CaptureField(tok)
 		if err != nil {
 			return fs.WrapErr(err)
-		}
-
-		if uj.Ext == nil {
-			uj.Ext = new(json.RawMessage)
 		}
 
 		err = uj.Ext.UnmarshalJSON(tbuf)

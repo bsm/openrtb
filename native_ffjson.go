@@ -7,7 +7,6 @@ package openrtb
 
 import (
 	"bytes"
-	"encoding/json"
 	"fmt"
 	fflib "github.com/pquerna/ffjson/fflib/v1"
 )
@@ -34,7 +33,16 @@ func (mj *Native) MarshalJSONBuf(buf fflib.EncodingBuffer) error {
 	_ = obj
 	_ = err
 	buf.WriteString(`{ "request":`)
-	fflib.WriteJsonString(buf, string(mj.Request))
+
+	{
+
+		obj, err = mj.Request.MarshalJSON()
+		if err != nil {
+			return err
+		}
+		buf.Write(obj)
+
+	}
 	buf.WriteByte(',')
 	if len(mj.Ver) != 0 {
 		buf.WriteString(`"ver":`)
@@ -73,21 +81,19 @@ func (mj *Native) MarshalJSONBuf(buf fflib.EncodingBuffer) error {
 		}
 		buf.WriteByte(',')
 	}
-	if mj.Ext != nil {
-		if true {
-			buf.WriteString(`"ext":`)
+	if len(mj.Ext) != 0 {
+		buf.WriteString(`"ext":`)
 
-			{
+		{
 
-				obj, err = mj.Ext.MarshalJSON()
-				if err != nil {
-					return err
-				}
-				buf.Write(obj)
-
+			obj, err = mj.Ext.MarshalJSON()
+			if err != nil {
+				return err
 			}
-			buf.WriteByte(',')
+			buf.Write(obj)
+
 		}
+		buf.WriteByte(',')
 	}
 	buf.Rewind(1)
 	buf.WriteByte('}')
@@ -298,25 +304,25 @@ mainparse:
 
 handle_Request:
 
-	/* handler: uj.Request type=string kind=string quoted=false*/
+	/* handler: uj.Request type=json.RawMessage kind=slice quoted=false*/
 
 	{
-
-		{
-			if tok != fflib.FFTok_string && tok != fflib.FFTok_null {
-				return fs.WrapErr(fmt.Errorf("cannot unmarshal %s into Go value for string", tok))
-			}
-		}
-
 		if tok == fflib.FFTok_null {
 
-		} else {
-
-			outBuf := fs.Output.Bytes()
-
-			uj.Request = string(string(outBuf))
-
+			state = fflib.FFParse_after_value
+			goto mainparse
 		}
+
+		tbuf, err := fs.CaptureField(tok)
+		if err != nil {
+			return fs.WrapErr(err)
+		}
+
+		err = uj.Request.UnmarshalJSON(tbuf)
+		if err != nil {
+			return fs.WrapErr(err)
+		}
+		state = fflib.FFParse_after_value
 	}
 
 	state = fflib.FFParse_after_value
@@ -364,7 +370,7 @@ handle_API:
 			uj.API = nil
 		} else {
 
-			uj.API = make([]int, 0)
+			uj.API = []int{}
 
 			wantVal := true
 
@@ -417,6 +423,7 @@ handle_API:
 				}
 
 				uj.API = append(uj.API, tmp_uj__API)
+
 				wantVal = false
 			}
 		}
@@ -441,7 +448,7 @@ handle_BAttr:
 			uj.BAttr = nil
 		} else {
 
-			uj.BAttr = make([]int, 0)
+			uj.BAttr = []int{}
 
 			wantVal := true
 
@@ -494,6 +501,7 @@ handle_BAttr:
 				}
 
 				uj.BAttr = append(uj.BAttr, tmp_uj__BAttr)
+
 				wantVal = false
 			}
 		}
@@ -509,8 +517,6 @@ handle_Ext:
 	{
 		if tok == fflib.FFTok_null {
 
-			uj.Ext = nil
-
 			state = fflib.FFParse_after_value
 			goto mainparse
 		}
@@ -518,10 +524,6 @@ handle_Ext:
 		tbuf, err := fs.CaptureField(tok)
 		if err != nil {
 			return fs.WrapErr(err)
-		}
-
-		if uj.Ext == nil {
-			uj.Ext = new(json.RawMessage)
 		}
 
 		err = uj.Ext.UnmarshalJSON(tbuf)

@@ -849,7 +849,7 @@ handle_IFrameBuster:
 			uj.IFrameBuster = nil
 		} else {
 
-			uj.IFrameBuster = make([]string, 0)
+			uj.IFrameBuster = []string{}
 
 			wantVal := true
 
@@ -898,6 +898,7 @@ handle_IFrameBuster:
 				}
 
 				uj.IFrameBuster = append(uj.IFrameBuster, tmp_uj__IFrameBuster)
+
 				wantVal = false
 			}
 		}
@@ -1136,7 +1137,7 @@ handle_BillingID:
 			uj.BillingID = nil
 		} else {
 
-			uj.BillingID = make([]string, 0)
+			uj.BillingID = []string{}
 
 			wantVal := true
 
@@ -1185,6 +1186,7 @@ handle_BillingID:
 				}
 
 				uj.BillingID = append(uj.BillingID, tmp_uj__BillingID)
+
 				wantVal = false
 			}
 		}

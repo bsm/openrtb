@@ -771,7 +771,7 @@ handle_Cat:
 			uj.Cat = nil
 		} else {
 
-			uj.Cat = make([]string, 0)
+			uj.Cat = []string{}
 
 			wantVal := true
 
@@ -820,6 +820,7 @@ handle_Cat:
 				}
 
 				uj.Cat = append(uj.Cat, tmp_uj__Cat)
+
 				wantVal = false
 			}
 		}
@@ -844,7 +845,7 @@ handle_SectionCat:
 			uj.SectionCat = nil
 		} else {
 
-			uj.SectionCat = make([]string, 0)
+			uj.SectionCat = []string{}
 
 			wantVal := true
 
@@ -893,6 +894,7 @@ handle_SectionCat:
 				}
 
 				uj.SectionCat = append(uj.SectionCat, tmp_uj__SectionCat)
+
 				wantVal = false
 			}
 		}
@@ -917,7 +919,7 @@ handle_PageCat:
 			uj.PageCat = nil
 		} else {
 
-			uj.PageCat = make([]string, 0)
+			uj.PageCat = []string{}
 
 			wantVal := true
 
@@ -966,6 +968,7 @@ handle_PageCat:
 				}
 
 				uj.PageCat = append(uj.PageCat, tmp_uj__PageCat)
+
 				wantVal = false
 			}
 		}
@@ -1676,7 +1679,7 @@ handle_Cat:
 			uj.Cat = nil
 		} else {
 
-			uj.Cat = make([]string, 0)
+			uj.Cat = []string{}
 
 			wantVal := true
 
@@ -1725,6 +1728,7 @@ handle_Cat:
 				}
 
 				uj.Cat = append(uj.Cat, tmp_uj__Cat)
+
 				wantVal = false
 			}
 		}
@@ -1749,7 +1753,7 @@ handle_SectionCat:
 			uj.SectionCat = nil
 		} else {
 
-			uj.SectionCat = make([]string, 0)
+			uj.SectionCat = []string{}
 
 			wantVal := true
 
@@ -1798,6 +1802,7 @@ handle_SectionCat:
 				}
 
 				uj.SectionCat = append(uj.SectionCat, tmp_uj__SectionCat)
+
 				wantVal = false
 			}
 		}
@@ -1822,7 +1827,7 @@ handle_PageCat:
 			uj.PageCat = nil
 		} else {
 
-			uj.PageCat = make([]string, 0)
+			uj.PageCat = []string{}
 
 			wantVal := true
 
@@ -1871,6 +1876,7 @@ handle_PageCat:
 				}
 
 				uj.PageCat = append(uj.PageCat, tmp_uj__PageCat)
+
 				wantVal = false
 			}
 		}
@@ -2787,7 +2793,7 @@ handle_Cat:
 			uj.Cat = nil
 		} else {
 
-			uj.Cat = make([]string, 0)
+			uj.Cat = []string{}
 
 			wantVal := true
 
@@ -2836,6 +2842,7 @@ handle_Cat:
 				}
 
 				uj.Cat = append(uj.Cat, tmp_uj__Cat)
+
 				wantVal = false
 			}
 		}
@@ -2860,7 +2867,7 @@ handle_SectionCat:
 			uj.SectionCat = nil
 		} else {
 
-			uj.SectionCat = make([]string, 0)
+			uj.SectionCat = []string{}
 
 			wantVal := true
 
@@ -2909,6 +2916,7 @@ handle_SectionCat:
 				}
 
 				uj.SectionCat = append(uj.SectionCat, tmp_uj__SectionCat)
+
 				wantVal = false
 			}
 		}
@@ -2933,7 +2941,7 @@ handle_PageCat:
 			uj.PageCat = nil
 		} else {
 
-			uj.PageCat = make([]string, 0)
+			uj.PageCat = []string{}
 
 			wantVal := true
 
@@ -2982,6 +2990,7 @@ handle_PageCat:
 				}
 
 				uj.PageCat = append(uj.PageCat, tmp_uj__PageCat)
+
 				wantVal = false
 			}
 		}

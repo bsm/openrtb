@@ -826,7 +826,7 @@ handle_BType:
 			uj.BType = nil
 		} else {
 
-			uj.BType = make([]int, 0)
+			uj.BType = []int{}
 
 			wantVal := true
 
@@ -879,6 +879,7 @@ handle_BType:
 				}
 
 				uj.BType = append(uj.BType, tmp_uj__BType)
+
 				wantVal = false
 			}
 		}
@@ -903,7 +904,7 @@ handle_BAttr:
 			uj.BAttr = nil
 		} else {
 
-			uj.BAttr = make([]int, 0)
+			uj.BAttr = []int{}
 
 			wantVal := true
 
@@ -956,6 +957,7 @@ handle_BAttr:
 				}
 
 				uj.BAttr = append(uj.BAttr, tmp_uj__BAttr)
+
 				wantVal = false
 			}
 		}
@@ -980,7 +982,7 @@ handle_Mimes:
 			uj.Mimes = nil
 		} else {
 
-			uj.Mimes = make([]string, 0)
+			uj.Mimes = []string{}
 
 			wantVal := true
 
@@ -1029,6 +1031,7 @@ handle_Mimes:
 				}
 
 				uj.Mimes = append(uj.Mimes, tmp_uj__Mimes)
+
 				wantVal = false
 			}
 		}
@@ -1083,7 +1086,7 @@ handle_ExpDir:
 			uj.ExpDir = nil
 		} else {
 
-			uj.ExpDir = make([]int, 0)
+			uj.ExpDir = []int{}
 
 			wantVal := true
 
@@ -1136,6 +1139,7 @@ handle_ExpDir:
 				}
 
 				uj.ExpDir = append(uj.ExpDir, tmp_uj__ExpDir)
+
 				wantVal = false
 			}
 		}
@@ -1160,7 +1164,7 @@ handle_Api:
 			uj.Api = nil
 		} else {
 
-			uj.Api = make([]int, 0)
+			uj.Api = []int{}
 
 			wantVal := true
 
@@ -1213,6 +1217,7 @@ handle_Api:
 				}
 
 				uj.Api = append(uj.Api, tmp_uj__Api)
+
 				wantVal = false
 			}
 		}

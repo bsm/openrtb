@@ -800,7 +800,7 @@ handle_Mimes:
 			uj.Mimes = nil
 		} else {
 
-			uj.Mimes = make([]string, 0)
+			uj.Mimes = []string{}
 
 			wantVal := true
 
@@ -849,6 +849,7 @@ handle_Mimes:
 				}
 
 				uj.Mimes = append(uj.Mimes, tmp_uj__Mimes)
+
 				wantVal = false
 			}
 		}
@@ -963,7 +964,7 @@ handle_Protocols:
 			uj.Protocols = nil
 		} else {
 
-			uj.Protocols = make([]int, 0)
+			uj.Protocols = []int{}
 
 			wantVal := true
 
@@ -1016,6 +1017,7 @@ handle_Protocols:
 				}
 
 				uj.Protocols = append(uj.Protocols, tmp_uj__Protocols)
+
 				wantVal = false
 			}
 		}
@@ -1190,7 +1192,7 @@ handle_BAttr:
 			uj.BAttr = nil
 		} else {
 
-			uj.BAttr = make([]int, 0)
+			uj.BAttr = []int{}
 
 			wantVal := true
 
@@ -1243,6 +1245,7 @@ handle_BAttr:
 				}
 
 				uj.BAttr = append(uj.BAttr, tmp_uj__BAttr)
+
 				wantVal = false
 			}
 		}
@@ -1390,7 +1393,7 @@ handle_PlaybackMethod:
 			uj.PlaybackMethod = nil
 		} else {
 
-			uj.PlaybackMethod = make([]int, 0)
+			uj.PlaybackMethod = []int{}
 
 			wantVal := true
 
@@ -1443,6 +1446,7 @@ handle_PlaybackMethod:
 				}
 
 				uj.PlaybackMethod = append(uj.PlaybackMethod, tmp_uj__PlaybackMethod)
+
 				wantVal = false
 			}
 		}
@@ -1467,7 +1471,7 @@ handle_Delivery:
 			uj.Delivery = nil
 		} else {
 
-			uj.Delivery = make([]int, 0)
+			uj.Delivery = []int{}
 
 			wantVal := true
 
@@ -1520,6 +1524,7 @@ handle_Delivery:
 				}
 
 				uj.Delivery = append(uj.Delivery, tmp_uj__Delivery)
+
 				wantVal = false
 			}
 		}
@@ -1574,7 +1579,7 @@ handle_CompanionAd:
 			uj.CompanionAd = nil
 		} else {
 
-			uj.CompanionAd = make([]Banner, 0)
+			uj.CompanionAd = []Banner{}
 
 			wantVal := true
 
@@ -1618,6 +1623,7 @@ handle_CompanionAd:
 				}
 
 				uj.CompanionAd = append(uj.CompanionAd, tmp_uj__CompanionAd)
+
 				wantVal = false
 			}
 		}
@@ -1642,7 +1648,7 @@ handle_Api:
 			uj.Api = nil
 		} else {
 
-			uj.Api = make([]int, 0)
+			uj.Api = []int{}
 
 			wantVal := true
 
@@ -1695,6 +1701,7 @@ handle_Api:
 				}
 
 				uj.Api = append(uj.Api, tmp_uj__Api)
+
 				wantVal = false
 			}
 		}
@@ -1719,7 +1726,7 @@ handle_CompanionType:
 			uj.CompanionType = nil
 		} else {
 
-			uj.CompanionType = make([]int, 0)
+			uj.CompanionType = []int{}
 
 			wantVal := true
 
@@ -1772,6 +1779,7 @@ handle_CompanionType:
 				}
 
 				uj.CompanionType = append(uj.CompanionType, tmp_uj__CompanionType)
+
 				wantVal = false
 			}
 		}
