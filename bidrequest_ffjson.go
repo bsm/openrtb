@@ -183,19 +183,21 @@ func (mj *BidRequest) MarshalJSONBuf(buf fflib.EncodingBuffer) error {
 		}
 		buf.WriteByte(',')
 	}
-	if len(mj.Ext) != 0 {
-		buf.WriteString(`"ext":`)
+	if mj.Ext != nil {
+		if true {
+			buf.WriteString(`"ext":`)
 
-		{
+			{
 
-			obj, err = mj.Ext.MarshalJSON()
-			if err != nil {
-				return err
+				obj, err = mj.Ext.MarshalJSON()
+				if err != nil {
+					return err
+				}
+				buf.Write(obj)
+
 			}
-			buf.Write(obj)
-
+			buf.WriteByte(',')
 		}
-		buf.WriteByte(',')
 	}
 	if mj.Pmp != nil {
 		if true {
@@ -1269,6 +1271,8 @@ handle_Ext:
 	{
 		if tok == fflib.FFTok_null {
 
+			uj.Ext = nil
+
 			state = fflib.FFParse_after_value
 			goto mainparse
 		}
@@ -1276,6 +1280,10 @@ handle_Ext:
 		tbuf, err := fs.CaptureField(tok)
 		if err != nil {
 			return fs.WrapErr(err)
+		}
+
+		if uj.Ext == nil {
+			uj.Ext = new(json.RawMessage)
 		}
 
 		err = uj.Ext.UnmarshalJSON(tbuf)
