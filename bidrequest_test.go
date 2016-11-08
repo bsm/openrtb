@@ -56,6 +56,7 @@ var _ = Describe("BidRequest", func() {
 				ID:       "45asdf987656789adfad4678rew656789",
 				BuyerUID: "5df678asd8987656asdf78987654",
 			},
+			Test:        1,
 			AuctionType: 2,
 			TMax:        120,
 			BAdv:        []string{"company1.com", "company2.com"},

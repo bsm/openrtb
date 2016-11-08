@@ -2,7 +2,7 @@ package openrtb
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"os"
 	"path/filepath"
 	"testing"
 
@@ -19,9 +19,10 @@ func iptr(n int) *int       { return &n }
 func sptr(s string) *string { return &s }
 
 func fixture(fname string, v interface{}) error {
-	data, err := ioutil.ReadFile(filepath.Join("testdata", fname+".json"))
+	f, err := os.Open(filepath.Join("testdata", fname+".json"))
 	if err != nil {
 		return err
 	}
-	return json.Unmarshal(data, v)
+	defer f.Close()
+	return json.NewDecoder(f).Decode(v)
 }

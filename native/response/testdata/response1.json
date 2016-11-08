@@ -1,0 +1,59 @@
+{
+  "ver": "1.1",
+  "imptrackers": ["http://imptracker.com"],
+  "jstracker": "<script>track()</script>",
+  "link": {
+    "url": "http://i.am.a/URL"
+  },
+  "assets": [
+    {
+      "id": 123,
+      "required": 1,
+      "title": {
+        "text": "Learn about this awesome thing"
+      }
+    },
+    {
+      "id": 124,
+      "required": 1,
+      "img": {
+        "url": "http://www.myads.com/thumbnail1.png"
+      }
+    },
+    {
+      "id": 128,
+      "required": 1,
+      "img": {
+        "url": "http://www.myads.com/largethumb1.png"
+      }
+    },
+    {
+      "id": 126,
+      "required": 1,
+      "data": {
+        "value": "My Brand"
+      }
+    },
+    {
+      "id": 127,
+      "required": 1,
+      "data": {
+        "value": "Learn all about this awesome story of someone using my product."
+      }
+    },
+    {
+      "id": 4,
+      "video": {
+        "vasttag": "<VAST version=\"2.0\"></VAST>"
+      }
+    },
+    {
+      "id": 5,
+      "link": {
+        "url": "http://landing.com",
+        "clicktrackers": ["http://tracker.com"],
+        "fallback": "http://fallback.com"
+      }
+    }
+  ]
+}
