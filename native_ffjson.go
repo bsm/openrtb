@@ -33,16 +33,7 @@ func (mj *Native) MarshalJSONBuf(buf fflib.EncodingBuffer) error {
 	_ = obj
 	_ = err
 	buf.WriteString(`{ "request":`)
-
-	{
-
-		obj, err = mj.Request.MarshalJSON()
-		if err != nil {
-			return err
-		}
-		buf.Write(obj)
-
-	}
+	fflib.WriteJsonString(buf, string(mj.Request))
 	buf.WriteByte(',')
 	if len(mj.Ver) != 0 {
 		buf.WriteString(`"ver":`)
@@ -304,25 +295,25 @@ mainparse:
 
 handle_Request:
 
-	/* handler: uj.Request type=json.RawMessage kind=slice quoted=false*/
+	/* handler: uj.Request type=string kind=string quoted=false*/
 
 	{
+
+		{
+			if tok != fflib.FFTok_string && tok != fflib.FFTok_null {
+				return fs.WrapErr(fmt.Errorf("cannot unmarshal %s into Go value for string", tok))
+			}
+		}
+
 		if tok == fflib.FFTok_null {
 
-			state = fflib.FFParse_after_value
-			goto mainparse
-		}
+		} else {
 
-		tbuf, err := fs.CaptureField(tok)
-		if err != nil {
-			return fs.WrapErr(err)
-		}
+			outBuf := fs.Output.Bytes()
 
-		err = uj.Request.UnmarshalJSON(tbuf)
-		if err != nil {
-			return fs.WrapErr(err)
+			uj.Request = string(string(outBuf))
+
 		}
-		state = fflib.FFParse_after_value
 	}
 
 	state = fflib.FFParse_after_value
