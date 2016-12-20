@@ -42,6 +42,9 @@ var _ = Describe("Video", func() {
 			},
 			Api:           []int{1, 2},
 			CompanionType: []int{1, 2},
+			Skip:          1,
+			SkipMin:       4,
+			SkipAfter:     11,
 		}))
 	})
 
