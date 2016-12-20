@@ -39,6 +39,9 @@ type Video struct {
 	CompanionAd    []Banner         `json:"companionad,omitempty"`
 	Api            []int            `json:"api,omitempty"` // List of supported API frameworks
 	CompanionType  []int            `json:"companiontype,omitempty"`
+	Skip           int64            `json:"skip,omitempty"`      // Indicates if the player will allow the video to be skipped, where 0 = no, 1 = yes.
+	SkipMin        int64            `json:"skipmin,omitempty"`   // Videos of total duration greater than this number of seconds can be skippable; only applicable if the ad is skippable.
+	SkipAfter      int64            `json:"skipafter,omitempty"` // Number of seconds a video must play before skipping is enabled; only applicable if the ad is skippable.
 	Ext            *json.RawMessage `json:"ext,omitempty"`
 }
 
