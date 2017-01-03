@@ -1,6 +1,6 @@
 package request
 
-import "encoding/json"
+import "github.com/bsm/openrtb"
 
 type ImageTypeID int
 
@@ -19,6 +19,6 @@ type Image struct {
 	HeightMin int `json:"hmin,omitempty"` // The minimum requested height of the image in pixels
 	// Either h/w or hmin/wmin should be transmitted. If only h/w is included, it
 	// should be considered an exact requirement
-	Mimes []string        `json:"mimes,omitempty"` // Whitelist of content MIME types supported
-	Ext   json.RawMessage `json:"ext,omitempty"`
+	Mimes []string          `json:"mimes,omitempty"` // Whitelist of content MIME types supported
+	Ext   openrtb.Extension `json:"ext,omitempty"`
 }
