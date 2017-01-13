@@ -25,10 +25,10 @@ type Audio struct {
 	Delivery      []int     `json:"delivery,omitempty"`    // List of supported delivery methods
 	CompanionAd   []Banner  `json:"companionad,omitempty"`
 	CompanionType []int     `json:"companiontype,omitempty"`
-	MaxSequence   int       `json:"maxseq,omitempty"`        // The maximumnumber of ads that canbe played in an ad pod.
-	Feed          int       `json:"companiontype,omitempty"` // Type of audio feed.
-	Stitched      int       `json:"companiontype,omitempty"` // Indicates if the ad is stitched with audio content or delivered independently
-	NVol          int       `json:"companiontype,omitempty"` // Volume normalization mode.
+	MaxSequence   int       `json:"maxseq,omitempty"`   // The maximumnumber of ads that canbe played in an ad pod.
+	Feed          int       `json:"feed,omitempty"`     // Type of audio feed.
+	Stitched      int       `json:"stitched,omitempty"` // Indicates if the ad is stitched with audio content or delivered independently
+	NVol          int       `json:"nvol,omitempty"`     // Volume normalization mode.
 	Ext           Extension `json:"ext,omitempty"`
 }
 
