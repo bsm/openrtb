@@ -20,12 +20,15 @@ type Video struct {
 	Mimes          []string  `json:"mimes,omitempty"`          // Content MIME types supported.
 	MinDuration    int       `json:"minduration,omitempty"`    // Minimum video ad duration in seconds
 	MaxDuration    int       `json:"maxduration,omitempty"`    // Maximum video ad duration in seconds
-	Protocol       int       `json:"protocol,omitempty"`       // Video bid response protocols
 	Protocols      []int     `json:"protocols,omitempty"`      // Video bid response protocols
+	Protocol       int       `json:"protocol,omitempty"`       // Video bid response protocols DEPRECATED
 	W              int       `json:"w,omitempty"`              // Width of the player in pixels
 	H              int       `json:"h,omitempty"`              // Height of the player in pixels
 	StartDelay     int       `json:"startdelay,omitempty"`     // Indicates the start delay in seconds
 	Linearity      int       `json:"linearity,omitempty"`      // Indicates whether the ad impression is linear or non-linear
+	Skip           int       `json:"skip,omitempty"`           // Indicates if the player will allow the video to be skipped, where 0 = no, 1 = yes.
+	SkipMin        int       `json:"skipmin,omitempty"`        // Videos of total duration greater than this number of seconds can be skippable
+	SkipAfter      int       `json:"skipafter,omitempty"`      // Number of seconds a video must play before skipping is enabled
 	Sequence       int       `json:"sequence,omitempty"`       // Default: 1
 	BAttr          []int     `json:"battr,omitempty"`          // Blocked creative attributes
 	MaxExtended    int       `json:"maxextended,omitempty"`    // Maximum extended video ad duration

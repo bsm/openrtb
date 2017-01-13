@@ -11,9 +11,14 @@ type Content struct {
 	Title              string    `json:"title,omitempty"`              // Content title.
 	Series             string    `json:"series,omitempty"`             // Content series.
 	Season             string    `json:"season,omitempty"`             // Content season.
+	Artist             string    `json:"artist,omitempty"`             // Artist credited with the content.
+	Genre              string    `json:"genre,omitempty"`              // Genre that best describes the content
+	Album              string    `json:"album,omiyempty"`              // Album to which the content belongs; typically for audio.
+	ISRC               string    `json:"isrc,omitempty"`               // International Standard Recording Code conforming to ISO - 3901.
 	Producer           *Producer `json:"producer,omitempty"`           // The producer.
 	URL                string    `json:"url,omitempty"`                // URL of the content, for buy-side contextualization or review.
 	Cat                []string  `json:"cat,omitempty"`                // Array of IAB content categories that describe the content.
+	ProdQuality        int       `json:"prodq,omitempty"`              // Production quality per IAB's classification.
 	VideoQuality       int       `json:"videoquality,omitempty"`       // Video quality per IAB's classification.
 	Context            int       `json:"context,omitempty"`            // Type of content (game, video, text, etc.).
 	ContentRating      string    `json:"contentrating,omitempty"`      // Content rating (e.g., MPAA).
@@ -25,5 +30,6 @@ type Content struct {
 	Len                int       `json:"len,omitempty"`                // Length of content in seconds; appropriate for video or audio.
 	Language           string    `json:"language,omitempty"`           // Content language using ISO-639-1-alpha-2.
 	Embeddable         int       `json:"embeddable,omitempty"`         // Indicator of whether or not the content is embeddable (e.g., an embeddable video player), where 0 = no, 1 = yes.
+	Data               []Data    `json:"data,omitempty"`               // Additional content data.
 	Ext                Extension `json:"ext,omitempty"`
 }
