@@ -46,7 +46,7 @@ const (
 	VideoLinearityNonLinear
 )
 
-// 5.8 Video Bid Response Protocols
+// 5.8 Video and Audio Bid Response Protocols
 const (
 	VideoProtoVAST1 int = iota + 1
 	VideoProtoVAST2
@@ -54,6 +54,10 @@ const (
 	VideoProtoVAST1Wrapper
 	VideoProtoVAST2Wrapper
 	VideoProtoVAST3Wrapper
+	VideoProtoVAST4
+	VideoProtoVAST4Wrapper
+	AudioProtocolDAAST1
+	AudioProtocolDAAST1Wrapper
 )
 
 // 5.9 Video Playback Methods
@@ -90,6 +94,7 @@ const (
 const (
 	ContentDeliveryStreaming int = iota + 1
 	ContentDeliveryProgressive
+	ContentDeliveryDownload
 )
 
 // 5.14 Content Context
@@ -191,13 +196,16 @@ type Producer ThirdParty
 type Geo struct {
 	Lat           float64   `json:"lat,omitempty"`           // Latitude from -90 to 90
 	Lon           float64   `json:"lon,omitempty"`           // Longitude from -180 to 180
+	Type          int       `json:"type,omitempty"`          // Indicate the source of the geo data
+	Accuracy      int       `json:"accuracy,omitempty"`      // Estimated location accuracy in meters; recommended when lat/lon are specified and derived from a device’s location services
+	LastFix       int       `json:"lastfix,omitempty"`       // Number of seconds since this geolocation fix was established.
+	IPService     int       `json:"ipservice,omitempty"`     // Service or provider used to determine geolocation from IP address if applicable
 	Country       string    `json:"country,omitempty"`       // Country using ISO 3166-1 Alpha 3
 	Region        string    `json:"region,omitempty"`        // Region using ISO 3166-2
 	RegionFIPS104 string    `json:"regionFIPS104,omitempty"` // Region of a country using FIPS 10-4
 	Metro         string    `json:"metro,omitempty"`
 	City          string    `json:"city,omitempty"`
 	Zip           string    `json:"zip,omitempty"`
-	Type          int       `json:"type,omitempty"`      // Indicate the source of the geo data
 	UTCOffset     int       `json:"utcoffset,omitempty"` // Local time as the number +/- of minutes from UTC
 	Ext           Extension `json:"ext,omitempty"`
 }
@@ -246,4 +254,12 @@ type Segment struct {
 type Regulations struct {
 	Coppa int       `json:"coppa,omitempty"` // Flag indicating if this request is subject to the COPPA regulations established by the USA FTC, where 0 = no, 1 = yes.
 	Ext   Extension `json:"ext,omitempty"`
+}
+
+// This object represents an allowed size (i.e., height and width combination) for a banner impression.
+// These are typically used in an array for an impression where multiple sizes are permitted.
+type Format struct {
+	W   int       `json:"w,omitempty"` // Width in device independent pixels (DIPS).
+	H   int       `json:"h,omitempty"` //Height in device independent pixels (DIPS).
+	Ext Extension `json:"ext,omitempty"`
 }

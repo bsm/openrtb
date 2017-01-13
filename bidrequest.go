@@ -27,6 +27,7 @@ type BidRequest struct {
 	Cur         []string     `json:"cur,omitempty"`     // Array of allowed currencies
 	Bcat        []string     `json:"bcat,omitempty"`    // Blocked Advertiser Categories.
 	BAdv        []string     `json:"badv,omitempty"`    // Array of strings of blocked toplevel domains of advertisers
+	BApp        []string     `json:"bapp,omitempty"`    // Block list of applications by their platform-specific exchange-independent application identifiers. On Android, these should be bundle or package names (e.g., com.foo.mygame).  On iOS, these are numeric IDs.
 	Regs        *Regulations `json:"regs,omitempty"`
 	Ext         Extension    `json:"ext,omitempty"`
 
