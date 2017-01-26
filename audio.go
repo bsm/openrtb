@@ -12,7 +12,7 @@ var (
 
 // The "audio" object must be included directly in the impression object
 type Audio struct {
-	Mimes         []string  `json:"mimes,omitempty"`       // Content MIME types supported.
+	Mimes         []string  `json:"mimes"`                 // Content MIME types supported.
 	MinDuration   int       `json:"minduration,omitempty"` // Minimum video ad duration in seconds
 	MaxDuration   int       `json:"maxduration,omitempty"` // Maximum video ad duration in seconds
 	Protocols     []int     `json:"protocols,omitempty"`   // Video bid response protocols
@@ -24,6 +24,7 @@ type Audio struct {
 	MaxBitrate    int       `json:"maxbitrate,omitempty"`  // Maximum bit rate in Kbps
 	Delivery      []int     `json:"delivery,omitempty"`    // List of supported delivery methods
 	CompanionAd   []Banner  `json:"companionad,omitempty"`
+	API           []int     `json:"api,omitempty"`
 	CompanionType []int     `json:"companiontype,omitempty"`
 	MaxSequence   int       `json:"maxseq,omitempty"`   // The maximumnumber of ads that canbe played in an ad pod.
 	Feed          int       `json:"feed,omitempty"`     // Type of audio feed.
