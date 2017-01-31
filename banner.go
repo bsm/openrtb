@@ -9,7 +9,7 @@ package openrtb
 type Banner struct {
 	W        int       `json:"w,omitempty"`        // Width
 	H        int       `json:"h,omitempty"`        // Height
-	Format   *Format   `json:"format,omitempty"`   //Array of format objects representing the banner sizes permitted.
+	Format   []Format  `json:"format,omitempty"`   //Array of format objects representing the banner sizes permitted.
 	WMax     int       `json:"wmax,omitempty"`     // Width maximum DEPRECATED
 	HMax     int       `json:"hmax,omitempty"`     // Height maximum DEPRECATED
 	WMin     int       `json:"wmin,omitempty"`     // Width minimum DEPRECATED

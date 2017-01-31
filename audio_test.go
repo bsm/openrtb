@@ -31,6 +31,7 @@ var _ = Describe("Audio", func() {
 				{W: 300, H: 250, ID: "1234567893-1", Pos: 1, BAttr: []int{13, 14}, ExpDir: []int{ExpDirRight, ExpDirDown}},
 				{W: 728, H: 90, ID: "1234567893-2", Pos: 1, BAttr: []int{13, 14}},
 			},
+			API:           []int{1, 2},
 			CompanionType: []int{1, 2},
 		}))
 	})
