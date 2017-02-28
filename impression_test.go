@@ -36,7 +36,6 @@ var _ = Describe("Impression", func() {
 
 	It("should validate", func() {
 		Expect((&Impression{}).Validate()).To(Equal(ErrInvalidImpNoID))
-		Expect((&Impression{ID: "IMPID"}).Validate()).To(Equal(ErrInvalidImpNoAssets))
 		Expect((&Impression{ID: "IMPID", Banner: &Banner{}, Video: &Video{}}).Validate()).To(Equal(ErrInvalidImpMultiAssets))
 		Expect((&Impression{ID: "IMPID", Banner: &Banner{}}).Validate()).NotTo(HaveOccurred())
 	})
