@@ -5,7 +5,6 @@ import "errors"
 // Validation errors
 var (
 	ErrInvalidImpNoID        = errors.New("openrtb: impression ID missing")
-	ErrInvalidImpNoAssets    = errors.New("openrtb: impression has no assets")       // neither Banner, nor Video, nor Native
 	ErrInvalidImpMultiAssets = errors.New("openrtb: impression has multiple assets") // at least two out of Banner, Video, Native
 )
 
@@ -55,9 +54,7 @@ func (imp *Impression) Validate() error {
 		return ErrInvalidImpNoID
 	}
 
-	if count := imp.assetCount(); count == 0 {
-		return ErrInvalidImpNoAssets
-	} else if count > 1 {
+	if count := imp.assetCount(); count > 1 {
 		return ErrInvalidImpMultiAssets
 	}
 

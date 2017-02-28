@@ -67,7 +67,6 @@ var _ = Describe("BidRequest", func() {
 		Expect((&BidRequest{}).Validate()).To(Equal(ErrInvalidReqNoID))
 		Expect((&BidRequest{ID: "A"}).Validate()).To(Equal(ErrInvalidReqNoImps))
 		Expect((&BidRequest{ID: "A", Imp: []Impression{{ID: "1"}}, Site: &Site{}, App: &App{}}).Validate()).To(Equal(ErrInvalidReqMultiInv))
-		Expect((&BidRequest{ID: "A", Imp: []Impression{{ID: "1"}}}).Validate()).To(Equal(ErrInvalidImpNoAssets))
 
 		Expect((&BidRequest{ID: "A", Imp: []Impression{{ID: "1", Banner: &Banner{}}}}).Validate()).NotTo(HaveOccurred())
 		Expect((&BidRequest{ID: "A", Imp: []Impression{{ID: "1", Banner: &Banner{}}}, Site: &Site{}}).Validate()).NotTo(HaveOccurred())
