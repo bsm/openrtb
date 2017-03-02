@@ -2,10 +2,10 @@ package openrtb
 
 // 5.2 Banner Ad Types
 const (
-	BannerTypeXHTMLText int = iota + 1
-	BannerTypeXHTML
-	BannerTypeJS
-	BannerTypeFrame
+	BannerTypeXHTMLText = 1
+	BannerTypeXHTML     = 2
+	BannerTypeJS        = 3
+	BannerTypeFrame     = 4
 )
 
 // 5.3 Creative Attributes
@@ -13,59 +13,59 @@ const (
 
 // 5.4 Ad Position
 const (
-	AdPosUnknown int = iota
-	AdPosAboveFold
-	AdPosBelowFold
-	AdPosHeader
-	AdPosFooter
-	AdPosSidebar
-	AdPosFullscreen
+	AdPosUnknown    = 0
+	AdPosAboveFold  = 1
+	AdPosBelowFold  = 3
+	AdPosHeader     = 4
+	AdPosFooter     = 5
+	AdPosSidebar    = 6
+	AdPosFullscreen = 7
 )
 
 // 5.5 Expandable Direction
 const (
-	ExpDirLeft int = iota + 1
-	ExpDirRight
-	ExpDirUp
-	ExpDirDown
-	ExpDirFullScreen
+	ExpDirLeft       = 1
+	ExpDirRight      = 2
+	ExpDirUp         = 3
+	ExpDirDown       = 4
+	ExpDirFullScreen = 5
 )
 
 // 5.6 API Frameworks
 const (
-	APIFrameworkVPAID1 int = iota + 1
-	APIFrameworkVPAID2
-	APIFrameworkMRAID1
-	APIFrameworkORMMA
-	APIFrameworkMRAID2
+	APIFrameworkVPAID1 = 1
+	APIFrameworkVPAID2 = 2
+	APIFrameworkMRAID1 = 3
+	APIFrameworkORMMA  = 4
+	APIFrameworkMRAID2 = 5
 )
 
 // 5.7 Video Linearity
 const (
-	VideoLinearityLinear int = iota + 1
-	VideoLinearityNonLinear
+	VideoLinearityLinear    = 1
+	VideoLinearityNonLinear = 2
 )
 
 // 5.8 Video and Audio Bid Response Protocols
 const (
-	VideoProtoVAST1 int = iota + 1
-	VideoProtoVAST2
-	VideoProtoVAST3
-	VideoProtoVAST1Wrapper
-	VideoProtoVAST2Wrapper
-	VideoProtoVAST3Wrapper
-	VideoProtoVAST4
-	VideoProtoVAST4Wrapper
-	AudioProtocolDAAST1
-	AudioProtocolDAAST1Wrapper
+	VideoProtoVAST1            = 1
+	VideoProtoVAST2            = 2
+	VideoProtoVAST3            = 3
+	VideoProtoVAST1Wrapper     = 4
+	VideoProtoVAST2Wrapper     = 5
+	VideoProtoVAST3Wrapper     = 6
+	VideoProtoVAST4            = 7
+	VideoProtoVAST4Wrapper     = 8
+	AudioProtocolDAAST1        = 9
+	AudioProtocolDAAST1Wrapper = 10
 )
 
 // 5.9 Video Playback Methods
 const (
-	VideoPlaybackAutoSoundOn int = iota + 1
-	VideoPlaybackAutoSoundOff
-	VideoPlaybackClickToPlay
-	VideoPlaybackMouseOver
+	VideoPlaybackAutoSoundOn  = 1
+	VideoPlaybackAutoSoundOff = 2
+	VideoPlaybackClickToPlay  = 3
+	VideoPlaybackMouseOver    = 4
 )
 
 // 5.10 Video Start Delay
@@ -77,85 +77,85 @@ const (
 
 // 5.11 Video Quality
 const (
-	VideoQualityUnknown int = iota
-	VideoQualityProfessional
-	VideoQualityProsumer
-	VideoQualityUGC
+	VideoQualityUnknown      = 0
+	VideoQualityProfessional = 1
+	VideoQualityProsumer     = 2
+	VideoQualityUGC          = 3
 )
 
 // 5.12 VAST Companion Types
 const (
-	VASTCompanionStatic int = iota + 1
-	VASTCompanionHTML
-	VASTCompanionIFrame
+	VASTCompanionStatic = 1
+	VASTCompanionHTML   = 2
+	VASTCompanionIFrame = 3
 )
 
 // 5.13 Content Delivery Methods
 const (
-	ContentDeliveryStreaming int = iota + 1
-	ContentDeliveryProgressive
-	ContentDeliveryDownload
+	ContentDeliveryStreaming   = 1
+	ContentDeliveryProgressive = 2
+	ContentDeliveryDownload    = 3
 )
 
 // 5.14 Content Context
 const (
-	ContextVideo int = iota + 1
-	ContextGame
-	ContextMusic
-	ContextApplication
-	ContextText
-	ContextOther
-	ContextUnknown
+	ContextVideo       = 1
+	ContextGame        = 2
+	ContextMusic       = 3
+	ContextApplication = 4
+	ContextText        = 5
+	ContextOther       = 6
+	ContextUnknown     = 7
 )
 
 // 5.15 QAG Media Ratings
 const (
-	QAGAll int = iota + 1
-	QAGOver12
-	QAGMature
+	QAGAll    = 1
+	QAGOver12 = 2
+	QAGMature = 3
 )
 
 // 5.16 Location Type
 const (
-	LocationTypeGPS int = iota + 1
-	LocationTypeIP
-	LocationTypeUser
+	LocationTypeGPS  = 1
+	LocationTypeIP   = 2
+	LocationTypeUser = 3
 )
 
 // 5.17 Device Type
 const (
-	DeviceTypeUnknown int = iota
-	DeviceTypeMobile
-	DeviceTypePC
-	DeviceTypeTV
-	DeviceTypePhone
-	DeviceTypeTablet
-	DeviceTypeConnected
-	DeviceTypeSetTopBox
+	DeviceTypeUnknown   = 1
+	DeviceTypeMobile    = 2
+	DeviceTypePC        = 3
+	DeviceTypeTV        = 4
+	DeviceTypePhone     = 5
+	DeviceTypeTablet    = 6
+	DeviceTypeConnected = 7
+	DeviceTypeSetTopBox = 8
 )
 
 // 5.18 Connection Type
 const (
-	ConnTypeUnknown int = iota
-	ConnTypeEthernet
-	ConnTypeWIFI
-	ConnTypeCell
-	ConnTypeCell2G
-	ConnTypeCell3G
-	ConnTypeCell4G
+	ConnTypeUnknown  = 0
+	ConnTypeEthernet = 1
+	ConnTypeWIFI     = 2
+	ConnTypeCell     = 3
+	ConnTypeCell2G   = 4
+	ConnTypeCell3G   = 5
+	ConnTypeCell4G   = 6
 )
 
 // 5.19 No-Bid Reason Codes
 const (
-	NBRUnknownError int = iota
-	NBRTechnicalError
-	NBRInvalidRequest
-	NBRKnownSpider
-	NBRSuspectedNonHuman
-	NBRProxyIP
-	NBRUnsupportedDevice
-	NBRBlockedSite
-	NBRUnmatchedUser
+	NBRUnknownError      = 0
+	NBRTechnicalError    = 1
+	NBRInvalidRequest    = 2
+	NBRKnownSpider       = 3
+	NBRSuspectedNonHuman = 4
+	NBRProxyIP           = 5
+	NBRUnsupportedDevice = 6
+	NBRBlockedSite       = 7
+	NBRUnmatchedUser     = 8
 )
 
 /*************************************************************************
