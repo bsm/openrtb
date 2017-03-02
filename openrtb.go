@@ -124,14 +124,14 @@ const (
 
 // 5.17 Device Type
 const (
-	DeviceTypeUnknown   = 1
-	DeviceTypeMobile    = 2
-	DeviceTypePC        = 3
-	DeviceTypeTV        = 4
-	DeviceTypePhone     = 5
-	DeviceTypeTablet    = 6
-	DeviceTypeConnected = 7
-	DeviceTypeSetTopBox = 8
+	DeviceTypeUnknown   = 0
+	DeviceTypeMobile    = 1
+	DeviceTypePC        = 2
+	DeviceTypeTV        = 3
+	DeviceTypePhone     = 4
+	DeviceTypeTablet    = 5
+	DeviceTypeConnected = 6
+	DeviceTypeSetTopBox = 7
 )
 
 // 5.18 Connection Type
