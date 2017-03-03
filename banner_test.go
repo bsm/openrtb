@@ -18,9 +18,9 @@ var _ = Describe("Banner", func() {
 			W:     728,
 			H:     90,
 			Pos:   AdPosAboveFold,
-			BType: []int{4},
-			BAttr: []int{14},
-			Api:   []int{3},
+			BType: []int{BannerTypeFrame},
+			BAttr: []int{CreativeAttributeWindowsDialogOrAlert},
+			Api:   []int{APIFrameworkMRAID1},
 		}))
 	})
 
