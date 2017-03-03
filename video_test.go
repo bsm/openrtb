@@ -28,20 +28,20 @@ var _ = Describe("Video", func() {
 			H:              480,
 			Linearity:      VideoLinearityLinear,
 			Sequence:       1,
-			BAttr:          []int{13, 14},
+			BAttr:          []int{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert},
 			MaxExtended:    30,
 			MinBitrate:     300,
 			MaxBitrate:     1500,
 			BoxingAllowed:  iptr(1),
 			PlaybackMethod: []int{VideoPlaybackAutoSoundOn, VideoPlaybackClickToPlay},
-			Delivery:       []int{2},
+			Delivery:       []int{ContentDeliveryProgressive},
 			Pos:            AdPosAboveFold,
 			CompanionAd: []Banner{
-				{W: 300, H: 250, ID: "1234567893-1", Pos: 1, BAttr: []int{13, 14}, ExpDir: []int{ExpDirRight, ExpDirDown}},
-				{W: 728, H: 90, ID: "1234567893-2", Pos: 1, BAttr: []int{13, 14}},
+				{W: 300, H: 250, ID: "1234567893-1", Pos: AdPosAboveFold, BAttr: []int{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert}, ExpDir: []int{ExpDirRight, ExpDirDown}},
+				{W: 728, H: 90, ID: "1234567893-2", Pos: AdPosAboveFold, BAttr: []int{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert}},
 			},
-			Api:           []int{1, 2},
-			CompanionType: []int{1, 2},
+			Api:           []int{APIFrameworkVPAID1, APIFrameworkVPAID2},
+			CompanionType: []int{VASTCompanionStatic, VASTCompanionHTML},
 		}))
 	})
 

@@ -24,7 +24,7 @@ var _ = Describe("Request", func() {
 				{ID: 128, Image: &Image{TypeID: ImageTypeMain, WidthMin: 836, HeightMin: 627, Width: 1000, Height: 800, Mimes: []string{"image/jpg"}}},
 				{ID: 126, Required: 1, Data: &Data{TypeID: DataTypeSponsored, Length: 25}},
 				{ID: 127, Required: 1, Data: &Data{TypeID: DataTypeDesc, Length: 140}},
-				{ID: 4, Video: &Video{MinDuration: 15, MaxDuration: 30, Protocols: []int{2, 3}, Mimes: []string{"video/mp4"}}},
+				{ID: 4, Video: &Video{MinDuration: 15, MaxDuration: 30, Protocols: []int{VideoProtoVAST2, VideoProtoVAST3}, Mimes: []string{"video/mp4"}}},
 			},
 		}))
 	})
