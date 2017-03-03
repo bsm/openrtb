@@ -9,7 +9,25 @@ const (
 )
 
 // 5.3 Creative Attributes
-// TODO
+const (
+	BannerAttributeAudioAdAutoPlay                 = 1
+	BannerAttributeAudioAdUserInitiated            = 2
+	BannerAttributeExpandableAuto                  = 3
+	BannerAttributeExpandableUserInitiatedClick    = 4
+	BannerAttributeExpandableUserInitiatedRollover = 5
+	BannerAttributeInBannerVideoAdAutoPlay         = 6
+	BannerAttributeInBannerVideoAdUserInitiated    = 7
+	BannerAttributePop                             = 8
+	BannerAttributeProvocativeOrSuggestiveImagery  = 9
+	BannerAttributeExtremeAnimation                = 10
+	BannerAttributeSurveys                         = 11
+	BannerAttributeTextOnly                        = 12
+	BannerAttributeUserInitiated                   = 13
+	BannerAttributeWindowsDialogOrAlert            = 14
+	BannerAttributeHasAudioWithPlayer              = 15
+	BannerAttributeAdProvidesSkipButton            = 16
+	BannerAttributeAdobeFlash                      = 17
+)
 
 // 5.4 Ad Position
 const (
