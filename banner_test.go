@@ -19,7 +19,7 @@ var _ = Describe("Banner", func() {
 			H:     90,
 			Pos:   AdPosAboveFold,
 			BType: []int{BannerTypeFrame},
-			BAttr: []int{BannerAttributeWindowsDialogOrAlert},
+			BAttr: []int{CreativeAttributeWindowsDialogOrAlert},
 			Api:   []int{APIFrameworkMRAID1},
 		}))
 	})

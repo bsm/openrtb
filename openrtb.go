@@ -10,23 +10,23 @@ const (
 
 // 5.3 Creative Attributes
 const (
-	BannerAttributeAudioAdAutoPlay                 = 1
-	BannerAttributeAudioAdUserInitiated            = 2
-	BannerAttributeExpandableAuto                  = 3
-	BannerAttributeExpandableUserInitiatedClick    = 4
-	BannerAttributeExpandableUserInitiatedRollover = 5
-	BannerAttributeInBannerVideoAdAutoPlay         = 6
-	BannerAttributeInBannerVideoAdUserInitiated    = 7
-	BannerAttributePop                             = 8
-	BannerAttributeProvocativeOrSuggestiveImagery  = 9
-	BannerAttributeExtremeAnimation                = 10
-	BannerAttributeSurveys                         = 11
-	BannerAttributeTextOnly                        = 12
-	BannerAttributeUserInitiated                   = 13
-	BannerAttributeWindowsDialogOrAlert            = 14
-	BannerAttributeHasAudioWithPlayer              = 15
-	BannerAttributeAdProvidesSkipButton            = 16
-	BannerAttributeAdobeFlash                      = 17
+	CreativeAttributeAudioAdAutoPlay                 = 1
+	CreativeAttributeAudioAdUserInitiated            = 2
+	CreativeAttributeExpandableAuto                  = 3
+	CreativeAttributeExpandableUserInitiatedClick    = 4
+	CreativeAttributeExpandableUserInitiatedRollover = 5
+	CreativeAttributeInBannerVideoAdAutoPlay         = 6
+	CreativeAttributeInBannerVideoAdUserInitiated    = 7
+	CreativeAttributePop                             = 8
+	CreativeAttributeProvocativeOrSuggestiveImagery  = 9
+	CreativeAttributeExtremeAnimation                = 10
+	CreativeAttributeSurveys                         = 11
+	CreativeAttributeTextOnly                        = 12
+	CreativeAttributeUserInitiated                   = 13
+	CreativeAttributeWindowsDialogOrAlert            = 14
+	CreativeAttributeHasAudioWithPlayer              = 15
+	CreativeAttributeAdProvidesSkipButton            = 16
+	CreativeAttributeAdobeFlash                      = 17
 )
 
 // 5.4 Ad Position
