@@ -22,17 +22,17 @@ var _ = Describe("Audio", func() {
 			MaxDuration: 30,
 			Protocols:   []int{AudioProtocolDAAST1, AudioProtocolDAAST1Wrapper},
 			Sequence:    1,
-			BAttr:       []int{13, 14},
+			BAttr:       []int{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert},
 			MaxExtended: 30,
 			MinBitrate:  300,
 			MaxBitrate:  1500,
-			Delivery:    []int{2},
+			Delivery:    []int{ContentDeliveryProgressive},
 			CompanionAd: []Banner{
-				{W: 300, H: 250, ID: "1234567893-1", Pos: 1, BAttr: []int{13, 14}, ExpDir: []int{ExpDirRight, ExpDirDown}},
-				{W: 728, H: 90, ID: "1234567893-2", Pos: 1, BAttr: []int{13, 14}},
+				{W: 300, H: 250, ID: "1234567893-1", Pos: AdPosAboveFold, BAttr: []int{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert}, ExpDir: []int{ExpDirRight, ExpDirDown}},
+				{W: 728, H: 90, ID: "1234567893-2", Pos: AdPosAboveFold, BAttr: []int{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert}},
 			},
-			API:           []int{1, 2},
-			CompanionType: []int{1, 2},
+			API:           []int{APIFrameworkVPAID1, APIFrameworkVPAID2},
+			CompanionType: []int{VASTCompanionStatic, VASTCompanionHTML},
 		}))
 	})
 
@@ -42,16 +42,16 @@ var _ = Describe("Audio", func() {
 			MaxDuration: 30,
 			Protocols:   []int{AudioProtocolDAAST1, AudioProtocolDAAST1Wrapper},
 			Sequence:    1,
-			BAttr:       []int{13, 14},
+			BAttr:       []int{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert},
 			MaxExtended: 30,
 			MinBitrate:  300,
 			MaxBitrate:  1500,
-			Delivery:    []int{2},
+			Delivery:    []int{ContentDeliveryProgressive},
 			CompanionAd: []Banner{
-				{W: 300, H: 250, ID: "1234567893-1", Pos: 1, BAttr: []int{13, 14}, ExpDir: []int{ExpDirRight, ExpDirDown}},
-				{W: 728, H: 90, ID: "1234567893-2", Pos: 1, BAttr: []int{13, 14}},
+				{W: 300, H: 250, ID: "1234567893-1", Pos: AdPosAboveFold, BAttr: []int{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert}, ExpDir: []int{ExpDirRight, ExpDirDown}},
+				{W: 728, H: 90, ID: "1234567893-2", Pos: AdPosAboveFold, BAttr: []int{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert}},
 			},
-			CompanionType: []int{1, 2},
+			CompanionType: []int{VASTCompanionStatic, VASTCompanionHTML},
 		}).Validate()).To(Equal(ErrInvalidAudioNoMimes))
 	})
 
