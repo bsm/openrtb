@@ -5,24 +5,13 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("Seatbid", func() {
-	var subject *Seatbid
+var _ = Describe("SeatBid", func() {
 
-	BeforeEach(func() {
-		subject = new(Seatbid)
-	})
-
-	It("should have validation", func() {
-		ok, err := subject.Valid()
-		Expect(err).To(HaveOccurred())
-		Expect(ok).To(BeFalse())
-
-		bid := (&Bid{}).SetID("BIDID").SetImpID("IMPID").SetPrice(0.0)
-		subject.Bid = append(subject.Bid, *bid)
-
-		ok, err = subject.Valid()
-		Expect(err).NotTo(HaveOccurred())
-		Expect(ok).To(BeTrue())
+	It("should validate", func() {
+		Expect((&SeatBid{}).Validate()).To(Equal(ErrInvalidSeatBidBid))
+		Expect((&SeatBid{Bid: []Bid{
+			{ID: "BIDID", ImpID: "IMPID"}},
+		}).Validate()).NotTo(HaveOccurred())
 	})
 
 })

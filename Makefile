@@ -1,7 +1,10 @@
-default: test
+default: vet test
 
-deps:
-	go get -t ./...
+test:
+	go test -a ./...
 
-test: deps
-	go test ./...
+bench:
+	go test ./... -bench=. -run=NONE
+
+vet:
+	go vet ./...
