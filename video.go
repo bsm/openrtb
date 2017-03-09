@@ -41,6 +41,7 @@ type Video struct {
 	CompanionAd    []Banner  `json:"companionad,omitempty"`
 	Api            []int     `json:"api,omitempty"` // List of supported API frameworks
 	CompanionType  []int     `json:"companiontype,omitempty"`
+	Placement      int       `json:"placement,omitempty"` // Video placement type
 	Ext            Extension `json:"ext,omitempty"`
 }
 

@@ -86,6 +86,15 @@ const (
 	VideoPlaybackMouseOver    = 4
 )
 
+// 5.9 Video Placement Types (Spec 2.5)
+const (
+	VideoPlacementInStream     = 1
+	VideoPlacementInBanner     = 2
+	VideoPlacementInArticle    = 3
+	VideoPlacementInFeed       = 4
+	VideoPlacementInterstitial = 5
+)
+
 // 5.10 Video Start Delay
 const (
 	VideoStartDelayPreRoll         = 0
