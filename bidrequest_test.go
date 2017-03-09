@@ -30,7 +30,7 @@ var _ = Describe("BidRequest", func() {
 				{
 					ID:     "1",
 					Secure: json.Number("1"),
-					Banner: &Banner{W: 300, H: 250, Pos: AdPosAboveFold, BAttr: []int{13}},
+					Banner: &Banner{W: 300, H: 250, Pos: AdPosAboveFold, BAttr: []int{CreativeAttributeUserInitiated}},
 				},
 			},
 			Site: &Site{
