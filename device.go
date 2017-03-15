@@ -25,6 +25,7 @@ type Device struct {
 	FlashVer   string    `json:"flashver,omitempty"`       // Flash version
 	Language   string    `json:"language,omitempty"`       // Browser language
 	Carrier    string    `json:"carrier,omitempty"`        // Carrier or ISP derived from the IP address
+	MCCMNC     string    `json:"mccmnc,omitempty"`         // Mobile carrier as the concatenated MCC-MNC code (e.g., "310-005" identifies Verizon Wireless CDMA in the USA).
 	ConnType   int       `json:"connectiontype,omitempty"` // Network connection type.
 	IFA        string    `json:"ifa,omitempty"`            // Native identifier for advertisers
 	IDSHA1     string    `json:"didsha1,omitempty"`        // SHA1 hashed device ID
