@@ -4,13 +4,13 @@ type Inventory struct {
 	ID            string     `json:"id,omitempty"` // ID on the exchange
 	Name          string     `json:"name,omitempty"`
 	Domain        string     `json:"domain,omitempty"`
-	Cat           []string   `json:"cat,omitempty"`          // Array of IAB content categories
-	SectionCat    []string   `json:"sectioncat,omitempty"`   // Array of IAB content categories for subsection
-	PageCat       []string   `json:"pagecat,omitempty"`      // Array of IAB content categories for page
-	PrivacyPolicy *int       `json:"pivacypolicy,omitempty"` // Default: 1 ("1": has a privacy policy)
-	Publisher     *Publisher `json:"publisher,omitempty"`    // Details about the Publisher
-	Content       *Content   `json:"content,omitempty"`      // Details about the Content
-	Keywords      string     `json:"keywords,omitempty"`     // Comma separated list of keywords about the site.
+	Cat           []string   `json:"cat,omitempty"`           // Array of IAB content categories
+	SectionCat    []string   `json:"sectioncat,omitempty"`    // Array of IAB content categories for subsection
+	PageCat       []string   `json:"pagecat,omitempty"`       // Array of IAB content categories for page
+	PrivacyPolicy *int       `json:"privacypolicy,omitempty"` // Default: 1 ("1": has a privacy policy)
+	Publisher     *Publisher `json:"publisher,omitempty"`     // Details about the Publisher
+	Content       *Content   `json:"content,omitempty"`       // Details about the Content
+	Keywords      string     `json:"keywords,omitempty"`      // Comma separated list of keywords about the site.
 	Ext           Extension  `json:"ext,omitempty"`
 }
 
