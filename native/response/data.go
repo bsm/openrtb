@@ -1,6 +1,6 @@
 package response
 
-import "github.com/bsm/openrtb"
+import "github.com/Upliner/openrtb"
 
 type Data struct {
 	Label string            `json:"label,omitempty"` // The optional formatted string name of the data type to be displayed

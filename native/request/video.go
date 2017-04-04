@@ -1,6 +1,6 @@
 package request
 
-import "github.com/bsm/openrtb"
+import "github.com/Upliner/openrtb"
 
 // TODO unclear if its the same as imp.video https://github.com/openrtb/OpenRTB/issues/26
 type Video struct {

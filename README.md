@@ -1,6 +1,6 @@
 # Go OpenRTB v2.x
 
-[![Build Status](https://travis-ci.org/bsm/openrtb.svg?branch=master)](https://travis-ci.org/bsm/openrtb)
+[![Build Status](https://travis-ci.org/Upliner/openrtb.svg?branch=master)](https://travis-ci.org/bsm/openrtb)
 
 OpenRTB implementation for Go
 

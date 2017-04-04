@@ -1,6 +1,6 @@
 package request
 
-import "github.com/bsm/openrtb"
+import "github.com/Upliner/openrtb"
 
 type Title struct {
 	Length int               `json:"len"` // Maximum length of the text in the title element
