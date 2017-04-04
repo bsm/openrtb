@@ -2,7 +2,7 @@ package response
 
 import (
 	"encoding/json"
-	"github.com/bsm/openrtb"
+	"github.com/Upliner/openrtb"
 )
 
 // The native object is the top level JSON object which identifies a native response
