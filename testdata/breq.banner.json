@@ -5,7 +5,7 @@
   "imp": [
     {
       "id": "1",
-      "secure": "1",
+      "secure": 1,
       "banner": {
         "w": 300,
         "h": 250,

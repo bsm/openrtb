@@ -1,8 +1,6 @@
 package openrtb
 
 import (
-	"encoding/json"
-
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
@@ -30,7 +28,7 @@ var _ = Describe("BidRequest", func() {
 			Imp: []Impression{
 				{
 					ID:     "1",
-					Secure: json.Number("1"),
+					Secure: 1,
 					Banner: &Banner{W: 300, H: 250, Pos: AdPosAboveFold, BAttr: []int{CreativeAttributeUserInitiated}},
 				},
 			},
