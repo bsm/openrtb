@@ -52,15 +52,6 @@ var _ = Describe("Video", func() {
 			Mimes: []string{"video/mp4"},
 		}).Validate()).To(Equal(ErrInvalidVideoNoLinearity))
 		Expect((&Video{
-			Linearity: VideoLinearityNonLinear,
-			Mimes:     []string{"video/mp4"},
-		}).Validate()).To(Equal(ErrInvalidVideoNoMinDuration))
-		Expect((&Video{
-			MinDuration: 1,
-			Linearity:   VideoLinearityNonLinear,
-			Mimes:       []string{"video/mp4"},
-		}).Validate()).To(Equal(ErrInvalidVideoNoMaxDuration))
-		Expect((&Video{
 			MinDuration: 1,
 			MaxDuration: 1,
 			Linearity:   VideoLinearityNonLinear,

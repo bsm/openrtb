@@ -53,10 +53,6 @@ func (v *Video) Validate() error {
 		return ErrInvalidVideoNoMimes
 	} else if v.Linearity == 0 {
 		return ErrInvalidVideoNoLinearity
-	} else if v.MinDuration == 0 {
-		return ErrInvalidVideoNoMinDuration
-	} else if v.MaxDuration == 0 {
-		return ErrInvalidVideoNoMaxDuration
 	} else if v.Protocol == 0 && len(v.Protocols) == 0 {
 		return ErrInvalidVideoNoProtocols
 	}

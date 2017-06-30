@@ -1,6 +1,6 @@
 package response
 
-import "github.com/bsm/openrtb"
+import "github.com/UnityTech/openrtb"
 
 // Corresponds to the Asset Object in the request. The main container object for
 // each asset requested or supported by Exchange on behalf of the rendering
