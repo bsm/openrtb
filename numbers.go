@@ -51,3 +51,7 @@ func (n *StringOrNumber) UnmarshalJSON(data []byte) error {
 	}
 	return nil
 }
+
+func NilableInt(i int) *int {
+	return &i
+}
