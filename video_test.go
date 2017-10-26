@@ -37,8 +37,8 @@ var _ = Describe("Video", func() {
 			Delivery:       []int{ContentDeliveryProgressive},
 			Pos:            AdPosAboveFold,
 			CompanionAd: []Banner{
-				{W: 300, H: 250, ID: "1234567893-1", Pos: AdPosAboveFold, BAttr: []int{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert}, ExpDir: []int{ExpDirRight, ExpDirDown}},
-				{W: 728, H: 90, ID: "1234567893-2", Pos: AdPosAboveFold, BAttr: []int{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert}},
+				{W: NilableInt(300), H: NilableInt(250), ID: "1234567893-1", Pos: AdPosAboveFold, BAttr: []int{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert}, ExpDir: []int{ExpDirRight, ExpDirDown}},
+				{W: NilableInt(728), H: NilableInt(90), ID: "1234567893-2", Pos: AdPosAboveFold, BAttr: []int{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert}},
 			},
 			Placement:     VideoPlacementInStream,
 			Api:           []int{APIFrameworkVPAID1, APIFrameworkVPAID2},
