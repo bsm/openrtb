@@ -44,11 +44,24 @@ var _ = Describe("StringOrNumber", func() {
 		Expect(n).To(Equal(StringOrNumber("33")))
 	})
 
+	It("should decode strings", func() {
+		var n StringOrNumber
+		Expect(json.Unmarshal([]byte(`""`), &n)).To(Succeed())
+		Expect(n).To(Equal(StringOrNumber("")))
+	})
+
 	It("should encode to strings", func() {
 		var n StringOrNumber = "33"
 		bin, err := json.Marshal(n)
 		Expect(err).NotTo(HaveOccurred())
 		Expect(string(bin)).To(Equal(`"33"`))
+	})
+
+	It("should encode to strings", func() {
+		var n StringOrNumber = ""
+		bin, err := json.Marshal(n)
+		Expect(err).NotTo(HaveOccurred())
+		Expect(string(bin)).To(Equal(`""`))
 	})
 
 })

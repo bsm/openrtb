@@ -36,7 +36,7 @@ type StringOrNumber string
 
 // UnmarshalJSON implements json.Unmarshaler
 func (n *StringOrNumber) UnmarshalJSON(data []byte) error {
-	if len(data) > 2 && data[0] == '"' && data[len(data)-1] == '"' {
+	if len(data) >= 2 && data[0] == '"' && data[len(data)-1] == '"' {
 		var v string
 		if err := json.Unmarshal(data, &v); err != nil {
 			return err
