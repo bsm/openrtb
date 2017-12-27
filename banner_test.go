@@ -15,8 +15,8 @@ var _ = Describe("Banner", func() {
 
 	It("should parse correctly", func() {
 		Expect(subject).To(Equal(&Banner{
-			W:     728,
-			H:     90,
+			W:     NilableInt(728),
+			H:     NilableInt(90),
 			Pos:   AdPosAboveFold,
 			BType: []int{BannerTypeFrame},
 			BAttr: []int{CreativeAttributeWindowsDialogOrAlert},
