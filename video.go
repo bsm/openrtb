@@ -18,8 +18,8 @@ var (
 // for auction is an in-stream video ad opportunity.
 type Video struct {
 	Mimes          []string  `json:"mimes,omitempty"`          // Content MIME types supported.
-	MinDuration    int       `json:"minduration,omitempty"`    // Minimum video ad duration in seconds
-	MaxDuration    int       `json:"maxduration,omitempty"`    // Maximum video ad duration in seconds
+	MinDuration    *int      `json:"minduration,omitempty"`    // Minimum video ad duration in seconds
+	MaxDuration    *int      `json:"maxduration,omitempty"`    // Maximum video ad duration in seconds
 	Protocols      []int     `json:"protocols,omitempty"`      // Video bid response protocols
 	Protocol       int       `json:"protocol,omitempty"`       // Video bid response protocols DEPRECATED
 	W              int       `json:"w,omitempty"`              // Width of the player in pixels
