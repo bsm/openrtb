@@ -21,8 +21,8 @@ var _ = Describe("Video", func() {
 				"application/x-shockwave-flash",
 				"application/javascript",
 			},
-			MinDuration:    5,
-			MaxDuration:    30,
+			MinDuration:    NilableInt(5),
+			MaxDuration:    NilableInt(30),
 			Protocols:      []int{VideoProtoVAST2, VideoProtoVAST3},
 			W:              640,
 			H:              480,
@@ -56,20 +56,20 @@ var _ = Describe("Video", func() {
 			Mimes:     []string{"video/mp4"},
 		}).Validate()).To(Equal(ErrInvalidVideoNoMinDuration))
 		Expect((&Video{
-			MinDuration: 1,
+			MinDuration: NilableInt(1),
 			Linearity:   VideoLinearityNonLinear,
 			Mimes:       []string{"video/mp4"},
 		}).Validate()).To(Equal(ErrInvalidVideoNoMaxDuration))
 		Expect((&Video{
-			MinDuration: 1,
-			MaxDuration: 1,
+			MinDuration: NilableInt(1),
+			MaxDuration: NilableInt(1),
 			Linearity:   VideoLinearityNonLinear,
 			Mimes:       []string{"video/mp4"},
 		}).Validate()).To(Equal(ErrInvalidVideoNoProtocols))
 		Expect((&Video{
 			Protocol:    VideoProtoVAST3,
-			MinDuration: 1,
-			MaxDuration: 1,
+			MinDuration: NilableInt(1),
+			MaxDuration: NilableInt(1),
 			Linearity:   VideoLinearityNonLinear,
 			Mimes:       []string{"video/mp4"},
 		}).Validate()).NotTo(HaveOccurred())
