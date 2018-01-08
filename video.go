@@ -18,8 +18,8 @@ var (
 // for auction is an in-stream video ad opportunity.
 type Video struct {
 	Mimes          []string  `json:"mimes,omitempty"`          // Content MIME types supported.
-	MinDuration    int       `json:"minduration,omitempty"`    // Minimum video ad duration in seconds
-	MaxDuration    int       `json:"maxduration,omitempty"`    // Maximum video ad duration in seconds
+	MinDuration    *int      `json:"minduration,omitempty"`    // Minimum video ad duration in seconds
+	MaxDuration    *int      `json:"maxduration,omitempty"`    // Maximum video ad duration in seconds
 	Protocols      []int     `json:"protocols,omitempty"`      // Video bid response protocols
 	Protocol       int       `json:"protocol,omitempty"`       // Video bid response protocols DEPRECATED
 	W              int       `json:"w,omitempty"`              // Width of the player in pixels
@@ -53,9 +53,9 @@ func (v *Video) Validate() error {
 		return ErrInvalidVideoNoMimes
 	} else if v.Linearity == 0 {
 		return ErrInvalidVideoNoLinearity
-	} else if v.MinDuration == 0 {
+	} else if v.MinDuration == nil {
 		return ErrInvalidVideoNoMinDuration
-	} else if v.MaxDuration == 0 {
+	} else if v.MaxDuration == nil {
 		return ErrInvalidVideoNoMaxDuration
 	} else if v.Protocol == 0 && len(v.Protocols) == 0 {
 		return ErrInvalidVideoNoProtocols
@@ -90,9 +90,6 @@ func (v *Video) UnmarshalJSON(data []byte) error {
 }
 
 func (v *Video) normalize() {
-	if v.Sequence == 0 {
-		v.Sequence = 1
-	}
 	if v.Linearity == 0 {
 		v.Linearity = VideoLinearityLinear
 	}

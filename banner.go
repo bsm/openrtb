@@ -7,8 +7,8 @@ package openrtb
 // VAST response to dictate placement of the companion creatives when multiple companion ad
 // opportunities of the same size are available on a page.
 type Banner struct {
-	W        int       `json:"w,omitempty"`        // Width
-	H        int       `json:"h,omitempty"`        // Height
+	W        *int      `json:"w,omitempty"`        // Width
+	H        *int      `json:"h,omitempty"`        // Height
 	Format   []Format  `json:"format,omitempty"`   //Array of format objects representing the banner sizes permitted.
 	WMax     int       `json:"wmax,omitempty"`     // Width maximum DEPRECATED
 	HMax     int       `json:"hmax,omitempty"`     // Height maximum DEPRECATED
