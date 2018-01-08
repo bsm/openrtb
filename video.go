@@ -90,9 +90,6 @@ func (v *Video) UnmarshalJSON(data []byte) error {
 }
 
 func (v *Video) normalize() {
-	if v.Sequence == 0 {
-		v.Sequence = 1
-	}
 	if v.Linearity == 0 {
 		v.Linearity = VideoLinearityLinear
 	}

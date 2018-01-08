@@ -27,7 +27,7 @@ var _ = Describe("Video", func() {
 			W:              640,
 			H:              480,
 			Linearity:      VideoLinearityLinear,
-			Sequence:       1,
+			Sequence:       0,
 			BAttr:          []int{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert},
 			MaxExtended:    30,
 			MinBitrate:     300,
