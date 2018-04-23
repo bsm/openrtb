@@ -13,7 +13,7 @@ type Content struct {
 	Season             string    `json:"season,omitempty"`             // Content season.
 	Artist             string    `json:"artist,omitempty"`             // Artist credited with the content.
 	Genre              string    `json:"genre,omitempty"`              // Genre that best describes the content
-	Album              string    `json:"album,omiyempty"`              // Album to which the content belongs; typically for audio.
+	Album              string    `json:"album,omitempty"`              // Album to which the content belongs; typically for audio.
 	ISRC               string    `json:"isrc,omitempty"`               // International Standard Recording Code conforming to ISO - 3901.
 	Producer           *Producer `json:"producer,omitempty"`           // The producer.
 	URL                string    `json:"url,omitempty"`                // URL of the content, for buy-side contextualization or review.
