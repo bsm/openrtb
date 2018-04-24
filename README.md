@@ -1,6 +1,6 @@
 # Go OpenRTB v2.x
 
-[![Build Status](https://travis-ci.org/bsm/openrtb.svg?branch=master)](https://travis-ci.org/bsm/openrtb)
+[![Build Status](https://travis-ci.org/tisonet/openrtb-easyjson.svg?branch=master)](https://travis-ci.org/tisonet/openrtb-easyjson)
 
 OpenRTB implementation for Go
 
@@ -9,7 +9,7 @@ OpenRTB implementation for Go
 To install, use `go get`:
 
 ```shell
-go get github.com/bsm/openrtb
+go get github.com/tisonet/openrtb-easyjson
 ```
 
 ## Usage
@@ -21,7 +21,7 @@ package main
 
 import (
   "log"
-  "github.com/bsm/openrtb"
+  "github.com/tisonet/openrtb-easyjson"
 )
 
 func main() {

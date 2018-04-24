@@ -1,6 +1,6 @@
 package request
 
-import "github.com/bsm/openrtb"
+import "github.com/tisonet/openrtb-easyjson"
 
 // The main container object for each asset requested or supported by Exchange
 // on behalf of the rendering client.  Only one of the {title,img,video,data}

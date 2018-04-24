@@ -1,6 +1,6 @@
 package response
 
-import "github.com/bsm/openrtb"
+import "github.com/tisonet/openrtb-easyjson"
 
 type Image struct {
 	URL    string            `json:"url,omitempty"` // URL of the image asset

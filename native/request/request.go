@@ -1,6 +1,6 @@
 package request
 
-import "github.com/bsm/openrtb"
+import "github.com/tisonet/openrtb-easyjson"
 
 type LayoutID int
 
