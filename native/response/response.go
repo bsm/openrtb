@@ -1,6 +1,6 @@
 package response
 
-import "github.com/bsm/openrtb"
+import "github.com/tisonet/openrtb-easyjson"
 
 // The native object is the top level JSON object which identifies a native response
 type Response struct {

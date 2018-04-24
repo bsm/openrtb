@@ -1,6 +1,6 @@
 package response
 
-import "github.com/bsm/openrtb"
+import "github.com/tisonet/openrtb-easyjson"
 
 type Link struct {
 	URL           string            `json:"url"`                // Landing URL of the clickable link
