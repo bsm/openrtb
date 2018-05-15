@@ -279,8 +279,8 @@ type Segment struct {
 // coppa flag signals whether or not the request falls under the United States Federal Trade Commission's
 // regulations for the United States Children's Online Privacy Protection Act ("COPPA").
 type Regulations struct {
-	Coppa int       `json:"coppa,omitempty"` // Flag indicating if this request is subject to the COPPA regulations established by the USA FTC, where 0 = no, 1 = yes.
-	Ext   Extension `json:"ext,omitempty"`
+	Coppa int          `json:"coppa,omitempty"` // Flag indicating if this request is subject to the COPPA regulations established by the USA FTC, where 0 = no, 1 = yes.
+	Ext   RegExtension `json:"ext,omitempty"`
 }
 
 // This object represents an allowed size (i.e., height and width combination) for a banner impression.
@@ -289,4 +289,9 @@ type Format struct {
 	W   int       `json:"w,omitempty"` // Width in device independent pixels (DIPS).
 	H   int       `json:"h,omitempty"` //Height in device independent pixels (DIPS).
 	Ext Extension `json:"ext,omitempty"`
+}
+
+// RegExtension Extension object for Regulations
+type RegExtension struct {
+	GDPR int `json:"gdpr,omitempty"`
 }

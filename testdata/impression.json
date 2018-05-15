@@ -1,5 +1,17 @@
 {
   "id": "1",
+  "metric": [
+    {
+      "type": "viewable_percentage_1",
+      "value": 0.99,
+      "vendor": "MOAT"
+    },
+    {
+      "type": "viewable_percentage_2",
+      "value": 0.98,
+      "vendor": "MOAT"
+    }
+  ],
   "banner": {
     "h": 250,
     "w": 300,
