@@ -16,6 +16,18 @@ var _ = Describe("Impression", func() {
 	It("should parse correctly", func() {
 		Expect(subject).To(Equal(&Impression{
 			ID: "1",
+			Metric: []*Metric{
+				{
+					Type:   "viewable_percentage_1",
+					Value:  0.99,
+					Vendor: "MOAT",
+				},
+				{
+					Type:   "viewable_percentage_2",
+					Value:  0.98,
+					Vendor: "MOAT",
+				},
+			},
 			Banner: &Banner{
 				W: 300,
 				H: 250,

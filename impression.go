@@ -17,6 +17,7 @@ var (
 // subordinate to the Imp object indicates the type of impression being offered.
 type Impression struct {
 	ID                string         `json:"id"` // A unique identifier for this impression
+	Metric            []*Metric      `json:"metric,omitempty"`
 	Banner            *Banner        `json:"banner,omitempty"`
 	Video             *Video         `json:"video,omitempty"`
 	Audio             *Audio         `json:"audio,omitempty"`
