@@ -42,6 +42,7 @@ type Bid struct {
 	WRatio         int            `json:"wratio,omitempty"`         // Relative width of the creative when expressing size as a ratio.
 	HRatio         int            `json:"hratio,omitempty"`         // Relative height of the creative when expressing size as a ratio.
 	Exp            int            `json:"exp,omitempty"`            // Advisory as to the number of seconds the bidder is willing to wait between the auction and the actual impression.
+	ContentType    string         `json:"-"`                        // content of the bid
 	Ext            Extension      `json:"ext,omitempty"`
 }
 
