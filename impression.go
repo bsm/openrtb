@@ -33,6 +33,7 @@ type Impression struct {
 	Exp               int            `json:"exp,omitempty"`               // Advisory as to the number of seconds that may elapse between the auction and the actual impression.
 	IFrameBuster      []string       `json:"iframebuster,omitempty"`      // Array of names for supportediframe busters.
 	ContentType       string         `json:"-"`                           // Used to attribute bid to a content - not sent in request
+	MediaType         string         `json:"-"`                           // media of the impression e.g. video/display
 	Ext               Extension      `json:"ext,omitempty"`
 }
 
