@@ -26,3 +26,32 @@ var _ = Describe("Content", func() {
 	})
 
 })
+
+var _ = Describe("QuotedContent", func() {
+	var subject *Content
+
+	BeforeEach(func() {
+		err := fixture("content.quoted", &subject)
+		Expect(err).NotTo(HaveOccurred())
+	})
+
+	It("should parse correctly", func() {
+		Expect(subject).To(Equal(&Content{
+			Keywords:           "Orwell, 1984",
+			UserRating:         "3",
+			Episode:            1,
+			Title:              "This is the video title",
+			URL:                "http://cdnp.tremormedia.com/video/1984.flv",
+			LiveStream:         0,
+			ContentRating:      "G",
+			Len:                129,
+			Series:             "book reading",
+			VideoQuality:       2,
+			Context:            1,
+			Season:             "1",
+			SourceRelationship: 0,
+			ID:                 "eb9f13ede5fd225333971523f6042f9d",
+		}))
+	})
+
+})
