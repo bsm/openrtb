@@ -5,4 +5,7 @@ go:
   - 1.10.x
   - 1.11.x
 install:
-  - go get -u -t ./...
+  - go get -t ./...
+env:
+  - GO111MODULE=on
+
