@@ -298,5 +298,5 @@ type RegExtension struct {
 
 // UserExtension Extension object for User
 type UserExtension struct {
-	Consent int `json:"consent,omitempty"`
+	Consent string `json:"consent,omitempty"`
 }
