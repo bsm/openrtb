@@ -1,6 +1,6 @@
 package request
 
-import "github.com/bsm/openrtb"
+import "encoding/json"
 
 type LayoutID int
 
@@ -66,14 +66,14 @@ const (
 // banner and/or video by also including as Imp subordinates the Banner and/or Video objects,
 // respectively. However, any given bid for the impression must conform to one of the offered types.
 type Request struct {
-	Ver              string            `json:"ver,omitempty"`            // Version of the Native Markup
-	LayoutID         LayoutID          `json:"layout,omitempty"`         // DEPRECATED The Layout ID of the native ad
-	AdUnitID         AdUnitID          `json:"adunit,omitempty"`         // DEPRECATED The Ad unit ID of the native ad
-	ContextTypeID    ContextTypeID     `json:"context,omitempty"`        // The context in which the ad appears
-	ContextSubTypeID ContextSubTypeID  `json:"contextsubtype,omitempty"` // A more detailed context in which the ad appears
-	PlacementTypeID  PlacementTypeID   `json:"plcmttype,omitempty"`      // The design/format/layout of the ad unit being offered
-	PlacementCount   int               `json:"plcmtcnt,omitempty"`       // The number of identical placements in this Layout
-	Sequence         int               `json:"seq,omitempty"`            // 0 for the first ad, 1 for the second ad, and so on
-	Assets           []Asset           `json:"assets"`                   // An array of Asset Objects
-	Ext              openrtb.Extension `json:"ext,omitempty"`
+	Ver              string           `json:"ver,omitempty"`            // Version of the Native Markup
+	LayoutID         LayoutID         `json:"layout,omitempty"`         // DEPRECATED The Layout ID of the native ad
+	AdUnitID         AdUnitID         `json:"adunit,omitempty"`         // DEPRECATED The Ad unit ID of the native ad
+	ContextTypeID    ContextTypeID    `json:"context,omitempty"`        // The context in which the ad appears
+	ContextSubTypeID ContextSubTypeID `json:"contextsubtype,omitempty"` // A more detailed context in which the ad appears
+	PlacementTypeID  PlacementTypeID  `json:"plcmttype,omitempty"`      // The design/format/layout of the ad unit being offered
+	PlacementCount   int              `json:"plcmtcnt,omitempty"`       // The number of identical placements in this Layout
+	Sequence         int              `json:"seq,omitempty"`            // 0 for the first ad, 1 for the second ad, and so on
+	Assets           []Asset          `json:"assets"`                   // An array of Asset Objects
+	Ext              json.RawMessage  `json:"ext,omitempty"`
 }

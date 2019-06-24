@@ -1,6 +1,8 @@
 package openrtb
 
 import (
+	"encoding/json"
+
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
@@ -18,7 +20,7 @@ var _ = Describe("Source", func() {
 			FinalSaleDecision: 1,
 			TransactionID:     "transaction-id",
 			PaymentChain:      "payment-chain",
-			Ext:               Extension("{}"),
+			Ext:               json.RawMessage("{}"),
 		}))
 	})
 })

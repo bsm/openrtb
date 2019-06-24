@@ -1,6 +1,6 @@
 package request
 
-import "github.com/bsm/openrtb"
+import "encoding/json"
 
 type DataTypeID int
 
@@ -21,7 +21,7 @@ const (
 )
 
 type Data struct {
-	TypeID DataTypeID        `json:"type"` // Type ID of the element supported by the publisher. The publisher can display this information in an appropriate format
-	Length int               `json:"len"`  // Maximum length of the text in the element’s response
-	Ext    openrtb.Extension `json:"ext,omitempty"`
+	TypeID DataTypeID      `json:"type"` // Type ID of the element supported by the publisher. The publisher can display this information in an appropriate format
+	Length int             `json:"len"`  // Maximum length of the text in the element’s response
+	Ext    json.RawMessage `json:"ext,omitempty"`
 }

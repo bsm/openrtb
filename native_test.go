@@ -1,6 +1,8 @@
 package openrtb
 
 import (
+	"encoding/json"
+
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
@@ -15,7 +17,7 @@ var _ = Describe("Native", func() {
 
 	It("should parse correctly", func() {
 		Expect(subject).To(Equal(&Native{
-			Request: Extension(`"PAYLOAD"`),
+			Request: json.RawMessage(`"PAYLOAD"`),
 			Ver:     "2",
 		}))
 	})
