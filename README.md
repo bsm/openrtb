@@ -4,6 +4,10 @@
 
 OpenRTB implementation for Go
 
+## Requirements
+
+Requires Go 1.8+ for proper `json.RawMessage` marshalling.
+
 ## Installation
 
 To install, use `go get`:
