@@ -37,3 +37,41 @@ var _ = Describe("Bid", func() {
 	})
 
 })
+
+var _ = Describe("Loopme AR Bid", func() {
+	var subject *Bid
+
+	BeforeEach(func() {
+		err := fixture("bid.loopme.ar", &subject)
+		Expect(err).NotTo(HaveOccurred())
+	})
+
+	It("should parse correctly", func() {
+		Expect(subject).To(Equal(&Bid{
+			ID:           "5d4b3b3be8250678c813f475",
+			ImpID:        "1",
+			Price:        29.7,
+			AdID:         "2056515",
+			NURL:         "https://us.fake-url.com/tr?et=BID_WIN&a_ecp=29.7&a_price=${AUCTION_PRICE:BF}&name=imp_nurl",
+			AdMarkup:     "<img>",
+			AdvDomain:    []string{"unity.com"},
+			IURL:         "https://fake-url.net/assets/2690-e3c0-aa99-9efd38cd1fa6.jpg",
+			CampaignID:   "2001626",
+			CreativeID:   "2056515",
+			Attr:         []int{99},
+			Protocol:     2,
+			Cat:          []string{"IAB19"},
+			LURL:         "https://fake-url.com?et=BID_LOSS&meta=&a_id=${AUCTION_ID}&a_bid_id=${AUCTION_BID_ID}&a_loss_id=${AUCTION_LOSS}",
+			H:            320,
+			W:            480,
+			CreativeType: "MRAID AR",
+		}))
+	})
+
+	It("should validate", func() {
+		Expect((&Bid{}).Validate()).To(Equal(ErrInvalidBidNoID))
+		Expect((&Bid{ID: "BIDID"}).Validate()).To(Equal(ErrInvalidBidNoImpID))
+		Expect(subject.Validate()).NotTo(HaveOccurred())
+	})
+
+})
