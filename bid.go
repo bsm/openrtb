@@ -44,6 +44,7 @@ type Bid struct {
 	Exp            int            `json:"exp,omitempty"`            // Advisory as to the number of seconds the bidder is willing to wait between the auction and the actual impression.
 	ContentType    string         `json:"-"`                        // content of the bid
 	MediaType      string         `json:"-"`                        // media of the impression e.g. video/display
+	CreativeType   string         `json:"crtype"`                   // CreativeType specifically used by Loopme Mraid AR
 	Ext            Extension      `json:"ext,omitempty"`
 }
 
