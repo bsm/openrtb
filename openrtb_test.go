@@ -16,7 +16,6 @@ func TestSuite(t *testing.T) {
 }
 
 func iptr(n int) *int       { return &n }
-func sptr(s string) *string { return &s }
 
 func fixture(fname string, v interface{}) error {
 	f, err := os.Open(filepath.Join("testdata", fname+".json"))
