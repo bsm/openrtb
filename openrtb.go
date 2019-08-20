@@ -56,6 +56,8 @@ const (
 	APIFrameworkMRAID1 = 3
 	APIFrameworkORMMA  = 4
 	APIFrameworkMRAID2 = 5
+	APIFrameworkMRAID3 = 6
+	APIFrameworkOMID1  = 7
 )
 
 // 5.7 Video Linearity
