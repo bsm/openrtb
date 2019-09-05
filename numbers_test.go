@@ -51,4 +51,10 @@ var _ = Describe("StringOrNumber", func() {
 		Expect(string(bin)).To(Equal(`"33"`))
 	})
 
+	It("should decode empty strings", func() {
+		var n StringOrNumber
+		Expect(json.Unmarshal([]byte(`""`), &n)).To(Succeed())
+		Expect(n).To(Equal(StringOrNumber("")))
+	})
+
 })
