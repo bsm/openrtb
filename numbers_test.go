@@ -8,7 +8,6 @@ import (
 )
 
 var _ = Describe("NumberOrString", func() {
-
 	It("should decode numbers", func() {
 		var n NumberOrString
 		Expect(json.Unmarshal([]byte(`33`), &n)).To(Succeed())
@@ -27,11 +26,9 @@ var _ = Describe("NumberOrString", func() {
 		Expect(err).NotTo(HaveOccurred())
 		Expect(string(bin)).To(Equal(`33`))
 	})
-
 })
 
 var _ = Describe("StringOrNumber", func() {
-
 	It("should decode numbers", func() {
 		var n StringOrNumber
 		Expect(json.Unmarshal([]byte(`33`), &n)).To(Succeed())
@@ -63,5 +60,4 @@ var _ = Describe("StringOrNumber", func() {
 		Expect(err).NotTo(HaveOccurred())
 		Expect(string(bin)).To(Equal(`""`))
 	})
-
 })

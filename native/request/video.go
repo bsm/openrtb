@@ -1,12 +1,16 @@
 package request
 
-import "encoding/json"
+import (
+	"encoding/json"
 
-// TODO unclear if its the same as imp.video https://github.com/openrtb/OpenRTB/issues/26
+	"github.com/bsm/openrtb/v3"
+)
+
+// Video is the native video object.
 type Video struct {
-	Mimes       []string        `json:"mimes,omitempty"`       // Whitelist of content MIME types supported
-	MinDuration int             `json:"minduration,omitempty"` // Minimum video ad duration in seconds
-	MaxDuration int             `json:"maxduration,omitempty"` // Maximum video ad duration in seconds
-	Protocols   []int           `json:"protocols,omitempty"`   // Video bid response protocols
-	Ext         json.RawMessage `json:"ext,omitempty"`
+	MIMEs       []string           `json:"mimes,omitempty"`       // Whitelist of content MIME types supported
+	MinDuration int                `json:"minduration,omitempty"` // Minimum video ad duration in seconds
+	MaxDuration int                `json:"maxduration,omitempty"` // Maximum video ad duration in seconds
+	Protocols   []openrtb.Protocol `json:"protocols,omitempty"`   // Video bid response protocols
+	Ext         json.RawMessage    `json:"ext,omitempty"`
 }

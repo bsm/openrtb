@@ -9,15 +9,13 @@ var _ = Describe("BidResponse", func() {
 	var subject *BidResponse
 
 	BeforeEach(func() {
-		err := fixture("bres.single", &subject)
-		Expect(err).NotTo(HaveOccurred())
+		Expect(fixture("bres.single", &subject)).To(Succeed())
 	})
 
 	It("should parse complex responses", func() {
 		for _, kind := range []string{"multi", "pmp", "vast"} {
 			var req *BidResponse
-			err := fixture("bres."+kind, &req)
-			Expect(err).NotTo(HaveOccurred(), "for %s", kind)
+			Expect(fixture("bres."+kind, &req)).To(Succeed(), "for %s", kind)
 			Expect(req.Validate()).NotTo(HaveOccurred(), "for %s", kind)
 		}
 	})
@@ -25,20 +23,20 @@ var _ = Describe("BidResponse", func() {
 	It("should parse responses", func() {
 		Expect(subject).To(Equal(&BidResponse{
 			ID: "BID-4-ZIMP-4b309eae-504a-4252-a8a8-4c8ceee9791a",
-			SeatBid: []SeatBid{
+			SeatBids: []SeatBid{
 				{
-					Bid: []Bid{
+					Bids: []Bid{
 						{
 							ID:         "32a69c6ba388f110487f9d1e63f77b22d86e916b",
 							ImpID:      "32a69c6ba388f110487f9d1e63f77b22d86e916b",
 							Price:      0.065445,
 							AdID:       "529833ce55314b19e8796116",
-							NURL:       "http://ads.com/win/529833ce55314b19e8796116?won=${auction_price}",
+							NoticeURL:  "http://ads.com/win/529833ce55314b19e8796116?won=${auction_price}",
 							AdMarkup:   "<iframe src=\"foo.bar\"/>",
-							AdvDomain:  []string{},
+							AdvDomains: []string{},
 							CampaignID: "529833ce55314b19e8796116",
 							CreativeID: "529833ce55314b19e8796116_1385706446",
-							Attr:       []int{},
+							Attrs:      []CreativeAttribute{},
 						},
 					},
 					Seat: "772",
@@ -53,5 +51,4 @@ var _ = Describe("BidResponse", func() {
 		Expect((&BidResponse{ID: "RESPID"}).Validate()).To(Equal(ErrInvalidRespNoSeatBids))
 		Expect(subject.Validate()).NotTo(HaveOccurred())
 	})
-
 })

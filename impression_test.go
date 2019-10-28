@@ -9,19 +9,18 @@ var _ = Describe("Impression", func() {
 	var subject *Impression
 
 	BeforeEach(func() {
-		err := fixture("impression", &subject)
-		Expect(err).NotTo(HaveOccurred())
+		Expect(fixture("impression", &subject)).To(Succeed())
 	})
 
 	It("should parse correctly", func() {
 		Expect(subject).To(Equal(&Impression{
 			ID: "1",
 			Banner: &Banner{
-				W: 300,
-				H: 250,
+				Width: 300,
+				Height: 250,
 			},
 			BidFloor: 0.03,
-			Pmp: &Pmp{
+			PMP: &PMP{
 				Private: 1,
 				Deals: []Deal{
 					{

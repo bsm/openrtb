@@ -9,8 +9,7 @@ var _ = Describe("App", func() {
 	var subject *App
 
 	BeforeEach(func() {
-		err := fixture("app", &subject)
-		Expect(err).NotTo(HaveOccurred())
+		Expect(fixture("app", &subject)).To(Succeed())
 	})
 
 	It("should have accessors", func() {
@@ -20,9 +19,9 @@ var _ = Describe("App", func() {
 	It("should parse correctly", func() {
 		Expect(subject).To(Equal(&App{
 			Inventory: Inventory{
-				ID:   "agltb3B1Yi1pbmNyDAsSA0FwcBiJkfIUDA",
-				Name: "Yahoo Weather",
-				Cat:  []string{"weather", "IAB15", "IAB15-10"},
+				ID:         "agltb3B1Yi1pbmNyDAsSA0FwcBiJkfIUDA",
+				Name:       "Yahoo Weather",
+				Categories: []ContentCategory{"weather", ContentCategoryScience, ContentCategoryWeather},
 				Publisher: &Publisher{
 					ID:     "agltb3B1Yi1pbmNyDAsSA0FwcBiJkfTUCV",
 					Name:   "yahoo",
@@ -30,19 +29,17 @@ var _ = Describe("App", func() {
 				},
 			},
 			Bundle:   "628677149",
-			Ver:      "1.0.2",
+			Version:  "1.0.2",
 			StoreURL: "https://itunes.apple.com/id628677149",
 		}))
 	})
-
 })
 
 var _ = Describe("Site", func() {
 	var subject *Site
 
 	BeforeEach(func() {
-		err := fixture("site", &subject)
-		Expect(err).NotTo(HaveOccurred())
+		Expect(fixture("site", &subject)).To(Succeed())
 	})
 
 	It("should have accessors", func() {
@@ -52,9 +49,9 @@ var _ = Describe("Site", func() {
 	It("should parse correctly", func() {
 		Expect(subject).To(Equal(&Site{
 			Inventory: Inventory{
-				ID:     "102855",
-				Cat:    []string{"IAB3-1"},
-				Domain: "http://www.usabarfinder.com",
+				ID:         "102855",
+				Categories: []ContentCategory{ContentCategoryAdvertising},
+				Domain:     "http://www.usabarfinder.com",
 				Publisher: &Publisher{
 					ID:     "8953",
 					Name:   "local.com",
@@ -64,5 +61,4 @@ var _ = Describe("Site", func() {
 			Page: "http://eas.usabarfinder.com/eas?cu=13824;cre=mu;target=_blank",
 		}))
 	})
-
 })
