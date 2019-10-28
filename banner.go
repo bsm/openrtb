@@ -24,5 +24,6 @@ type Banner struct {
 	TopFrame int             `json:"topframe,omitempty"` // Default: 0 ("1": Delivered in top frame, "0": Elsewhere)
 	ExpDir   []int           `json:"expdir,omitempty"`   // Specify properties for an expandable ad
 	Api      []int           `json:"api,omitempty"`      // List of supported API frameworks
+	Vcm      int             `json:"vcm,omitempty"`      // Represents the relationship with video. 0 = concurrent, 1 = end-card
 	Ext      json.RawMessage `json:"ext,omitempty"`
 }
