@@ -6,12 +6,10 @@ import (
 )
 
 var _ = Describe("SeatBid", func() {
-
 	It("should validate", func() {
 		Expect((&SeatBid{}).Validate()).To(Equal(ErrInvalidSeatBidBid))
-		Expect((&SeatBid{Bid: []Bid{
+		Expect((&SeatBid{Bids: []Bid{
 			{ID: "BIDID", ImpID: "IMPID"}},
 		}).Validate()).NotTo(HaveOccurred())
 	})
-
 })

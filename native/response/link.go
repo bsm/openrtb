@@ -2,6 +2,7 @@ package response
 
 import "encoding/json"
 
+// Link object contains response link.
 type Link struct {
 	URL           string          `json:"url"`                     // Landing URL of the clickable link
 	ClickTrackers []string        `json:"clicktrackers,omitempty"` // List of third-party tracker URLs to be fired on click of the URL

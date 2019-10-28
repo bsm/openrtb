@@ -9,19 +9,18 @@ var _ = Describe("Banner", func() {
 	var subject *Banner
 
 	BeforeEach(func() {
-		err := fixture("banner", &subject)
-		Expect(err).NotTo(HaveOccurred())
+		Expect(fixture("banner", &subject)).To(Succeed())
 	})
 
 	It("should parse correctly", func() {
 		Expect(subject).To(Equal(&Banner{
-			W:     728,
-			H:     90,
-			Pos:   AdPosAboveFold,
-			BType: []int{BannerTypeFrame},
-			BAttr: []int{CreativeAttributeWindowsDialogOrAlert},
-			Api:   []int{APIFrameworkMRAID1},
-			Vcm:   1,
+			Width:        728,
+			Height:       90,
+			Position:     AdPositionAboveFold,
+			BlockedTypes: []BannerType{BannerTypeFrame},
+			BlockedAttrs: []CreativeAttribute{CreativeAttributeWindowsDialogOrAlert},
+			APIs:         []APIFramework{APIFrameworkMRAID1},
+			VCM:          1,
 		}))
 	})
 

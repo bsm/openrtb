@@ -9,50 +9,49 @@ var _ = Describe("Audio", func() {
 	var subject *Audio
 
 	BeforeEach(func() {
-		err := fixture("audio", &subject)
-		Expect(err).NotTo(HaveOccurred())
+		Expect(fixture("audio", &subject)).To(Succeed())
 	})
 
 	It("should parse correctly", func() {
 		Expect(subject).To(Equal(&Audio{
-			Mimes: []string{
+			MIMEs: []string{
 				"audio/mp4",
 			},
-			MinDuration: 5,
-			MaxDuration: 30,
-			Protocols:   []int{AudioProtocolDAAST1, AudioProtocolDAAST1Wrapper},
-			Sequence:    1,
-			BAttr:       []int{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert},
-			MaxExtended: 30,
-			MinBitrate:  300,
-			MaxBitrate:  1500,
-			Delivery:    []int{ContentDeliveryProgressive},
-			CompanionAd: []Banner{
-				{W: 300, H: 250, ID: "1234567893-1", Pos: AdPosAboveFold, BAttr: []int{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert}, ExpDir: []int{ExpDirRight, ExpDirDown}},
-				{W: 728, H: 90, ID: "1234567893-2", Pos: AdPosAboveFold, BAttr: []int{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert}},
+			MinDuration:  5,
+			MaxDuration:  30,
+			Protocols:    []Protocol{ProtocolDAAST1, ProtocolDAAST1Wrapper},
+			Sequence:     1,
+			BlockedAttrs: []CreativeAttribute{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert},
+			MaxExtended:  30,
+			MinBitrate:   300,
+			MaxBitrate:   1500,
+			Delivery:     []ContentDelivery{ContentDeliveryProgressive},
+			CompanionAds: []Banner{
+				{Width: 300, Height: 250, ID: "1234567893-1", Position: AdPositionAboveFold, BlockedAttrs: []CreativeAttribute{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert}, ExpDirs: []ExpDir{ExpDirRight, ExpDirDown}},
+				{Width: 728, Height: 90, ID: "1234567893-2", Position: AdPositionAboveFold, BlockedAttrs: []CreativeAttribute{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert}},
 			},
-			API:           []int{APIFrameworkVPAID1, APIFrameworkVPAID2},
-			CompanionType: []int{VASTCompanionStatic, VASTCompanionHTML},
+			APIs:           []APIFramework{APIFrameworkVPAID1, APIFrameworkVPAID2},
+			CompanionTypes: []CompanionType{CompanionTypeStatic, CompanionTypeHTML},
 		}))
 	})
 
 	It("should validate", func() {
 		Expect((&Audio{
-			MinDuration: 5,
-			MaxDuration: 30,
-			Protocols:   []int{AudioProtocolDAAST1, AudioProtocolDAAST1Wrapper},
-			Sequence:    1,
-			BAttr:       []int{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert},
-			MaxExtended: 30,
-			MinBitrate:  300,
-			MaxBitrate:  1500,
-			Delivery:    []int{ContentDeliveryProgressive},
-			CompanionAd: []Banner{
-				{W: 300, H: 250, ID: "1234567893-1", Pos: AdPosAboveFold, BAttr: []int{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert}, ExpDir: []int{ExpDirRight, ExpDirDown}},
-				{W: 728, H: 90, ID: "1234567893-2", Pos: AdPosAboveFold, BAttr: []int{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert}},
+			MinDuration:  5,
+			MaxDuration:  30,
+			Protocols:    []Protocol{ProtocolDAAST1, ProtocolDAAST1Wrapper},
+			Sequence:     1,
+			BlockedAttrs: []CreativeAttribute{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert},
+			MaxExtended:  30,
+			MinBitrate:   300,
+			MaxBitrate:   1500,
+			Delivery:     []ContentDelivery{ContentDeliveryProgressive},
+			CompanionAds: []Banner{
+				{Width: 300, Height: 250, ID: "1234567893-1", Position: AdPositionAboveFold, BlockedAttrs: []CreativeAttribute{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert}, ExpDirs: []ExpDir{ExpDirRight, ExpDirDown}},
+				{Width: 728, Height: 90, ID: "1234567893-2", Position: AdPositionAboveFold, BlockedAttrs: []CreativeAttribute{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert}},
 			},
-			CompanionType: []int{VASTCompanionStatic, VASTCompanionHTML},
-		}).Validate()).To(Equal(ErrInvalidAudioNoMimes))
+			CompanionTypes: []CompanionType{CompanionTypeStatic, CompanionTypeHTML},
+		}).Validate()).To(Equal(ErrInvalidAudioNoMIMEs))
 	})
 
 })

@@ -9,8 +9,7 @@ var _ = Describe("Content", func() {
 	var subject *Content
 
 	BeforeEach(func() {
-		err := fixture("content", &subject)
-		Expect(err).NotTo(HaveOccurred())
+		Expect(fixture("content", &subject)).To(Succeed())
 	})
 
 	It("should parse correctly", func() {
@@ -24,15 +23,13 @@ var _ = Describe("Content", func() {
 			},
 		}))
 	})
-
 })
 
 var _ = Describe("QuotedContent", func() {
 	var subject *Content
 
 	BeforeEach(func() {
-		err := fixture("content.quoted", &subject)
-		Expect(err).NotTo(HaveOccurred())
+		Expect(fixture("content.quoted", &subject)).To(Succeed())
 	})
 
 	It("should parse correctly", func() {
@@ -44,7 +41,7 @@ var _ = Describe("QuotedContent", func() {
 			URL:                "http://cdnp.tremormedia.com/video/1984.flv",
 			LiveStream:         0,
 			ContentRating:      "G",
-			Len:                129,
+			Length:             129,
 			Series:             "book reading",
 			VideoQuality:       2,
 			Context:            1,
@@ -53,5 +50,4 @@ var _ = Describe("QuotedContent", func() {
 			ID:                 "eb9f13ede5fd225333971523f6042f9d",
 		}))
 	})
-
 })

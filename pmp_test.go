@@ -7,16 +7,15 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("Pmp", func() {
-	var subject *Pmp
+var _ = Describe("PMP", func() {
+	var subject *PMP
 
 	BeforeEach(func() {
-		err := fixture("pmp", &subject)
-		Expect(err).NotTo(HaveOccurred())
+		Expect(fixture("pmp", &subject)).To(Succeed())
 	})
 
 	It("should parse correctly", func() {
-		Expect(subject).To(Equal(&Pmp{
+		Expect(subject).To(Equal(&PMP{
 			Private: 1,
 			Deals: []Deal{
 				{ID: "DX-1985-010A", BidFloor: 2.5, BidFloorCurrency: "", AuctionType: 2},
@@ -26,9 +25,7 @@ var _ = Describe("Pmp", func() {
 	})
 
 	It("should generate correctly", func() {
-		bin, err := json.Marshal(&Pmp{Deals: []Deal{{}}})
-		Expect(err).NotTo(HaveOccurred())
-		Expect(string(bin)).To(Equal(`{"deals":[{"at":2}]}`))
+		Expect(json.Marshal(&PMP{Deals: []Deal{{}}})).To(MatchJSON(`{"deals":[{"at":2}]}`))
 	})
 
 })

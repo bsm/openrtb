@@ -3,12 +3,12 @@ package response
 import (
 	"encoding/json"
 
-	"github.com/bsm/openrtb"
+	"github.com/bsm/openrtb/v3"
 )
 
-// The native object is the top level JSON object which identifies a native response
+// Response is the native object is the top level JSON object which identifies a native response.
 type Response struct {
-	Ver         openrtb.StringOrNumber `json:"ver,omitempty"`         // Version of the Native Markup
+	Version     openrtb.StringOrNumber `json:"ver,omitempty"`         // Version of the Native Markup
 	Assets      []Asset                `json:"assets"`                // An array of Asset Objects
 	Link        Link                   `json:"link"`                  // Destination Link. This is default link object for the ad
 	ImpTrackers []string               `json:"imptrackers,omitempty"` // Array of impression tracking URLs, expected to return a 1x1 image or 204 response

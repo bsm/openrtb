@@ -10,10 +10,9 @@ import (
 )
 
 var _ = Describe("Response", func() {
-
 	It("should parse correctly", func() {
-		Expect(fixture("testdata/response1.json")).To(Equal(Response{
-			Ver:         "1.1",
+		Expect(fixture("testdata/response1.json")).To(Equal(&Response{
+			Version:         "1.1",
 			ImpTrackers: []string{"http://imptracker.com"},
 			JSTracker:   "<script>track()</script>",
 			Link: Link{
@@ -30,7 +29,6 @@ var _ = Describe("Response", func() {
 			},
 		}))
 	})
-
 })
 
 func TestSuite(t *testing.T) {
@@ -38,10 +36,9 @@ func TestSuite(t *testing.T) {
 	RunSpecs(t, "openrtb/native/response")
 }
 
-func fixture(path string) Response {
-	var subject Response
+func fixture(path string) (res *Response) {
 	enc, err := ioutil.ReadFile(path)
 	Expect(err).ToNot(HaveOccurred())
-	Expect(json.Unmarshal(enc, &subject)).To(Succeed())
-	return subject
+	Expect(json.Unmarshal(enc, &res)).To(Succeed())
+	return res
 }

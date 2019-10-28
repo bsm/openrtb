@@ -2,8 +2,10 @@ package request
 
 import "encoding/json"
 
+// DataTypeID enum.
 type DataTypeID int
 
+// DataTypeID enum values.
 const (
 	DataTypeSponsored      DataTypeID = 1  // Sponsored By message where response should contain the brand name of the sponsor
 	DataTypeDesc           DataTypeID = 2  // Descriptive text associated with the product or service being advertised
@@ -20,6 +22,7 @@ const (
 
 )
 
+// Data is the native data object.
 type Data struct {
 	TypeID DataTypeID      `json:"type"` // Type ID of the element supported by the publisher. The publisher can display this information in an appropriate format
 	Length int             `json:"len"`  // Maximum length of the text in the element’s response

@@ -11,15 +11,13 @@ var _ = Describe("Native", func() {
 	var subject *Native
 
 	BeforeEach(func() {
-		err := fixture("native", &subject)
-		Expect(err).NotTo(HaveOccurred())
+		Expect(fixture("native", &subject)).To(Succeed())
 	})
 
 	It("should parse correctly", func() {
 		Expect(subject).To(Equal(&Native{
 			Request: json.RawMessage(`"PAYLOAD"`),
-			Ver:     "2",
+			Version:     "2",
 		}))
 	})
-
 })
