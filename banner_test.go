@@ -21,6 +21,7 @@ var _ = Describe("Banner", func() {
 			BType: []int{BannerTypeFrame},
 			BAttr: []int{CreativeAttributeWindowsDialogOrAlert},
 			Api:   []int{APIFrameworkMRAID1},
+			Vcm:   1,
 		}))
 	})
 
