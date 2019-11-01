@@ -7,11 +7,9 @@ import (
 
 // Validation errors
 var (
-	ErrInvalidVideoNoMIMEs       = errors.New("openrtb: video has no mimes")
-	ErrInvalidVideoNoLinearity   = errors.New("openrtb: video linearity missing")
-	ErrInvalidVideoNoMinDuration = errors.New("openrtb: video min-duration missing")
-	ErrInvalidVideoNoMaxDuration = errors.New("openrtb: video max-duration missing")
-	ErrInvalidVideoNoProtocols   = errors.New("openrtb: video protocols missing")
+	ErrInvalidVideoNoMIMEs     = errors.New("openrtb: video has no mimes")
+	ErrInvalidVideoNoLinearity = errors.New("openrtb: video linearity missing")
+	ErrInvalidVideoNoProtocols = errors.New("openrtb: video protocols missing")
 )
 
 // Video object must be included directly in the impression object if the impression offered
@@ -53,10 +51,6 @@ func (v *Video) Validate() error {
 		return ErrInvalidVideoNoMIMEs
 	} else if v.Linearity == 0 {
 		return ErrInvalidVideoNoLinearity
-	} else if v.MinDuration == 0 {
-		return ErrInvalidVideoNoMinDuration
-	} else if v.MaxDuration == 0 {
-		return ErrInvalidVideoNoMaxDuration
 	} else if v.Protocol == 0 && len(v.Protocols) == 0 {
 		return ErrInvalidVideoNoProtocols
 	}
