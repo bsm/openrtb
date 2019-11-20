@@ -27,10 +27,11 @@ func (a *Inventory) GetPrivacyPolicy() int {
 // "site" object.
 type App struct {
 	Inventory
-	Bundle   string `json:"bundle,omitempty"`   // App bundle or package name
-	StoreURL string `json:"storeurl,omitempty"` // App store URL for an installed app
-	Ver      string `json:"ver,omitempty"`      // App version
-	Paid     int    `json:"paid,omitempty"`     // "1": Paid, "2": Free
+	Bundle   string    `json:"bundle,omitempty"`   // App bundle or package name
+	StoreURL string    `json:"storeurl,omitempty"` // App store URL for an installed app
+	Ver      string    `json:"ver,omitempty"`      // App version
+	Paid     int       `json:"paid,omitempty"`     // "1": Paid, "2": Free
+	Ext      Extension `json:"ext,omitempty"`      // Placeholder for exchange-specific extensions to OpenRTB
 }
 
 // A site object should be included if the ad supported content is part of a website (as opposed to
