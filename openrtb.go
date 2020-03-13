@@ -319,7 +319,7 @@ const (
 	ContentCategoryAccessories  ContentCategory  = "IAB18-6"
 
 	ContentCategoryTechnologyComputing   ContentCategory  = "IAB19"
-	ContentCategoryDGraphics             ContentCategory  = "IAB19-13"
+	ContentCategoryDGraphics             ContentCategory  = "IAB19-1"
 	ContentCategoryAnimation             ContentCategory  = "IAB19-2"
 	ContentCategoryAntivirusSoftware     ContentCategory  = "IAB19-3"
 	ContentCategoryCC                   ContentCategory   = "IAB19-4"
