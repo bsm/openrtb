@@ -9,7 +9,6 @@ import (
 var (
 	ErrInvalidVideoNoMimes       = errors.New("openrtb: video has no mimes")
 	ErrInvalidVideoNoLinearity   = errors.New("openrtb: video linearity missing")
-	ErrInvalidVideoNoMinDuration = errors.New("openrtb: video min-duration missing")
 	ErrInvalidVideoNoMaxDuration = errors.New("openrtb: video max-duration missing")
 	ErrInvalidVideoNoProtocols   = errors.New("openrtb: video protocols missing")
 )
@@ -53,8 +52,6 @@ func (v *Video) Validate() error {
 		return ErrInvalidVideoNoMimes
 	} else if v.Linearity == 0 {
 		return ErrInvalidVideoNoLinearity
-	} else if v.MinDuration == 0 {
-		return ErrInvalidVideoNoMinDuration
 	} else if v.MaxDuration == 0 {
 		return ErrInvalidVideoNoMaxDuration
 	} else if v.Protocol == 0 && len(v.Protocols) == 0 {
