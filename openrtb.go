@@ -69,7 +69,7 @@ const (
 	ContentCategoryCareerAdvice        ContentCategory = "IAB4-11"
 
 	ContentCategoryEducation             ContentCategory = "IAB5"
-	ContentCategory12Education           ContentCategory = "IAB5-17"
+	ContentCategory12Education           ContentCategory = "IAB5-1"
 	ContentCategoryAdultEducation        ContentCategory = "IAB5-2"
 	ContentCategoryArtHistory            ContentCategory = "IAB5-3"
 	ContentCategoryCollegeAdministration ContentCategory = "IAB5-4"
