@@ -16,7 +16,7 @@ var _ = Describe("Impression", func() {
 		Expect(subject).To(Equal(&Impression{
 			ID: "1",
 			Banner: &Banner{
-				Width: 300,
+				Width:  300,
 				Height: 250,
 			},
 			BidFloor: 0.03,

@@ -12,7 +12,7 @@ import (
 var _ = Describe("Response", func() {
 	It("should parse correctly", func() {
 		Expect(fixture("testdata/response1.json")).To(Equal(&Response{
-			Version:         "1.1",
+			Version:     "1.1",
 			ImpTrackers: []string{"http://imptracker.com"},
 			JSTracker:   "<script>track()</script>",
 			Link: Link{

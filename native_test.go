@@ -17,7 +17,7 @@ var _ = Describe("Native", func() {
 	It("should parse correctly", func() {
 		Expect(subject).To(Equal(&Native{
 			Request: json.RawMessage(`"PAYLOAD"`),
-			Version:     "2",
+			Version: "2",
 		}))
 	})
 })

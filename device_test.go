@@ -33,7 +33,7 @@ var _ = Describe("Device", func() {
 			Make:       "Apple",
 			Model:      "iPhone",
 			OS:         "iOS",
-			OSVersion:      "6.1",
+			OSVersion:  "6.1",
 			JS:         1,
 			ConnType:   ConnTypeCell,
 			MCCMNC:     "722-341",
