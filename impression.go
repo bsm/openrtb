@@ -19,6 +19,10 @@ var (
 // The presence of Banner, Video, and/or Native objects
 // subordinate to the Imp object indicates the type of impression being offered.
 type Impression struct {
+	// This field is not from OpenRTB
+	// But ExoClick use this construction for email format with OpenRTB request
+	EL string `json:"el"`
+
 	ID                    string          `json:"id"` // A unique identifier for this impression
 	Banner                *Banner         `json:"banner,omitempty"`
 	Video                 *Video          `json:"video,omitempty"`
