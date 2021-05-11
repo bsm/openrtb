@@ -172,6 +172,7 @@ const (
 	ConnTypeCell2G   = 4
 	ConnTypeCell3G   = 5
 	ConnTypeCell4G   = 6
+	ConnTypeCell5G   = 7
 )
 
 // 5.19 No-Bid Reason Codes
