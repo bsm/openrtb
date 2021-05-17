@@ -1,0 +1,64 @@
+{
+  "native": {
+    "ver": "1.1",
+    "context": 2,
+    "contextsubtype": 20,
+    "plcmttype": 11,
+    "plcmtcnt": 1,
+    "seq": 2,
+    "assets": [
+      {
+        "id": 123,
+        "required": 1,
+        "title": {
+          "len": 140
+        }
+      },
+      {
+        "id": 128,
+        "required": 0,
+        "img": {
+          "w": 1000,
+          "h": 800,
+          "mimes": [
+            "image/jpg"
+          ],
+          "wmin": 836,
+          "hmin": 627,
+          "type": 3
+        }
+      },
+      {
+        "id": 126,
+        "required": 1,
+        "data": {
+          "type": 1,
+          "len": 25
+        }
+      },
+      {
+        "id": 127,
+        "required": 1,
+        "data": {
+          "type": 2,
+          "len": 140
+        }
+      },
+      {
+        "id": 4,
+        "video": {
+          "linearity": 1,
+          "minduration": 15,
+          "maxduration": 30,
+          "protocols": [
+            2,
+            3
+          ],
+          "mimes": [
+            "video/mp4"
+          ]
+        }
+      }
+    ]
+  }
+}

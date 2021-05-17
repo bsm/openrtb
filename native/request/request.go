@@ -1,6 +1,9 @@
 package request
 
-import "encoding/json"
+import (
+	"bytes"
+	"encoding/json"
+)
 
 // LayoutID enum.
 type LayoutID int
@@ -80,4 +83,41 @@ type Request struct {
 	Sequence         int             `json:"seq,omitempty"`            // 0 for the first ad, 1 for the second ad, and so on
 	Assets           []Asset         `json:"assets"`                   // An array of Asset Objects
 	Ext              json.RawMessage `json:"ext,omitempty"`
+}
+
+type (
+	jsonRequest Request
+
+	legacyNative struct {
+		Native Request `json:"native"`
+	}
+)
+
+var (
+	nativeBytes = []byte("native")
+	nullBytes   = []byte("null")
+)
+
+func (r *Request) UnmarshalJSON(data []byte) error {
+	if bytes.Equal(data, nullBytes) {
+		return nil
+	}
+
+	if bytes.Contains(data, nativeBytes) {
+		var jn legacyNative
+		if err := json.Unmarshal(data, &jn); err != nil {
+			return err
+		}
+
+		*r = jn.Native
+		return nil
+	}
+
+	var jn jsonRequest
+	if err := json.Unmarshal(data, &jn); err != nil {
+		return err
+	}
+
+	*r = (Request)(jn)
+	return nil
 }
