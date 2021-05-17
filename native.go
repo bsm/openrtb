@@ -1,6 +1,9 @@
 package openrtb
 
-import "encoding/json"
+import (
+	"bytes"
+	"encoding/json"
+)
 
 // Native object represents a native type impression. Native ad units are intended to blend seamlessly into
 // the surrounding content (e.g., a sponsored Twitter or Facebook post). As such, the response must be
@@ -15,4 +18,32 @@ type Native struct {
 	APIs         []APIFramework      `json:"api,omitempty"`   // List of supported API frameworks for this impression.
 	BlockedAttrs []CreativeAttribute `json:"battr,omitempty"` // Blocked creative attributes
 	Ext          json.RawMessage     `json:"ext,omitempty"`
+}
+
+type jsonNative Native
+
+var (
+	requestBytes = []byte("request")
+	nullBytes    = []byte("null")
+)
+
+func (n *Native) UnmarshalJSON(data []byte) error {
+	if bytes.Equal(data, nullBytes) {
+		return nil
+	}
+
+	if bytes.Contains(data, requestBytes) {
+		var jn jsonNative
+		if err := json.Unmarshal(data, &jn); err != nil {
+			return err
+		}
+
+		*n = (Native)(jn)
+		return nil
+	}
+
+	req := make(json.RawMessage, len(data))
+	copy(req, data)
+	n.Request = req
+	return nil
 }

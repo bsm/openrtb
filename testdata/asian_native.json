@@ -1,0 +1,34 @@
+{
+  "assets": [
+    {
+      "id": 1,
+      "required": 1,
+      "title": {
+        "len": 140
+      }
+    },
+    {
+      "id": 2,
+      "required": 1,
+      "img": {
+        "type": 3,
+        "mimes": [
+          "image/jpg",
+          "image/png",
+          "image/gif"
+        ],
+        "hmin": 160,
+        "wmin": 160
+      }
+    },
+    {
+      "id": 3,
+      "required": 0,
+      "data": {
+        "len": 140,
+        "type": 2
+      }
+    }
+  ],
+  "ver": "1.2"
+}
