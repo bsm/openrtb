@@ -48,6 +48,14 @@ var _ = Describe("Request", func() {
 			},
 		}))
 	})
+
+	It("should parse json string correctly", func() {
+		req := fixture("testdata/request3.json")
+		Expect(req).To(Equal(&Request{
+			Version: "1.0",
+			Assets:  []Asset{},
+		}))
+	})
 })
 
 func TestSuite(t *testing.T) {
