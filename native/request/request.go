@@ -103,6 +103,16 @@ func (r *Request) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
+	if len(data) >= 2 && data[0] == '"' && data[len(data)-1] == '"' {
+		// this must be a quoted string
+		var jsonS string
+		if err := json.Unmarshal(data, &jsonS); err != nil {
+			return err
+		}
+
+		data = []byte(jsonS)
+	}
+
 	if bytes.Contains(data, nativeBytes) {
 		var jn legacyNative
 		if err := json.Unmarshal(data, &jn); err != nil {
