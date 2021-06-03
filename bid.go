@@ -46,6 +46,7 @@ type Bid struct {
 	WidthRatio  int                 `json:"wratio,omitempty"`         // Relative width of the creative when expressing size as a ratio.
 	HeightRatio int                 `json:"hratio,omitempty"`         // Relative height of the creative when expressing size as a ratio.
 	Exp         int                 `json:"exp,omitempty"`            // Advisory as to the number of seconds the bidder is willing to wait between the auction and the actual impression.
+	Native      json.RawMessage     `json:"native,omitempty"`         // Native ads markup, specially for AdNow.
 	Ext         json.RawMessage     `json:"ext,omitempty"`
 }
 

@@ -29,6 +29,19 @@ var _ = Describe("Bid", func() {
 		}))
 	})
 
+	It("should parse asian correctly", func() {
+		var asian *Bid
+		Expect(fixture("asian_bid", &asian)).To(Succeed())
+
+		expectNative := `{"link":{"url":"https://test.com"},"assets":[{"id":1,"required":1,"title":{"text":"TEST!"}}]}`
+		Expect(asian).To(Equal(&Bid{
+			ID:     "BID-SCI-258-471500-k5p21f06-1dm3",
+			ImpID:  "SCI-1-471500-k5p21f06-1dm3",
+			Price:  0.0001,
+			Native: []byte(expectNative),
+		}))
+	})
+
 	It("should validate", func() {
 		Expect((&Bid{}).Validate()).To(Equal(ErrInvalidBidNoID))
 		Expect((&Bid{ID: "BIDID"}).Validate()).To(Equal(ErrInvalidBidNoImpID))

@@ -1,0 +1,6 @@
+{
+  "id": "BID-SCI-258-471500-k5p21f06-1dm3",
+  "impid": "SCI-1-471500-k5p21f06-1dm3",
+  "price": 0.0001,
+  "native": {"link":{"url":"https://test.com"},"assets":[{"id":1,"required":1,"title":{"text":"TEST!"}}]}
+}
