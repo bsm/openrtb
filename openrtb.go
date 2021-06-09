@@ -302,5 +302,13 @@ type RegExtension struct {
 
 // UserExtension Extension object for User
 type UserExtension struct {
-	Consent string `json:"consent,omitempty"`
+	Consent string  `json:"consent,omitempty"`
+	SdkData SdkData `json:"sdkdata,omitempty"`
+}
+
+// SdkData object for UserExtension. Required for direct demand header bidding integration
+type SdkData struct {
+	Seq    int32 `json:"seq,omitempty"`    // Number of times Header Bidding same prevaluation token has been requested by Mediation SDK
+	Loads  int32 `json:"loads,omitempty"`  // Number of times same prevaluation token has been used to load AdM
+	Starts int32 `json:"starts,omitempty"` // Number of times starts has been registered for the same prevaluation token
 }
