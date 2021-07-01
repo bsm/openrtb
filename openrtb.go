@@ -297,6 +297,7 @@ type Format struct {
 // RegExtension Extension object for Regulations
 type RegExtension struct {
 	GDPR      int    `json:"gdpr,omitempty"`
+	LGPD      bool   `json:"lgpd,omitempty"`
 	USPrivacy string `json:"us_privacy,omitempty"`
 }
 
