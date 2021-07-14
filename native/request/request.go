@@ -79,7 +79,7 @@ type Request struct {
 	ContextTypeID    ContextTypeID   `json:"context,omitempty"`        // The context in which the ad appears
 	ContextSubTypeID ContextTypeID   `json:"contextsubtype,omitempty"` // A more detailed context in which the ad appears
 	PlacementTypeID  PlacementTypeID `json:"plcmttype,omitempty"`      // The design/format/layout of the ad unit being offered
-	PlacementCount   int             `json:"plcmtcnt,omitempty"`       // The number of identical placements in this Layout
+	PlacementCount   json.Number     `json:"plcmtcnt,omitempty"`       // The number of identical placements in this Layout
 	Sequence         int             `json:"seq,omitempty"`            // 0 for the first ad, 1 for the second ad, and so on
 	Assets           []Asset         `json:"assets"`                   // An array of Asset Objects
 	Ext              json.RawMessage `json:"ext,omitempty"`

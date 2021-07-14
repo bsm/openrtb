@@ -18,7 +18,7 @@ var _ = Describe("Request", func() {
 			ContextTypeID:    ContextTypeSocial,
 			ContextSubTypeID: ContextSubTypeSocial,
 			PlacementTypeID:  PlacementTypeID(11),
-			PlacementCount:   1,
+			PlacementCount:   "1",
 			Sequence:         2,
 			Assets: []Asset{
 				{ID: 123, Required: 1, Title: &Title{Length: 140}},
@@ -37,7 +37,7 @@ var _ = Describe("Request", func() {
 			ContextTypeID:    ContextTypeSocial,
 			ContextSubTypeID: ContextSubTypeSocial,
 			PlacementTypeID:  PlacementTypeID(11),
-			PlacementCount:   1,
+			PlacementCount:   "1",
 			Sequence:         2,
 			Assets: []Asset{
 				{ID: 123, Required: 1, Title: &Title{Length: 140}},
@@ -54,6 +54,17 @@ var _ = Describe("Request", func() {
 		Expect(req).To(Equal(&Request{
 			Version: "1.0",
 			Assets:  []Asset{},
+		}))
+	})
+
+	It("should parse string plcmtcnt correctly", func() {
+		req := fixture("testdata/request4.json")
+		Expect(req).To(Equal(&Request{
+			Version:        "1.1",
+			PlacementCount: "12",
+			Assets: []Asset{
+				{ID: 123, Required: 1, Title: &Title{Length: 140}},
+			},
 		}))
 	})
 })
