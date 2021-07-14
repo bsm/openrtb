@@ -309,7 +309,7 @@ type UserExtension struct {
 
 // SdkData object for UserExtension. Required for direct demand header bidding integration
 type SdkData struct {
-	Seq    int32 `json:"seq,omitempty"`    // Number of times Header Bidding same prevaluation token has been requested by Mediation SDK
-	Loads  int32 `json:"loads,omitempty"`  // Number of times same prevaluation token has been used to load AdM
-	Starts int32 `json:"starts,omitempty"` // Number of times starts has been registered for the same prevaluation token
+	Seq    int32 `json:"seq"`    // Number of times Header Bidding same prevaluation token has been requested by Mediation SDK
+	Loads  int32 `json:"loads"`  // Number of times same prevaluation token has been used to load AdM
+	Starts int32 `json:"starts"` // Number of times starts has been registered for the same prevaluation token
 }
