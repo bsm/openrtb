@@ -21,7 +21,7 @@ var (
 type Impression struct {
 	// This field is not from OpenRTB
 	// But ExoClick use this construction for email format with OpenRTB request
-	EL string `json:"el"`
+	EL *string `json:"el,omitempty"`
 
 	ID                    string          `json:"id"` // A unique identifier for this impression
 	Banner                *Banner         `json:"banner,omitempty"`
