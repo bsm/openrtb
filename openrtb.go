@@ -690,6 +690,13 @@ const (
 	DeviceTypeSetTopBox DeviceType = 7
 )
 
+var deviceTypes = [...]string{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"}
+
+func (dt DeviceType) String() string {
+	// single digit itoa
+	return deviceTypes[dt]
+}
+
 // ConnType as defined in section 5.22.
 type ConnType int
 
