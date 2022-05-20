@@ -306,7 +306,7 @@ type RegExtension struct {
 type UserExtension struct {
 	Consent      string  `json:"consent,omitempty"`
 	SdkData      SdkData `json:"sdkdata,omitempty"`
-	AppStartTime int     `json:"appStartTime,omitempty"`
+	AppStartTime int64   `json:"appStartTime,omitempty"`
 }
 
 // SdkData object for UserExtension. Required for direct demand header bidding integration
