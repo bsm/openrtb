@@ -34,5 +34,6 @@ type Device struct {
 	PIDMD5     string    `json:"dpidmd5,omitempty"`    // MD5 hashed platform device ID
 	MacSHA1    string    `json:"macsha1,omitempty"`    // SHA1 hashed device ID; IMEI when available, else MEID or ESN
 	MacMD5     string    `json:"macmd5,omitempty"`     // MD5 hashed device ID; IMEI when available, else MEID or ESN
+	OAID       string    `json:"OAID,omitempty"`       // Open Advertising Tracking ID
 	Ext        Extension `json:"ext,omitempty"`
 }

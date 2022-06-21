@@ -39,6 +39,7 @@ var _ = Describe("Device", func() {
 			ConnType:   ConnTypeCell,
 			MCCMNC:     "722-341",
 			DeviceType: DeviceTypeMobile,
+			OAID:       "1fe9a970-efbb-29e0-0bdd-f5dbbf751ab5",
 		}))
 	})
 })
