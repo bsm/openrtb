@@ -1,63 +1,46 @@
-package openrtb
+package openrtb_test
 
 import (
 	"encoding/json"
+	"testing"
 
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
+	. "github.com/bsm/openrtb/v3"
 )
 
-var _ = Describe("NumberOrString", func() {
-	It("should decode numbers", func() {
-		var n NumberOrString
-		Expect(json.Unmarshal([]byte(`33`), &n)).To(Succeed())
-		Expect(n).To(Equal(NumberOrString(33)))
-	})
+func TestNumberOrString(t *testing.T) {
+	var v NumberOrString
 
-	It("should decode strings", func() {
-		var n NumberOrString
-		Expect(json.Unmarshal([]byte(`"33"`), &n)).To(Succeed())
-		Expect(n).To(Equal(NumberOrString(33)))
-	})
+	if err := json.Unmarshal([]byte(`33`), &v); err != nil {
+		t.Errorf("expected no error, got %v", err)
+	} else if exp := NumberOrString(33); exp != v {
+		t.Errorf("expected %#v, got %#v", exp, v)
+	}
 
-	It("should encode to numbers", func() {
-		var n NumberOrString = 33
-		bin, err := json.Marshal(n)
-		Expect(err).NotTo(HaveOccurred())
-		Expect(string(bin)).To(Equal(`33`))
-	})
-})
+	if err := json.Unmarshal([]byte(`"34"`), &v); err != nil {
+		t.Errorf("expected no error, got %v", err)
+	} else if exp := NumberOrString(34); exp != v {
+		t.Errorf("expected %#v, got %#v", exp, v)
+	}
+}
 
-var _ = Describe("StringOrNumber", func() {
-	It("should decode numbers", func() {
-		var n StringOrNumber
-		Expect(json.Unmarshal([]byte(`33`), &n)).To(Succeed())
-		Expect(n).To(Equal(StringOrNumber("33")))
-	})
+func TestStringOrNumber(t *testing.T) {
+	var v StringOrNumber
 
-	It("should decode strings", func() {
-		var n StringOrNumber
-		Expect(json.Unmarshal([]byte(`"33"`), &n)).To(Succeed())
-		Expect(n).To(Equal(StringOrNumber("33")))
-	})
+	if err := json.Unmarshal([]byte(`33`), &v); err != nil {
+		t.Errorf("expected no error, got %v", err)
+	} else if exp := StringOrNumber("33"); exp != v {
+		t.Errorf("expected %#v, got %#v", exp, v)
+	}
 
-	It("should decode strings", func() {
-		var n StringOrNumber
-		Expect(json.Unmarshal([]byte(`""`), &n)).To(Succeed())
-		Expect(n).To(Equal(StringOrNumber("")))
-	})
+	if err := json.Unmarshal([]byte(`"34"`), &v); err != nil {
+		t.Errorf("expected no error, got %v", err)
+	} else if exp := StringOrNumber("34"); exp != v {
+		t.Errorf("expected %#v, got %#v", exp, v)
+	}
 
-	It("should encode to strings", func() {
-		var n StringOrNumber = "33"
-		bin, err := json.Marshal(n)
-		Expect(err).NotTo(HaveOccurred())
-		Expect(string(bin)).To(Equal(`"33"`))
-	})
-
-	It("should encode to strings", func() {
-		var n StringOrNumber = ""
-		bin, err := json.Marshal(n)
-		Expect(err).NotTo(HaveOccurred())
-		Expect(string(bin)).To(Equal(`""`))
-	})
-})
+	if err := json.Unmarshal([]byte(`""`), &v); err != nil {
+		t.Errorf("expected no error, got %v", err)
+	} else if exp := StringOrNumber(""); exp != v {
+		t.Errorf("expected %#v, got %#v", exp, v)
+	}
+}

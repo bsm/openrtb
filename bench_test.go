@@ -2,13 +2,13 @@ package openrtb
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"os"
 	"path/filepath"
 	"testing"
 )
 
 func BenchmarkBidRequest_Unmarshal(b *testing.B) {
-	data, err := ioutil.ReadFile(filepath.Join("testdata", "breq.video.json"))
+	data, err := os.ReadFile(filepath.Join("testdata", "breq.video.json"))
 	if err != nil {
 		b.Fatal(err.Error())
 	}
@@ -23,7 +23,7 @@ func BenchmarkBidRequest_Unmarshal(b *testing.B) {
 }
 
 func BenchmarkBidRequest_Marshal(b *testing.B) {
-	data, err := ioutil.ReadFile(filepath.Join("testdata", "breq.video.json"))
+	data, err := os.ReadFile(filepath.Join("testdata", "breq.video.json"))
 	if err != nil {
 		b.Fatal(err.Error())
 	}

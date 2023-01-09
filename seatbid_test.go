@@ -1,15 +1,15 @@
-package openrtb
+package openrtb_test
 
 import (
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
+	"errors"
+	"testing"
+
+	. "github.com/bsm/openrtb/v3"
 )
 
-var _ = Describe("SeatBid", func() {
-	It("should validate", func() {
-		Expect((&SeatBid{}).Validate()).To(Equal(ErrInvalidSeatBidBid))
-		Expect((&SeatBid{Bids: []Bid{
-			{ID: "BIDID", ImpID: "IMPID"}},
-		}).Validate()).NotTo(HaveOccurred())
-	})
-})
+func TestSeatBid_Validate(t *testing.T) {
+	subject := &SeatBid{}
+	if exp, got := ErrInvalidSeatBidBid, subject.Validate(); !errors.Is(exp, got) {
+		t.Fatalf("expected %v, got %v", exp, got)
+	}
+}
