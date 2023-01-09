@@ -7,6 +7,7 @@ import "encoding/json"
 // set top box or other digital device.
 type Device struct {
 	UA           string          `json:"ua,omitempty"`             // User agent
+	Sua          *UserAgent      `json:"sua,omitempty"`            // Structured User agent. It's more accurate than UA
 	Geo          *Geo            `json:"geo,omitempty"`            // Location of the device assumed to be the user’s current location
 	DNT          int             `json:"dnt,omitempty"`            // "1": Do not track
 	LMT          int             `json:"lmt,omitempty"`            // "1": Limit Ad Tracking
