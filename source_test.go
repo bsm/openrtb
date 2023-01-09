@@ -1,26 +1,26 @@
-package openrtb
+package openrtb_test
 
 import (
 	"encoding/json"
+	"reflect"
+	"testing"
 
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
+	. "github.com/bsm/openrtb/v3"
 )
 
-var _ = Describe("Source", func() {
+func TestSource(t *testing.T) {
 	var subject *Source
+	if err := fixture("source", &subject); err != nil {
+		t.Fatalf("expected no error, got %v", err)
+	}
 
-	BeforeEach(func() {
-		err := fixture("source", &subject)
-		Expect(err).NotTo(HaveOccurred())
-	})
-
-	It("should parse correctly", func() {
-		Expect(subject).To(Equal(&Source{
-			FinalSaleDecision: 1,
-			TransactionID:     "transaction-id",
-			PaymentChain:      "payment-chain",
-			Ext:               json.RawMessage("{}"),
-		}))
-	})
-})
+	exp := &Source{
+		FinalSaleDecision: 1,
+		TransactionID:     "transaction-id",
+		PaymentChain:      "payment-chain",
+		Ext:               json.RawMessage("{}"),
+	}
+	if got := subject; !reflect.DeepEqual(exp, got) {
+		t.Errorf("expected %+v, got %+v", exp, got)
+	}
+}

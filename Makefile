@@ -1,10 +1,6 @@
-default: vet test
+default: test
 
-test:
-	go test -a ./...
+.minimal.makefile:
+	curl -fsSL -o $@ https://gitlab.com/bsm/misc/raw/master/make/go/minimal.makefile
 
-bench:
-	go test ./... -bench=. -run=NONE
-
-vet:
-	go vet ./...
+include .minimal.makefile
