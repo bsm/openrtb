@@ -9,7 +9,7 @@ type UserAgent struct {
 	Architecture string          `json:"architecture,omitempty"` // Device’s major binary architecture, e.g. "x86" or "arm". Taken from the Sec-CH-UA-Arch header
 	Bitness      string          `json:"bitness,omitempty"`      // Device’s bitness, e.g. "64" for 64-bit architecture. Taken from the Sec-CH-UA-Bitness header
 	Model        string          `json:"model,omitempty"`        // Device model. Taken from the Sec-CH-UAModel header
-	Source       string          `json:"source,omitempty"`       // The source of data used to create this object, List: User-Agent Source in AdCOM 1.0
+	Source       int             `json:"source,omitempty"`       // The source of data used to create this object, List: User-Agent Source in AdCOM 1.0
 	Ext          json.RawMessage `json:"ext,omitempty"`
 }
 
