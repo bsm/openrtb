@@ -688,6 +688,7 @@ const (
 	DeviceTypeTablet    DeviceType = 5
 	DeviceTypeConnected DeviceType = 6
 	DeviceTypeSetTopBox DeviceType = 7
+	DeviceTypeOOH       DeviceType = 8
 )
 
 // ConnType as defined in section 5.22.
