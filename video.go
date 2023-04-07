@@ -33,6 +33,12 @@ type Video struct {
 	MinBitrate      int                 `json:"minbitrate,omitempty"`     // Minimum bit rate in Kbps
 	MaxBitrate      int                 `json:"maxbitrate,omitempty"`     // Maximum bit rate in Kbps
 	BoxingAllowed   *int                `json:"boxingallowed,omitempty"`  // If exchange publisher has rules preventing letter boxing
+	PodID           string              `json:"podid,omitempty"`          // Pod id unique identifier for video ad pod
+	PodDuration     int                 `json:"poddur,omitempty"`         // Pod Duration total amount of time in seconds that advertisers may fill for a video ad pod
+	PodSequence     PodSequence         `json:"podseq,omitempty"`         // Pod Sequence position of the video ad pod
+	SlotInPod       SlotPositionInPod   `json:"slotinpod,omitempty"`      // Slot Position in ad
+	RqdDurs         []int64             `json:"rqddurs,omitempty"`        // Precise acceptable durations for video creatives inseconds.
+	MinCPMPerSecond float64             `json:"mincpmpersec,omitempty"`   //   Minimum CPM per second. This is a price floor for the portion of a video ad pod
 	PlaybackMethods []VideoPlayback     `json:"playbackmethod,omitempty"` // List of allowed playback methods
 	Delivery        []ContentDelivery   `json:"delivery,omitempty"`       // List of supported delivery methods
 	Position        AdPosition          `json:"pos,omitempty"`            // Ad Position

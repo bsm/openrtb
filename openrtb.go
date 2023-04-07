@@ -842,3 +842,24 @@ type Format struct {
 	WidthMin    int             `json:"wmin,omitempty"`    // The minimum width in device independent pixels (DIPS) at which the ad will be displayed the size is expressed as a ratio.
 	Ext         json.RawMessage `json:"ext,omitempty"`
 }
+
+// PodSequence identifies the pod sequence field, for use in video content streams with one or more ad pods as defined in Adcom1.0
+type PodSequence int
+
+// PodSequence options as defined in Adcom1.0
+const (
+	PodSeqLast  PodSequence = -1 // Last pod in the content stream.
+	PodSeqAny   PodSequence = 0  // Any pod in the content stream.
+	PodSeqFirst PodSequence = 1  // First pod in the content stream.
+)
+
+// SlotPositionInPod identifies the slot position in pod field, for use in video ad pods as defined in Adcom1.0
+type SlotPositionInPod int
+
+// SlotPositionInPod options as defined in Adcom1.0
+const (
+	SlotPosLast        SlotPositionInPod = -1 // Last ad in the pod.
+	SlotPosAny         SlotPositionInPod = 0  // Any ad in the pod.
+	SlotPosFirst       SlotPositionInPod = 1  // First ad in the pod.
+	SlotPosFirstOrLast SlotPositionInPod = 2  // First or Last ad in the pod.
+)
