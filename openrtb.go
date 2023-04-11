@@ -488,10 +488,10 @@ const (
 	ExpDirFullScreen ExpDir = 5
 )
 
-// APIFramework as defined in section 5.6.
+// APIFramework as defined in Adcom1.0.
 type APIFramework int
 
-// 5.6 API Frameworks
+// API Frameworks options as defined in Adcom1.0.
 const (
 	APIFrameworkUnknown APIFramework = 0
 	APIFrameworkVPAID1  APIFramework = 1
@@ -499,6 +499,10 @@ const (
 	APIFrameworkMRAID1  APIFramework = 3
 	APIFrameworkORMMA   APIFramework = 4
 	APIFrameworkMRAID2  APIFramework = 5
+	APIFrameworkMRAID3  APIFramework = 6
+	APIFrameworkOMID    APIFramework = 7
+	APIFrameworkSIMID1  APIFramework = 8
+	APIFrameworkSIMID11 APIFramework = 9
 )
 
 // VideoLinearity as defined in section 5.7.
@@ -862,4 +866,29 @@ const (
 	SlotPosAny         SlotPositionInPod = 0  // Any ad in the pod.
 	SlotPosFirst       SlotPositionInPod = 1  // First ad in the pod.
 	SlotPosFirstOrLast SlotPositionInPod = 2  // First or Last ad in the pod.
+)
+
+// Type of the creative markup so that it can properly be associated with the right sub-object of the BidRequest.Imp.
+type MarkupType int
+
+// MarkupType available options
+const (
+	MarkupUnknown MarkupType = 0
+	MarkupBanner  MarkupType = 1
+	MarkupVideo   MarkupType = 2
+	MarkupAudio   MarkupType = 3
+	MarkupNative  MarkupType = 4
+)
+
+// CategoryTaxonomy identifies the taxonomy in effect when content categories as defined in Adcom1.0.
+type CategoryTaxonomy int
+
+// CategoryTaxonomy options as defined in Adcom1.0
+const (
+	CategoryTaxonomyIABContent1   CategoryTaxonomy = 1 // 1	IAB Content Category Taxonomy 1.0.
+	CategoryTaxonomyIABContent2   CategoryTaxonomy = 2 // 2	IAB Content Category Taxonomy 2: www.iab.com/guidelines/taxonomy
+	CategoryTaxonomyIABProduct1   CategoryTaxonomy = 3 // 3	IAB Ad Product Taxonomy 1.0.
+	CategoryTaxonomyIABAudience11 CategoryTaxonomy = 4 // 4	IAB Audience Taxonomy 1.1.
+	CategoryTaxonomyIABContent21  CategoryTaxonomy = 5 // 5	IAB Content Category Taxonomy 2.1.
+	CategoryTaxonomyIABContent22  CategoryTaxonomy = 6 // 6	IAB Content Category Taxonomy 2.2
 )

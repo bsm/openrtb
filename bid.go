@@ -36,7 +36,7 @@ type Bid struct {
 	Tactic      string              `json:"tactic,omitempty"`         // Tactic ID to enable buyers to label bids for reporting to the exchange the tactic through which their bid was submitted.
 	Categories  []ContentCategory   `json:"cat,omitempty"`            // IAB content categories of the creative. Refer to List 5.1
 	Attrs       []CreativeAttribute `json:"attr,omitempty"`           // Array of creative attributes.
-	API         APIFramework        `json:"api,omitempty"`            // API required by the markup if applicable
+	API         APIFramework        `json:"api,omitempty"`            // API required by the markup if applicable, NOTE: for ORTB ver <= 2.5 APIFramework supported is 1 to 6.
 	Protocol    Protocol            `json:"protocol,omitempty"`       // Video response protocol of the markup if applicable
 	MediaRating IQGRating           `json:"qagmediarating,omitempty"` // Creative media rating per IQG guidelines.
 	Language    string              `json:"language,omitempty"`       // Language of the creative using ISO-639-1-alpha-2.
@@ -45,8 +45,16 @@ type Bid struct {
 	Height      int                 `json:"h,omitempty"`              // Height of the ad in pixels.
 	WidthRatio  int                 `json:"wratio,omitempty"`         // Relative width of the creative when expressing size as a ratio.
 	HeightRatio int                 `json:"hratio,omitempty"`         // Relative height of the creative when expressing size as a ratio.
-	Exp         int                 `json:"exp,omitempty"`            // Advisory as to the number of seconds the bidder is willing to wait between the auction and the actual impression.
-	Ext         json.RawMessage     `json:"ext,omitempty"`
+
+	APIS             APIFramework      `json:"apis,omitempty"`      // APIS required by the markup if applicable.
+	LangB            string            `json:"langb,omitempty"`     // Language of the creative using IETF BCP 47. Only one of language or langb should be present.
+	Duration         int               `json:"dur,omitempty"`       // Duration of the video or audio creative in seconds.
+	MarkupType       MarkupType        `json:"mtype,omitempty"`     // Creative markup so that it can properly be associated.
+	SlotInPod        SlotPositionInPod `json:"slotinpod,omitempty"` // Indicates that the bid response is only eligible for a specific position.
+	CategoryTaxonomy CategoryTaxonomy  `json:"cattax,omitempty"`    // Defines the taxonomy in use.
+
+	Exp int             `json:"exp,omitempty"` // Advisory as to the number of seconds the bidder is willing to wait between the auction and the actual impression.
+	Ext json.RawMessage `json:"ext,omitempty"`
 }
 
 // Validate required attributes
