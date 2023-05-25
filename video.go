@@ -45,7 +45,8 @@ type Video struct {
 	CompanionAds    []Banner            `json:"companionad,omitempty"`
 	APIs            []APIFramework      `json:"api,omitempty"` // List of supported API frameworks
 	CompanionTypes  []CompanionType     `json:"companiontype,omitempty"`
-	Placement       VideoPlacement      `json:"placement,omitempty"` // Video placement type
+	Placement       VideoPlacement      `json:"placement,omitempty"` // Video placement type, DEPRECATED
+	Plcmt           VideoPlcmt          `json:"plcmt,omitempty"`     // Video Plcmt type ad defined in ADCOM1.0
 	Ext             json.RawMessage     `json:"ext,omitempty"`
 }
 
