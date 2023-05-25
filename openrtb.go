@@ -892,3 +892,14 @@ const (
 	CategoryTaxonomyIABContent21  CategoryTaxonomy = 5 // 5	IAB Content Category Taxonomy 2.1.
 	CategoryTaxonomyIABContent22  CategoryTaxonomy = 6 // 6	IAB Content Category Taxonomy 2.2
 )
+
+// VideoPlcmt represents the the various types of video placements in accordance with updated IAB Digital Video Guidelines.
+type VideoPlcmt int
+
+// Types of video placements derived largely from the IAB Digital Video Guidelines.
+const (
+	VideoPlcmtInstream            VideoPlcmt = 1
+	VideoPlcmtAccompanyingContent VideoPlcmt = 2
+	VideoPlcmtInterstitial        VideoPlcmt = 3
+	VideoPlcmtNoContent           VideoPlcmt = 4
+)
