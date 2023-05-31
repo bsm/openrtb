@@ -1,10 +1,5 @@
 package openrtb
 
-import (
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
-)
-
 var _ = Describe("Impression", func() {
 	var subject *Impression
 
@@ -43,6 +38,7 @@ var _ = Describe("Impression", func() {
 					},
 				},
 			},
+			Rewarded: false,
 		}))
 	})
 
