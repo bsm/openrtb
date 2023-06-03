@@ -35,7 +35,7 @@ type Impression struct {
 	ContentType       string         `json:"-"`                           // Used to attribute bid to a content - not sent in request
 	MediaType         string         `json:"-"`                           // media of the impression e.g. video/display
 	Ext               Extension      `json:"ext,omitempty"`
-	Rewarded          bool           `json:"rwdd,omitempty"` //Indicates whether the user receives a reward for viewing the ad
+	Rewarded          int            `json:"rwdd,omitempty"` //Indicates whether the user receives a reward for viewing the ad
 }
 
 func (imp *Impression) assetCount() int {
