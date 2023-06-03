@@ -43,7 +43,7 @@ var _ = Describe("Impression", func() {
 					},
 				},
 			},
-			Rewarded: false,
+			Rewarded: 0,
 		}))
 	})
 
