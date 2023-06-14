@@ -903,3 +903,11 @@ const (
 	VideoPlcmtInterstitial        VideoPlcmt = 3
 	VideoPlcmtNoContent           VideoPlcmt = 4
 )
+
+// ChannelEntity describes the network or channel an ad will be displayed on. (Reffer Section 3.2.23 and 3.2.24 OpenRTB_2.6)
+type ChannelEntity struct {
+	ID     string          `json:"id,omitempty"`
+	Name   string          `json:"name,omitempty"`
+	Domain string          `json:"domain,omitempty"`
+	Ext    json.RawMessage `json:"ext,omitempty"`
+}
