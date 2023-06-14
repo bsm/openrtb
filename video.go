@@ -20,8 +20,8 @@ type Video struct {
 	MaxDuration     int                 `json:"maxduration,omitempty"`    // Maximum video ad duration in seconds
 	Protocols       []Protocol          `json:"protocols,omitempty"`      // Video bid response protocols
 	Protocol        Protocol            `json:"protocol,omitempty"`       // Video bid response protocols DEPRECATED
-	Width           int                 `json:"w,omitempty"`              // Width of the player in pixels
-	Height          int                 `json:"h,omitempty"`              // Height of the player in pixels
+	Width           int                 `json:"w"`                        // Width of the player in pixels
+	Height          int                 `json:"h"`                        // Height of the player in pixels
 	StartDelay      StartDelay          `json:"startdelay,omitempty"`     // Indicates the start delay in seconds
 	Linearity       VideoLinearity      `json:"linearity,omitempty"`      // Indicates whether the ad impression is linear or non-linear
 	Skip            int                 `json:"skip,omitempty"`           // Indicates if the player will allow the video to be skipped, where 0 = no, 1 = yes.
