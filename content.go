@@ -33,5 +33,10 @@ type Content struct {
 	Language           string            `json:"language,omitempty"`           // Content language using ISO-639-1-alpha-2.
 	Embeddable         int               `json:"embeddable,omitempty"`         // Indicator of whether or not the content is embeddable (e.g., an embeddable video player), where 0 = no, 1 = yes.
 	Data               []Data            `json:"data,omitempty"`               // Additional content data.
+	Network            *ChannelEntity    `json:"network,omitempty"`            // Details about the network the content is on.
+	Channel            *ChannelEntity    `json:"channel,omitempty"`            // Details about the channel the content is on.
+	KwArray            []string          `json:"kwarray,omitempty"`            // Array of keywords about the site. Only one of ‘keywords’ or‘kwarray’ may be present.
+	CategoryTaxonomy   CategoryTaxonomy  `json:"cattax,omitempty"`             // Defines the taxonomy in use.
+	LangB              string            `json:"langb,omitempty"`              // Language of the creative using IETF BCP 47. Only one of language or langb should be present.
 	Ext                json.RawMessage   `json:"ext,omitempty"`
 }
