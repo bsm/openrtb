@@ -28,7 +28,7 @@ type BidRequest struct {
 	Seats             []string          `json:"wseat,omitempty"`   // Array of buyer seats allowed to bid on this auction
 	BlockedSeats      []string          `json:"bseat,omitempty"`   // Array of buyer seats blocked to bid on this auction
 	Languages         []string          `json:"wlang,omitempty"`   // Allowed list of languages for creatives using ISO-639-1-alpha-2. Omission implies no specific restrictions, but buyers would be advised to consider language attribute in the Device and/or Content objects if available. Only one of wlang or wlangb should be present.
-	WLangB            []string          `json:"wlangb,omitempty"`  // Allowed list of languages for creatives using IETF BCP 47I. Omission implies no specific restrictions, but buyers would be advised to consider language attribute in the Device and/or Content objects if available. Only one of wlang or wlangb should be present.
+	LanguagesB        []string          `json:"wlangb,omitempty"`  // Allowed list of languages for creatives using IETF BCP 47I. Omission implies no specific restrictions, but buyers would be advised to consider language attribute in the Device and/or Content objects if available. Only one of wlang or wlangb should be present.
 	AllImpressions    int               `json:"allimps,omitempty"` // Flag to indicate whether exchange can verify that all impressions offered represent all of the impressions available in context, Default: 0
 	Currencies        []string          `json:"cur,omitempty"`     // Array of allowed currencies
 	BlockedCategories []ContentCategory `json:"bcat,omitempty"`    // Blocked Advertiser Categories.
