@@ -32,7 +32,7 @@ type Content struct {
 	SourceRelationship int               `json:"sourcerelationship,omitempty"` // 0 = indirect, 1 = direct.
 	Length             int               `json:"len,omitempty"`                // Length of content in seconds; appropriate for video or audio.
 	Language           string            `json:"language,omitempty"`           // Content language using ISO-639-1-alpha-2.
-	LangB              string            `json:"langb,omitempty"`              // Content language using IETF BCP 47. Only one of language or langb should be present.
+	LanguageB          string            `json:"langb,omitempty"`              // Content language using IETF BCP 47. Only one of language or langb should be present.
 	Embeddable         int               `json:"embeddable,omitempty"`         // Indicator of whether or not the content is embeddable (e.g., an embeddable video player), where 0 = no, 1 = yes.
 	Data               []Data            `json:"data,omitempty"`               // Additional content data.
 	Network            *ChannelEntity    `json:"network,omitempty"`            // Details about the network the content is on.
