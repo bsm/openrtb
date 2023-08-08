@@ -19,6 +19,7 @@ type Content struct {
 	ISRC               string            `json:"isrc,omitempty"`               // International Standard Recording Code conforming to ISO - 3901.
 	Producer           *Producer         `json:"producer,omitempty"`           // The producer.
 	URL                string            `json:"url,omitempty"`                // URL of the content, for buy-side contextualization or review.
+	CategoryTaxonomy   CategoryTaxonomy  `json:"cattax,omitempty"`             // Defines the taxonomy in use.
 	Categories         []ContentCategory `json:"cat,omitempty"`                // Array of IAB content categories that describe the content.
 	ProductionQuality  ProductionQuality `json:"prodq,omitempty"`              // Production quality per IAB's classification.
 	VideoQuality       ProductionQuality `json:"videoquality,omitempty"`       // DEPRECATED. Video quality per IAB's classification.
@@ -31,12 +32,11 @@ type Content struct {
 	SourceRelationship int               `json:"sourcerelationship,omitempty"` // 0 = indirect, 1 = direct.
 	Length             int               `json:"len,omitempty"`                // Length of content in seconds; appropriate for video or audio.
 	Language           string            `json:"language,omitempty"`           // Content language using ISO-639-1-alpha-2.
+	LangB              string            `json:"langb,omitempty"`              // Content language using IETF BCP 47. Only one of language or langb should be present.
 	Embeddable         int               `json:"embeddable,omitempty"`         // Indicator of whether or not the content is embeddable (e.g., an embeddable video player), where 0 = no, 1 = yes.
 	Data               []Data            `json:"data,omitempty"`               // Additional content data.
 	Network            *ChannelEntity    `json:"network,omitempty"`            // Details about the network the content is on.
 	Channel            *ChannelEntity    `json:"channel,omitempty"`            // Details about the channel the content is on.
 	KwArray            []string          `json:"kwarray,omitempty"`            // Array of keywords about the site. Only one of ‘keywords’ or‘kwarray’ may be present.
-	CategoryTaxonomy   CategoryTaxonomy  `json:"cattax,omitempty"`             // Defines the taxonomy in use.
-	LangB              string            `json:"langb,omitempty"`              // Language of the creative using IETF BCP 47. Only one of language or langb should be present.
 	Ext                json.RawMessage   `json:"ext,omitempty"`
 }
