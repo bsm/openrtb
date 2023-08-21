@@ -26,7 +26,8 @@ type Device struct {
 	JS           int             `json:"js,omitempty"`             // Javascript status ("0": Disabled, "1": Enabled)
 	GeoFetch     int             `json:"geofetch,omitempty"`       // Indicates if the geolocation API will be available to JavaScript code running in the banner,
 	FlashVersion string          `json:"flashver,omitempty"`       // Flash version
-	Language     string          `json:"language,omitempty"`       // Browser language
+	Language     string          `json:"language,omitempty"`       // Browser language using ISO-639-1-alpha-2. Only one of language or langb should be present.
+	LanguageB    string          `json:"langb,omitempty"`          // Browser language using IETF BCP 47. Only one of language or langb should be present.
 	Carrier      string          `json:"carrier,omitempty"`        // Carrier or ISP derived from the IP address
 	MCCMNC       string          `json:"mccmnc,omitempty"`         // Mobile carrier as the concatenated MCC-MNC code (e.g., "310-005" identifies Verizon Wireless CDMA in the USA).
 	ConnType     ConnType        `json:"connectiontype,omitempty"` // Network connection type.
