@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	. "github.com/bsm/openrtb/v3"
+	. "github.com/tomlightning/openrtb/v3"
 )
 
 func TestBid(t *testing.T) {

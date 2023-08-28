@@ -1,6 +1,6 @@
 package openrtb
 
-import "encoding/json"
+import "github.com/goccy/go-json"
 
 // Source object describes the nature and behavior of the entity that is the source of the bid request upstream from the exchange.
 type Source struct {

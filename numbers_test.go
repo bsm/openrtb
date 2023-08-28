@@ -1,10 +1,11 @@
 package openrtb_test
 
 import (
-	"encoding/json"
 	"testing"
 
-	. "github.com/bsm/openrtb/v3"
+	"github.com/goccy/go-json"
+
+	. "github.com/tomlightning/openrtb/v3"
 )
 
 func TestNumberOrString(t *testing.T) {

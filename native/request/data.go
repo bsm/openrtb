@@ -1,6 +1,6 @@
 package request
 
-import "encoding/json"
+import "github.com/goccy/go-json"
 
 // DataTypeID enum.
 type DataTypeID int

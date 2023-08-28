@@ -1,6 +1,6 @@
 package openrtb
 
-import "encoding/json"
+import "github.com/goccy/go-json"
 
 // Banner object must be included directly in the impression object if the impression offered
 // for auction is display or rich media, or it may be optionally embedded in the video object to

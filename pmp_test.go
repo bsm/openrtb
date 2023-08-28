@@ -2,11 +2,12 @@ package openrtb_test
 
 import (
 	"bytes"
-	"encoding/json"
 	"reflect"
 	"testing"
 
-	. "github.com/bsm/openrtb/v3"
+	"github.com/goccy/go-json"
+
+	. "github.com/tomlightning/openrtb/v3"
 )
 
 func TestPMP(t *testing.T) {

@@ -1,6 +1,6 @@
 package openrtb
 
-import "encoding/json"
+import "github.com/goccy/go-json"
 
 // Native object represents a native type impression. Native ad units are intended to blend seamlessly into
 // the surrounding content (e.g., a sponsored Twitter or Facebook post). As such, the response must be

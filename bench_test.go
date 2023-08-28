@@ -1,10 +1,11 @@
 package openrtb
 
 import (
-	"encoding/json"
 	"os"
 	"path/filepath"
 	"testing"
+
+	"github.com/goccy/go-json"
 )
 
 func BenchmarkBidRequest_Unmarshal(b *testing.B) {

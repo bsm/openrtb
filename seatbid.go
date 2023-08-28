@@ -1,8 +1,9 @@
 package openrtb
 
 import (
-	"encoding/json"
 	"errors"
+
+	"github.com/goccy/go-json"
 )
 
 // SeatBid contains seat information. At least one of Bid is required.

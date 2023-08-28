@@ -1,3 +1,5 @@
-module github.com/bsm/openrtb/v3
+module github.com/tomlighting/openrtb/v3
 
-go 1.13
+go 1.20
+
+require github.com/goccy/go-json v0.10.2 // indirect

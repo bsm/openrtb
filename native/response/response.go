@@ -1,9 +1,9 @@
 package response
 
 import (
-	"encoding/json"
+	"github.com/goccy/go-json"
 
-	"github.com/bsm/openrtb/v3"
+	"github.com/tomlightning/openrtb/v3"
 )
 
 // Response is the native object is the top level JSON object which identifies a native response.

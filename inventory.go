@@ -1,6 +1,6 @@
 package openrtb
 
-import "encoding/json"
+import "github.com/goccy/go-json"
 
 // Inventory contains inventory specific attributes
 type Inventory struct {

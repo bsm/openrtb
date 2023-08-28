@@ -1,9 +1,10 @@
 package openrtb_test
 
 import (
-	"encoding/json"
 	"os"
 	"path/filepath"
+
+	"github.com/goccy/go-json"
 )
 
 func fixture(fname string, v interface{}) error {

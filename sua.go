@@ -1,6 +1,6 @@
 package openrtb
 
-import "encoding/json"
+import "github.com/goccy/go-json"
 
 type UserAgent struct {
 	Browsers     []BrandVersion  `json:"browsers,omitempty"`     // A browser or similar software component

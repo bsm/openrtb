@@ -1,6 +1,6 @@
 package request
 
-import "encoding/json"
+import "github.com/goccy/go-json"
 
 // Asset is the main container object for each asset requested or supported by Exchange
 // on behalf of the rendering client.  Only one of the {title,img,video,data}

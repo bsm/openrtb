@@ -1,13 +1,14 @@
 package request_test
 
 import (
-	"encoding/json"
 	"os"
 	"reflect"
 	"testing"
 
-	"github.com/bsm/openrtb/v3"
-	. "github.com/bsm/openrtb/v3/native/request"
+	"github.com/goccy/go-json"
+
+	"github.com/tomlightning/openrtb/v3"
+	. "github.com/tomlightning/openrtb/v3/native/request"
 )
 
 func TestRequest(t *testing.T) {

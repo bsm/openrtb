@@ -1,6 +1,6 @@
 package response
 
-import "encoding/json"
+import "github.com/goccy/go-json"
 
 // Asset corresponds to the Asset Object in the request. The main container object for
 // each asset requested or supported by Exchange on behalf of the rendering

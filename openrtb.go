@@ -1,6 +1,6 @@
 package openrtb
 
-import "encoding/json"
+import "github.com/goccy/go-json"
 
 // ContentCategory as defined in section 5.1
 type ContentCategory string

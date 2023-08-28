@@ -1,6 +1,6 @@
 package response
 
-import "encoding/json"
+import "github.com/goccy/go-json"
 
 // Image object contains response image.
 type Image struct {

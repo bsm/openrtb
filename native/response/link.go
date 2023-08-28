@@ -1,6 +1,6 @@
 package response
 
-import "encoding/json"
+import "github.com/goccy/go-json"
 
 // Link object contains response link.
 type Link struct {

@@ -1,8 +1,9 @@
 package openrtb
 
 import (
-	"encoding/json"
 	"errors"
+
+	"github.com/goccy/go-json"
 )
 
 // Validation errors

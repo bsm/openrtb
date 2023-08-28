@@ -1,6 +1,6 @@
 package response
 
-import "encoding/json"
+import "github.com/goccy/go-json"
 
 // Title wraps title information.
 type Title struct {

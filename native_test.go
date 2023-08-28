@@ -1,11 +1,12 @@
 package openrtb_test
 
 import (
-	"encoding/json"
 	"reflect"
 	"testing"
 
-	. "github.com/bsm/openrtb/v3"
+	"github.com/goccy/go-json"
+
+	. "github.com/tomlightning/openrtb/v3"
 )
 
 func TestNative(t *testing.T) {

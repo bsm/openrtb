@@ -1,8 +1,9 @@
 package openrtb
 
 import (
-	"encoding/json"
 	"strconv"
+
+	"github.com/goccy/go-json"
 )
 
 // NumberOrString attempts to fix OpenRTB incompatibilities

@@ -1,6 +1,6 @@
 package openrtb
 
-import "encoding/json"
+import "github.com/goccy/go-json"
 
 // PMP is the Private Marketplace Object
 type PMP struct {

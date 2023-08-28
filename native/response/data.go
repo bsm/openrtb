@@ -1,6 +1,6 @@
 package response
 
-import "encoding/json"
+import "github.com/goccy/go-json"
 
 // Data object contains response data.
 type Data struct {

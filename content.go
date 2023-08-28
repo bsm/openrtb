@@ -1,6 +1,6 @@
 package openrtb
 
-import "encoding/json"
+import "github.com/goccy/go-json"
 
 // Content object describes the content in which the impression will appear, which may be syndicated or nonsyndicated
 // content. This object may be useful when syndicated content contains impressions and does
