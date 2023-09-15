@@ -32,8 +32,9 @@ type Impression struct {
 	BidFloor              float64         `json:"bidfloor,omitempty"`          // Bid floor for this impression in CPM
 	BidFloorCurrency      string          `json:"bidfloorcur,omitempty"`       // Currency of bid floor
 	Secure                NumberOrString  `json:"secure,omitempty"`            // Flag to indicate whether the impression requires secure HTTPS URL creative assets and markup.
-	Exp                   int             `json:"exp,omitempty"`               // Advisory as to the number of seconds that may elapse between the auction and the actual impression.
-	IFrameBusters         []string        `json:"iframebuster,omitempty"`      // Array of names for supportediframe busters.
+	Quantity              *Quantity       `json:"qty,omitempty"`          // Includes the impression multiplier, and describes its source.
+	Exp                   int             `json:"exp,omitempty"`          // Advisory as to the number of seconds that may elapse between the auction and the actual impression.
+	IFrameBusters         []string        `json:"iframebuster,omitempty"` // Array of names for supportediframe busters.
 	Ext                   json.RawMessage `json:"ext,omitempty"`
 }
 
@@ -63,6 +64,11 @@ func (imp *Impression) Validate() error {
 
 	if imp.Video != nil {
 		if err := imp.Video.Validate(); err != nil {
+			return err
+		}
+	}
+	if imp.Quantity != nil {
+		if err := imp.Quantity.Validate(); err != nil {
 			return err
 		}
 	}

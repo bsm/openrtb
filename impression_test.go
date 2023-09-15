@@ -31,6 +31,9 @@ func TestImpression(t *testing.T) {
 				},
 			},
 		},
+		Quantity: &Quantity{
+			Multiplier: 1.0,
+		},
 	}
 	if got := subject; !reflect.DeepEqual(exp, got) {
 		t.Errorf("expected %+v, got %+v", exp, got)
