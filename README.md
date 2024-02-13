@@ -13,7 +13,7 @@ Requires Go 1.8+ for proper `json.RawMessage` marshaling.
 To install, use `go get`:
 
 ```shell
-go get github.com/bsm/openrtb/v3
+go get github.com/octoclick/openrtb-easyjson
 ```
 
 ## Usage
