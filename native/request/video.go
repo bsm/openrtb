@@ -2,6 +2,7 @@ package request
 
 import "github.com/UnityTech/openrtb"
 
+// Video is the native video object.
 // TODO unclear if its the same as imp.video https://github.com/openrtb/OpenRTB/issues/26
 type Video struct {
 	Mimes       []string          `json:"mimes,omitempty"`       // Whitelist of content MIME types supported

@@ -2,14 +2,17 @@ package request
 
 import "github.com/UnityTech/openrtb"
 
+// ImageTypeID enum.
 type ImageTypeID int
 
+// ImageTypeID enum values.
 const (
 	ImageTypeIcon ImageTypeID = 1 // Icon image
 	ImageTypeLogo ImageTypeID = 2 // Logo image for the brand/app
 	ImageTypeMain ImageTypeID = 3 // Large image preview for the ad
 )
 
+// Image is the native image object.
 type Image struct {
 	TypeID ImageTypeID `json:"type,omitempty"` // Type ID of the image element supported by the publisher
 

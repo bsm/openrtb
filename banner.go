@@ -1,6 +1,6 @@
 package openrtb
 
-// The "banner" object must be included directly in the impression object if the impression offered
+// Banner object must be included directly in the impression object if the impression offered
 // for auction is display or rich media, or it may be optionally embedded in the video object to
 // describe the companion banners available for the linear or non-linear video ad.  The banner
 // object may include a unique identifier; this can be useful if these IDs can be leveraged in the

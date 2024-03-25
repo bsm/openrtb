@@ -1,69 +1,71 @@
-package openrtb
+package openrtb_test
 
 import (
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
+	"errors"
+	"reflect"
+	"testing"
+
+	. "github.com/UnityTech/openrtb"
 )
 
-var _ = Describe("Video", func() {
+func TestVideo(t *testing.T) {
 	var subject *Video
+	if err := fixture("video", &subject); err != nil {
+		t.Fatalf("expected no error, got %v", err)
+	}
 
-	BeforeEach(func() {
-		err := fixture("video", &subject)
-		Expect(err).NotTo(HaveOccurred())
-	})
+	boxingAllowed := 1
+	exp := &Video{
+		Mimes: []string{
+			"video/x-flv",
+			"video/mp4",
+			"application/x-shockwave-flash",
+			"application/javascript",
+		},
+		MinDuration:    5,
+		MaxDuration:    30,
+		Protocols:      []int{VideoProtoVAST2, VideoProtoVAST3},
+		W:              640,
+		H:              480,
+		Linearity:      VideoLinearityLinear,
+		Sequence:       1,
+		BAttr:          []int{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert},
+		MaxExtended:    30,
+		MinBitrate:     300,
+		MaxBitrate:     1500,
+		BoxingAllowed:  &boxingAllowed,
+		PlaybackMethod: []int{VideoPlaybackAutoSoundOn, VideoPlaybackClickToPlay},
+		Delivery:       []int{ContentDeliveryProgressive},
+		Pos:            AdPosAboveFold,
+		CompanionAd: []Banner{
+			{W: 300, H: 250, ID: "1234567893-1", Pos: AdPosAboveFold, BAttr: []int{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert}, ExpDir: []int{ExpDirRight, ExpDirDown}},
+			{W: 728, H: 90, ID: "1234567893-2", Pos: AdPosAboveFold, BAttr: []int{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert}},
+		},
+		Placement:     VideoPlacementInStream,
+		Api:           []int{APIFrameworkVPAID1, APIFrameworkVPAID2},
+		CompanionType: []int{VASTCompanionStatic, VASTCompanionHTML},
+	}
+	if got := subject; !reflect.DeepEqual(exp, got) {
+		t.Errorf("expected %+v, got %+v", exp, got)
+	}
+}
 
-	It("should parse correctly", func() {
-		Expect(subject).To(Equal(&Video{
-			Mimes: []string{
-				"video/x-flv",
-				"video/mp4",
-				"application/x-shockwave-flash",
-				"application/javascript",
-			},
-			MinDuration:    5,
-			MaxDuration:    30,
-			Protocols:      []int{VideoProtoVAST2, VideoProtoVAST3},
-			W:              640,
-			H:              480,
-			Linearity:      VideoLinearityLinear,
-			Sequence:       1,
-			BAttr:          []int{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert},
-			MaxExtended:    30,
-			MinBitrate:     300,
-			MaxBitrate:     1500,
-			BoxingAllowed:  iptr(1),
-			PlaybackMethod: []int{VideoPlaybackAutoSoundOn, VideoPlaybackClickToPlay},
-			Delivery:       []int{ContentDeliveryProgressive},
-			Pos:            AdPosAboveFold,
-			CompanionAd: []Banner{
-				{W: 300, H: 250, ID: "1234567893-1", Pos: AdPosAboveFold, BAttr: []int{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert}, ExpDir: []int{ExpDirRight, ExpDirDown}},
-				{W: 728, H: 90, ID: "1234567893-2", Pos: AdPosAboveFold, BAttr: []int{CreativeAttributeUserInitiated, CreativeAttributeWindowsDialogOrAlert}},
-			},
-			Placement:     VideoPlacementInStream,
-			Api:           []int{APIFrameworkVPAID1, APIFrameworkVPAID2},
-			CompanionType: []int{VASTCompanionStatic, VASTCompanionHTML},
-		}))
-	})
-
-	It("should validate", func() {
-		Expect((&Video{}).Validate()).To(Equal(ErrInvalidVideoNoMimes))
-		Expect((&Video{
-			Mimes: []string{"video/mp4"},
-		}).Validate()).To(Equal(ErrInvalidVideoNoLinearity))
-		Expect((&Video{
-			MinDuration: 1,
-			MaxDuration: 1,
-			Linearity:   VideoLinearityNonLinear,
-			Mimes:       []string{"video/mp4"},
-		}).Validate()).To(Equal(ErrInvalidVideoNoProtocols))
-		Expect((&Video{
-			Protocol:    VideoProtoVAST3,
-			MinDuration: 1,
-			MaxDuration: 1,
-			Linearity:   VideoLinearityNonLinear,
-			Mimes:       []string{"video/mp4"},
-		}).Validate()).NotTo(HaveOccurred())
-	})
-
-})
+func TestVideo_Validate(t *testing.T) {
+	subject := &Video{}
+	if exp, got := ErrInvalidVideoNoMimes, subject.Validate(); !errors.Is(exp, got) {
+		t.Fatalf("expected %v, got %v", exp, got)
+	}
+	subject = &Video{Mimes: []string{"video/mp4"}}
+	if exp, got := ErrInvalidVideoNoLinearity, subject.Validate(); !errors.Is(exp, got) {
+		t.Fatalf("expected %v, got %v", exp, got)
+	}
+	subject = &Video{
+		MinDuration: 1,
+		MaxDuration: 1,
+		Linearity:   VideoLinearityNonLinear,
+		Mimes:       []string{"video/mp4"},
+	}
+	if exp, got := ErrInvalidVideoNoProtocols, subject.Validate(); !errors.Is(exp, got) {
+		t.Fatalf("expected %v, got %v", exp, got)
+	}
+}

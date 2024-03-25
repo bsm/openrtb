@@ -8,6 +8,7 @@ var (
 	ErrInvalidBidNoImpID = errors.New("openrtb: bid is missing impression ID")
 )
 
+// Bid object contains bid information.
 // ID, ImpID and Price are required; all other optional.
 // If the bidder wins the impression, the exchange calls notice URL (nurl)
 // a) to inform the bidder of the win;
@@ -32,7 +33,7 @@ type Bid struct {
 	Tactic         string         `json:"tactic,omitempty"`         // Tactic ID to enable buyers to label bids for reporting to the exchange the tactic through which their bid was submitted.
 	Cat            []string       `json:"cat,omitempty"`            // IAB content categories of the creative. Refer to List 5.1
 	Attr           []int          `json:"attr,omitempty"`           // Array of creative attributes.
-	API            int            `json:"api,omitempty"`            // API required by the markup if applicable
+	API            int            `json:"api,omitempty"`            // API required by the markup if applicable, NOTE: for ORTB ver <= 2.5 APIFramework supported is 1 to 6.
 	Protocol       int            `json:"protocol,omitempty"`       // Video response protocol of the markup if applicable
 	QAGMediaRating int            `json:"qagmediarating,omitempty"` // Creative media rating per IQG guidelines.
 	Language       string         `json:"language,omitempty"`       // Language of the creative using ISO-639-1-alpha-2.
@@ -41,11 +42,19 @@ type Bid struct {
 	W              int            `json:"w,omitempty"`              // Width of the ad in pixels.
 	WRatio         int            `json:"wratio,omitempty"`         // Relative width of the creative when expressing size as a ratio.
 	HRatio         int            `json:"hratio,omitempty"`         // Relative height of the creative when expressing size as a ratio.
-	Exp            int            `json:"exp,omitempty"`            // Advisory as to the number of seconds the bidder is willing to wait between the auction and the actual impression.
-	ContentType    string         `json:"-"`                        // Content of the bid
-	MediaType      string         `json:"-"`                        // Media of the impression e.g. video/display
-	IsOMEnabled    bool           `json:"-"`                        // Flag to send indicate to the Sdk whether or not to run om scripts
-	Ext            Extension      `json:"ext,omitempty"`
+
+	APIS             []int             `json:"apis,omitempty"`      // APIS required by the markup if applicable.
+	LangB            string            `json:"langb,omitempty"`     // Language of the creative using IETF BCP 47. Only one of language or langb should be present.
+	Duration         int               `json:"dur,omitempty"`       // Duration of the video or audio creative in seconds.
+	MarkupType       MarkupType        `json:"mtype,omitempty"`     // Creative markup so that it can properly be associated.
+	SlotInPod        SlotPositionInPod `json:"slotinpod,omitempty"` // Indicates that the bid response is only eligible for a specific position.
+	CategoryTaxonomy CategoryTaxonomy  `json:"cattax,omitempty"`    // Defines the taxonomy in use.
+
+	Exp         int       `json:"exp,omitempty"` // Advisory as to the number of seconds the bidder is willing to wait between the auction and the actual impression.
+	ContentType string    `json:"-"`             // Content of the bid
+	MediaType   string    `json:"-"`             // Media of the impression e.g. video/display
+	IsOMEnabled bool      `json:"-"`             // Flag to send indicate to the Sdk whether or not to run om scripts
+	Ext         Extension `json:"ext,omitempty"`
 }
 
 // Validate required attributes

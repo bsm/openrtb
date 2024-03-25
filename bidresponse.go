@@ -1,6 +1,8 @@
 package openrtb
 
-import "errors"
+import (
+	"errors"
+)
 
 // Validation errors
 var (
@@ -8,6 +10,7 @@ var (
 	ErrInvalidRespNoSeatBids = errors.New("openrtb: response missing seatbids")
 )
 
+// BidResponse is the bid response wrapper object.
 // ID and at least one "seatbid” object is required, which contains a bid on at least one impression.
 // Other attributes are optional since an exchange may establish default values.
 // No-Bids on all impressions should be indicated as a HTTP 204 response.
@@ -30,11 +33,11 @@ func (res *BidResponse) Validate() error {
 		return ErrInvalidRespNoSeatBids
 	}
 
-	for _, sb := range res.SeatBid {
-		if err := sb.Validate(); err != nil {
+	for i := range res.SeatBid {
+		sb := res.SeatBid[i]
+		if err := (&sb).Validate(); err != nil {
 			return err
 		}
 	}
-
 	return nil
 }

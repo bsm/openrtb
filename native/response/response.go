@@ -2,7 +2,7 @@ package response
 
 import "github.com/UnityTech/openrtb"
 
-// The native object is the top level JSON object which identifies a native response
+// Response is the native object is the top level JSON object which identifies a native response.
 type Response struct {
 	Ver         openrtb.StringOrNumber `json:"ver,omitempty"`         // Version of the Native Markup
 	Assets      []Asset                `json:"assets"`                // An array of Asset Objects

@@ -1,24 +1,24 @@
-package openrtb
+package openrtb_test
 
 import (
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
+	"reflect"
+	"testing"
+
+	. "github.com/UnityTech/openrtb"
 )
 
-var _ = Describe("Metric", func() {
-	var metric *Metric
+func TestMetric(t *testing.T) {
+	var subject *Metric
+	if err := fixture("metric", &subject); err != nil {
+		t.Fatalf("expected no error, got %v", err)
+	}
 
-	BeforeEach(func() {
-		err := fixture("metric", &metric)
-		Expect(err).NotTo(HaveOccurred())
-	})
-
-	It("should parse correctly", func() {
-		Expect(metric).To(Equal(&Metric{
-			Type:   "viewable_percentage",
-			Value:  0.99,
-			Vendor: "MOAT",
-		}))
-	})
-
-})
+	exp := &Metric{
+		Type:   "viewable_percentage",
+		Value:  0.99,
+		Vendor: "MOAT",
+	}
+	if got := subject; !reflect.DeepEqual(exp, got) {
+		t.Errorf("expected %+v, got %+v", exp, got)
+	}
+}

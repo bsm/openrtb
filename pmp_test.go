@@ -1,34 +1,38 @@
-package openrtb
+package openrtb_test
 
 import (
+	"bytes"
 	"encoding/json"
+	"reflect"
+	"testing"
 
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
+	. "github.com/UnityTech/openrtb"
 )
 
-var _ = Describe("Pmp", func() {
+func TestPMP(t *testing.T) {
 	var subject *Pmp
+	if err := fixture("pmp", &subject); err != nil {
+		t.Fatalf("expected no error, got %v", err)
+	}
 
-	BeforeEach(func() {
-		err := fixture("pmp", &subject)
-		Expect(err).NotTo(HaveOccurred())
-	})
+	exp := &Pmp{
+		Private: 1,
+		Deals: []Deal{
+			{ID: "DX-1985-010A", BidFloor: 2.5, BidFloorCurrency: "", AuctionType: 2},
+			{ID: "DX-1986-010A", BidFloor: 2.6, BidFloorCurrency: "", AuctionType: 2},
+		},
+	}
+	if got := subject; !reflect.DeepEqual(exp, got) {
+		t.Errorf("expected %+v, got %+v", exp, got)
+	}
+}
 
-	It("should parse correctly", func() {
-		Expect(subject).To(Equal(&Pmp{
-			Private: 1,
-			Deals: []Deal{
-				{ID: "DX-1985-010A", BidFloor: 2.5, BidFloorCurrency: "", AuctionType: 2},
-				{ID: "DX-1986-010A", BidFloor: 2.6, BidFloorCurrency: "", AuctionType: 2},
-			},
-		}))
-	})
-
-	It("should generate correctly", func() {
-		bin, err := json.Marshal(&Pmp{Deals: []Deal{{}}})
-		Expect(err).NotTo(HaveOccurred())
-		Expect(string(bin)).To(Equal(`{"deals":[{"at":2}]}`))
-	})
-
-})
+func TestPMP_MarshalJSON(t *testing.T) {
+	subject := &Pmp{Deals: []Deal{{}}}
+	exp := []byte(`{"deals":[{"at":2}]}`)
+	if got, err := json.Marshal(subject); err != nil {
+		t.Fatalf("expected no error, got %v", err)
+	} else if !bytes.Equal(exp, got) {
+		t.Errorf("expected %+v, got %+v", exp, got)
+	}
+}
