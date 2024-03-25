@@ -1,3 +1,3 @@
-module github.com/bsm/openrtb/v3
+module github.com/UnityTech/openrtb
 
 go 1.13
