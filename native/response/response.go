@@ -1,6 +1,6 @@
 package response
 
-import "github.com/UnityTech/openrtb"
+import "github.com/UnityTech/openrtb/v3"
 
 // Response is the native object is the top level JSON object which identifies a native response.
 type Response struct {

@@ -4,7 +4,7 @@ import (
 	"errors"
 	"testing"
 
-	. "github.com/UnityTech/openrtb"
+	. "github.com/UnityTech/openrtb/v3"
 )
 
 func TestSeatBid_Validate(t *testing.T) {

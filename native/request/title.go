@@ -1,6 +1,6 @@
 package request
 
-import "github.com/UnityTech/openrtb"
+import "github.com/UnityTech/openrtb/v3"
 
 // Title is the native title object.
 type Title struct {

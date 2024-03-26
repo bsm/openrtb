@@ -1,6 +1,6 @@
 package response
 
-import "github.com/UnityTech/openrtb"
+import "github.com/UnityTech/openrtb/v3"
 
 // Link object contains response link.
 type Link struct {

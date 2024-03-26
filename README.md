@@ -13,7 +13,7 @@ Requires Go 1.8+ for proper `json.RawMessage` marshaling.
 To install, use `go get`:
 
 ```shell
-go get github.com/UnityTech/openrtb
+go get github.com/UnityTech/openrtb/v3
 ```
 
 ## Usage
@@ -22,9 +22,11 @@ go get github.com/UnityTech/openrtb
 package main
 
 import (
+  "encoding/json"
   "log"
+  "os"
 
-  "github.com/UnityTech/openrtb"
+  "github.com/UnityTech/openrtb/v3"
 )
 
 func main() {
