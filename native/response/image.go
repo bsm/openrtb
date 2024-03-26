@@ -1,6 +1,6 @@
 package response
 
-import "github.com/UnityTech/openrtb"
+import "github.com/UnityTech/openrtb/v3"
 
 // Image object contains response image.
 type Image struct {

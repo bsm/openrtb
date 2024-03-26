@@ -1,6 +1,6 @@
 package response
 
-import "github.com/UnityTech/openrtb"
+import "github.com/UnityTech/openrtb/v3"
 
 // Title wraps title information.
 type Title struct {

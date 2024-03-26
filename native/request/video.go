@@ -1,6 +1,6 @@
 package request
 
-import "github.com/UnityTech/openrtb"
+import "github.com/UnityTech/openrtb/v3"
 
 // Video is the native video object.
 // TODO unclear if its the same as imp.video https://github.com/openrtb/OpenRTB/issues/26

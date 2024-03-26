@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	. "github.com/UnityTech/openrtb"
+	. "github.com/UnityTech/openrtb/v3"
 )
 
 func TestApp(t *testing.T) {

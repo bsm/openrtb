@@ -1,6 +1,6 @@
 package request
 
-import "github.com/UnityTech/openrtb"
+import "github.com/UnityTech/openrtb/v3"
 
 // ImageTypeID enum.
 type ImageTypeID int
