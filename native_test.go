@@ -1,23 +1,23 @@
-package openrtb
+package openrtb_test
 
 import (
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
+	"reflect"
+	"testing"
+
+	. "github.com/UnityTech/openrtb"
 )
 
-var _ = Describe("Native", func() {
+func TestNative(t *testing.T) {
 	var subject *Native
+	if err := fixture("native", &subject); err != nil {
+		t.Fatalf("expected no error, got %v", err)
+	}
 
-	BeforeEach(func() {
-		err := fixture("native", &subject)
-		Expect(err).NotTo(HaveOccurred())
-	})
-
-	It("should parse correctly", func() {
-		Expect(subject).To(Equal(&Native{
-			Request: Extension(`"PAYLOAD"`),
-			Ver:     "2",
-		}))
-	})
-
-})
+	exp := &Native{
+		Request: Extension(`"PAYLOAD"`),
+		Ver:     "2",
+	}
+	if got := subject; !reflect.DeepEqual(exp, got) {
+		t.Errorf("expected %+v, got %+v", exp, got)
+	}
+}

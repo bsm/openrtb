@@ -1,8 +1,10 @@
 package openrtb
 
-import "errors"
+import (
+	"errors"
+)
 
-// At least one of Bid is required.
+// SeatBid contains seat information. At least one of Bid is required.
 // A bid response can contain multiple "seatbid” objects, each on behalf of a different bidder seat.
 // SeatBid object can contain multiple bids each pertaining to a different impression on behalf of a seat.
 // Each "bid” object must include the impression ID to which it pertains as well as the bid price.
@@ -26,8 +28,9 @@ func (sb *SeatBid) Validate() error {
 		return ErrInvalidSeatBidBid
 	}
 
-	for _, bid := range sb.Bid {
-		if err := bid.Validate(); err != nil {
+	for i := range sb.Bid {
+		bid := sb.Bid[i]
+		if err := (&bid).Validate(); err != nil {
 			return err
 		}
 	}

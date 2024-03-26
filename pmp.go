@@ -2,14 +2,14 @@ package openrtb
 
 import "encoding/json"
 
-// Private Marketplace Object
+// Pmp is the Private Marketplace Object
 type Pmp struct {
 	Private int       `json:"private_auction,omitempty"`
 	Deals   []Deal    `json:"deals,omitempty"`
 	Ext     Extension `json:"ext,omitempty"`
 }
 
-// PMP Deal
+// Deal contains PMP deal information.
 type Deal struct {
 	ID               string    `json:"id,omitempty"` // Unique deal ID
 	BidFloor         float64   `json:"bidfloor,omitempty"`

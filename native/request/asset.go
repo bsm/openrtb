@@ -2,7 +2,7 @@ package request
 
 import "github.com/UnityTech/openrtb"
 
-// The main container object for each asset requested or supported by Exchange
+// Asset is the main container object for each asset requested or supported by Exchange
 // on behalf of the rendering client.  Only one of the {title,img,video,data}
 // objects should be present in each object.  The id is to be unique within the
 // AssetObject array so that the response can be aligned.

@@ -10,7 +10,7 @@ var (
 	ErrInvalidAudioNoMimes = errors.New("openrtb: audio has no mimes")
 )
 
-// The "audio" object must be included directly in the impression object
+// Audio object must be included directly in the impression object
 type Audio struct {
 	Mimes         []string  `json:"mimes"`                 // Content MIME types supported.
 	MinDuration   int       `json:"minduration,omitempty"` // Minimum video ad duration in seconds
@@ -35,7 +35,7 @@ type Audio struct {
 
 type jsonAudio Audio
 
-// Validates the object
+// Validate the object
 func (a *Audio) Validate() error {
 	if len(a.Mimes) == 0 {
 		return ErrInvalidAudioNoMimes

@@ -1,6 +1,8 @@
 package openrtb
 
-import "errors"
+import (
+	"errors"
+)
 
 // Validation errors
 var (
@@ -9,7 +11,7 @@ var (
 	ErrInvalidReqMultiInv = errors.New("openrtb: request has multiple inventory sources") // has site and app
 )
 
-// The top-level bid request object contains a globally unique bid request or auction ID.  This "id"
+// BidRequest is the top-level bid request object contains a globally unique bid request or auction ID.  This "id"
 // attribute is required as is at least one "imp" (i.e., impression) object.  Other attributes are
 // optional since an exchange may establish default values.
 type BidRequest struct {
@@ -24,7 +26,8 @@ type BidRequest struct {
 	TMax        int          `json:"tmax,omitempty"`    // Maximum amount of time in milliseconds to submit a bid
 	WSeat       []string     `json:"wseat,omitempty"`   // Array of buyer seats allowed to bid on this auction
 	BSeat       []string     `json:"bseat,omitempty"`   // Array of buyer seats blocked to bid on this auction
-	WLang       []string     `json:"wlang,omitempty"`   // Array of languages for creatives using ISO-639-1-alpha-2
+	WLang       []string     `json:"wlang,omitempty"`   // Allowed list of languages for creatives using ISO-639-1-alpha-2. Omission implies no specific restrictions, but buyers would be advised to consider language attribute in the Device and/or Content objects if available. Only one of wlang or wlangb should be present.
+	LanguagesB  []string     `json:"wlangb,omitempty"`  // Allowed list of languages for creatives using IETF BCP 47I. Omission implies no specific restrictions, but buyers would be advised to consider language attribute in the Device and/or Content objects if available. Only one of wlang or wlangb should be present.
 	AllImps     int          `json:"allimps,omitempty"` // Flag to indicate whether exchange can verify that all impressions offered represent all of the impressions available in context, Default: 0
 	Cur         []string     `json:"cur,omitempty"`     // Array of allowed currencies
 	Bcat        []string     `json:"bcat,omitempty"`    // Blocked Advertiser Categories.
@@ -37,7 +40,7 @@ type BidRequest struct {
 	Pmp *Pmp `json:"pmp,omitempty"` // DEPRECATED: kept for backwards compatibility
 }
 
-// Validates the request
+// Validate the request
 func (req *BidRequest) Validate() error {
 	if req.ID == "" {
 		return ErrInvalidReqNoID
@@ -47,7 +50,8 @@ func (req *BidRequest) Validate() error {
 		return ErrInvalidReqMultiInv
 	}
 
-	for _, imp := range req.Imp {
+	for i := range req.Imp {
+		imp := req.Imp[i]
 		if err := (&imp).Validate(); err != nil {
 			return err
 		}

@@ -2,6 +2,7 @@ package response
 
 import "github.com/UnityTech/openrtb"
 
+// Image object contains response image.
 type Image struct {
 	URL    string            `json:"url,omitempty"` // URL of the image asset
 	Width  int               `json:"w,omitempty"`   // Width of the image in pixels

@@ -1,5 +1,6 @@
 package openrtb
 
+// Inventory contains inventory specific attributes
 type Inventory struct {
 	ID            string     `json:"id,omitempty"` // ID on the exchange
 	Name          string     `json:"name,omitempty"`
@@ -22,7 +23,7 @@ func (a *Inventory) GetPrivacyPolicy() int {
 	return 1
 }
 
-// An "app" object should be included if the ad supported content is part of a mobile application
+// App object should be included if the ad supported content is part of a mobile application
 // (as opposed to a mobile website).  A bid request must not contain both an "app" object and a
 // "site" object.
 type App struct {
@@ -34,7 +35,7 @@ type App struct {
 	Ext      Extension `json:"ext,omitempty"`      // Placeholder for exchange-specific extensions to OpenRTB
 }
 
-// A site object should be included if the ad supported content is part of a website (as opposed to
+// Site object should be included if the ad supported content is part of a website (as opposed to
 // an application).  A bid request must not contain both a site object and an app object.
 type Site struct {
 	Inventory

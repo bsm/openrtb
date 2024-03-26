@@ -1,6 +1,6 @@
 package openrtb
 
-// This object represents a native type impression. Native ad units are intended to blend seamlessly into
+// Native object represents a native type impression. Native ad units are intended to blend seamlessly into
 // the surrounding content (e.g., a sponsored Twitter or Facebook post). As such, the response must be
 // well-structured to afford the publisher fine-grained control over rendering.
 // The presence of a Native as a subordinate of the Imp object indicates that this impression is offered as

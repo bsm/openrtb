@@ -1,27 +1,28 @@
-package openrtb
+package openrtb_test
 
 import (
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
+	"reflect"
+	"testing"
+
+	. "github.com/UnityTech/openrtb"
 )
 
-var _ = Describe("Banner", func() {
+func TestBanner(t *testing.T) {
 	var subject *Banner
+	if err := fixture("banner", &subject); err != nil {
+		t.Fatalf("expected no error, got %v", err)
+	}
 
-	BeforeEach(func() {
-		err := fixture("banner", &subject)
-		Expect(err).NotTo(HaveOccurred())
-	})
-
-	It("should parse correctly", func() {
-		Expect(subject).To(Equal(&Banner{
-			W:     728,
-			H:     90,
-			Pos:   AdPosAboveFold,
-			BType: []int{BannerTypeFrame},
-			BAttr: []int{CreativeAttributeWindowsDialogOrAlert},
-			Api:   []int{APIFrameworkMRAID1},
-		}))
-	})
-
-})
+	exp := &Banner{
+		W:     728,
+		H:     90,
+		Pos:   AdPosAboveFold,
+		BType: []int{BannerTypeFrame},
+		BAttr: []int{CreativeAttributeWindowsDialogOrAlert},
+		Api:   []int{APIFrameworkMRAID1},
+		VCM:   1,
+	}
+	if got := subject; !reflect.DeepEqual(exp, got) {
+		t.Errorf("expected %+v, got %+v", exp, got)
+	}
+}
