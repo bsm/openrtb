@@ -22,5 +22,6 @@
   "js": 1,
   "connectiontype": 3,
   "mccmnc": "722-341",
-  "devicetype": 1
+  "devicetype": 1,
+  "oaid": "1fe9a970-efbb-29e0-0bdd-f5dbbf751ab5"
 }

@@ -1,7 +1,5 @@
 package openrtb
 
-import "encoding/json"
-
 // ContentCategory as defined in section 5.1
 type ContentCategory string
 
@@ -840,8 +838,6 @@ type ChannelEntity struct {
 	Domain string    `json:"domain,omitempty"`
 	Ext    Extension `json:"ext,omitempty"`
 }
-
-type Extension json.RawMessage
 
 // RegExtension Extension object for Regulations
 type RegExtension struct {
