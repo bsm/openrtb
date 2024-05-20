@@ -48,6 +48,7 @@ type Video struct {
 	Placement       VideoPlacement      `json:"placement,omitempty"` // Video placement type, DEPRECATED
 	Plcmt           VideoPlcmt          `json:"plcmt,omitempty"`     // Video Plcmt type ad defined in ADCOM1.0
 	Ext             json.RawMessage     `json:"ext,omitempty"`
+	MaxSequence     int                 `json:"maxseq,omitempty"` // Indicates the maximum number of ads that may be served into a “dynamic” video ad pod
 }
 
 type jsonVideo Video

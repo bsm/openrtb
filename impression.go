@@ -3,6 +3,8 @@ package openrtb
 import (
 	"encoding/json"
 	"errors"
+
+	jsoniter "github.com/json-iterator/go"
 )
 
 // Validation errors
@@ -32,10 +34,22 @@ type Impression struct {
 	BidFloor              float64         `json:"bidfloor,omitempty"`          // Bid floor for this impression in CPM
 	BidFloorCurrency      string          `json:"bidfloorcur,omitempty"`       // Currency of bid floor
 	Secure                NumberOrString  `json:"secure,omitempty"`            // Flag to indicate whether the impression requires secure HTTPS URL creative assets and markup.
-	Quantity              *Quantity       `json:"qty,omitempty"`          // Includes the impression multiplier, and describes its source.
-	Exp                   int             `json:"exp,omitempty"`          // Advisory as to the number of seconds that may elapse between the auction and the actual impression.
-	IFrameBusters         []string        `json:"iframebuster,omitempty"` // Array of names for supportediframe busters.
+	Quantity              *Quantity       `json:"qty,omitempty"`               // Includes the impression multiplier, and describes its source.
+	Exp                   int             `json:"exp,omitempty"`               // Advisory as to the number of seconds that may elapse between the auction and the actual impression.
+	IFrameBusters         []string        `json:"iframebuster,omitempty"`      // Array of names for supportediframe busters.
 	Ext                   json.RawMessage `json:"ext,omitempty"`
+	Metric                []Metric        `json:"metric,omitempty"`
+	ClickBrowser          int             `json:"clickbrowser,omitempty"`
+	Rwdd                  int             `json:"rwdd,omitempty"`
+}
+
+type MetricType string
+
+type Metric struct {
+	Type   MetricType          `json:"type,omitempty"`
+	Value  float32             `json:"value"` // We don't want to use "omitempty" here because the real value could be 0
+	Vendor string              `json:"vendor,omitempty"`
+	Ext    jsoniter.RawMessage `json:"ext,omitempty"`
 }
 
 func (imp *Impression) assetCount() int {

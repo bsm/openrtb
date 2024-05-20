@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	. "github.com/bsm/openrtb/v3"
+	. "github.com/arpeely/openrtb/v3"
 )
 
 func TestDevice(t *testing.T) {
