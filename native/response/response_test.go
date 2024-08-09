@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"testing"
 
-	. "github.com/bsm/openrtb/v3/native/response"
+	. "github.com/octoclick/openrtb-easyjson/native/response"
 )
 
 func TestResponse(t *testing.T) {

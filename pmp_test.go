@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"testing"
 
-	. "github.com/bsm/openrtb/v3"
+	. "github.com/octoclick/openrtb-easyjson"
 )
 
 func TestPMP(t *testing.T) {

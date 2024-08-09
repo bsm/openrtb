@@ -3,6 +3,7 @@ package openrtb
 import (
 	"encoding/json"
 	"errors"
+	"net"
 )
 
 // Validation errors
@@ -10,6 +11,9 @@ var (
 	ErrInvalidReqNoID     = errors.New("openrtb: request ID missing")
 	ErrInvalidReqNoImps   = errors.New("openrtb: request has no impressions")
 	ErrInvalidReqMultiInv = errors.New("openrtb: request has multiple inventory sources") // has site and app
+	ErrInvalidSitePage    = errors.New("openrtb: request hasn't site.page or site.domain")
+	ErrInvalidDeviceIP    = errors.New("openrtb: request has invalid device.ip || device.ipv6")
+	ErrInvalidUserID      = errors.New("openrtb: request has invalid user.id")
 )
 
 // BidRequest is the top-level bid request object contains a globally unique bid request or auction ID.  This "id"
@@ -48,12 +52,21 @@ func (req *BidRequest) Validate() error {
 	} else if req.Site != nil && req.App != nil {
 		return ErrInvalidReqMultiInv
 	}
-
+	if req.Site != nil && len(req.Site.Page) == 0 && len(req.Site.Domain) == 0 {
+		return ErrInvalidSitePage
+	}
+	if net.ParseIP(req.Device.IP) == nil && net.ParseIP(req.Device.IPv6) == nil {
+		return ErrInvalidDeviceIP
+	}
 	for i := range req.Impressions {
 		imp := req.Impressions[i]
 		if err := (&imp).Validate(); err != nil {
 			return err
 		}
+	}
+
+	if req.User == nil || len(req.User.ID) == 0 {
+		return ErrInvalidUserID
 	}
 
 	return nil

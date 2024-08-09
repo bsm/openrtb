@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	. "github.com/bsm/openrtb/v3"
+	. "github.com/octoclick/openrtb-easyjson"
 )
 
 func TestNumberOrString(t *testing.T) {

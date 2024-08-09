@@ -6,8 +6,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/bsm/openrtb/v3"
-	. "github.com/bsm/openrtb/v3/native/request"
+	"github.com/octoclick/openrtb-easyjson"
+	. "github.com/octoclick/openrtb-easyjson/native/request"
 )
 
 func TestRequest(t *testing.T) {
