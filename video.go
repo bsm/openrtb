@@ -24,7 +24,7 @@ type Video struct {
 	Height          int                 `json:"h"`                        // Height of the player in pixels
 	StartDelay      StartDelay          `json:"startdelay,omitempty"`     // Indicates the start delay in seconds
 	Linearity       VideoLinearity      `json:"linearity,omitempty"`      // Indicates whether the ad impression is linear or non-linear
-	Skip            int                 `json:"skip,omitempty"`           // Indicates if the player will allow the video to be skipped, where 0 = no, 1 = yes.
+	Skip            *int                `json:"skip,omitempty"`           // Indicates if the player will allow the video to be skipped, where 0 = no, 1 = yes.
 	SkipMin         int                 `json:"skipmin,omitempty"`        // Videos of total duration greater than this number of seconds can be skippable
 	SkipAfter       int                 `json:"skipafter,omitempty"`      // Number of seconds a video must play before skipping is enabled
 	Sequence        int                 `json:"sequence,omitempty"`       // Default: 1
